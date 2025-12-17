@@ -23,7 +23,6 @@ public class PersonaEjer4 {
 	        System.out.print("Introduce la altura en metros: ");
 	        double altura = teclado.nextDouble();
 
-	        System.out.println("\n--- Creando objetos ---\n");
 
 	        // --- 2. Crear 3 objetos ---
 

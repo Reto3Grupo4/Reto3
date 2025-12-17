@@ -6,7 +6,7 @@ public class ConexionSQL {
 
 	public static void main(String[] argumentos) {
 
-		String url = "jbdc:mysql://localhost:33060/empresa_dam";
+		String url = "jdbc:mysql://localhost:33060/empresa_dam";
 		String user = "dam_v";
 		String pass = "elorrieta9753$";
 		
@@ -26,10 +26,16 @@ public class ConexionSQL {
 			
 			// 4 - Tratar los datos
 			while(resultados.next()) {
-				System.out.println(resultados.getInt(0));
-				
+				System.out.print(resultados.getInt("NumDep") + "   ");
+				System.out.print(resultados.getString("NomDep")  + "   ");
+				System.out.print(resultados.getString("Localidad") + "\n");
 			}
 			
+			while(resultados.next()) {
+				System.out.print(resultados.getInt("NumDep") + "   ");
+				System.out.print(resultados.getString("NomDep")  + "   ");
+				System.out.print(resultados.getString("Localidad") + "\n");
+			}
 			//5 - Cerrar en orden inverso
 			conn.close();
 		} catch (SQLException exSql) {
