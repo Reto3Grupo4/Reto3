@@ -5,6 +5,8 @@ public class Coche {
     private int velocidad;
     
     public Coche(int velocidadInicial) {
+    	super();
+    	velocidad =0;
         this.velocidad = velocidadInicial;
     }
     
@@ -28,7 +30,11 @@ public class Coche {
 	}
 	
 	public void frena (int menos) {
-		this.velocidad -= menos;
+		if(menos <0) {
+			this.velocidad += menos;
+		}else {
+			this.velocidad -= menos;
+		}
 		if(this.velocidad < 0) {
 			this.velocidad = 0;
 		}
