@@ -2,11 +2,11 @@ package POJOS;
 
 public class Artista {
 
-	private String idArtista;
-	private String nombreArtistico;
-	private String genero;
-	private String imagen;
-	private String descripcion;
+	public String idArtista;
+	public String nombreArtistico;
+	public String genero;
+	public String imagen;
+	public String descripcion;
 	
 	public Artista() {
 		

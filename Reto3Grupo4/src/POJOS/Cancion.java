@@ -2,9 +2,9 @@ package POJOS;
 
 public class Cancion {
 
-	private String idCancion;
-	private String idAlbum;
-	private String artistasInvitados;
+	public String idCancion;
+	public String idAlbum;
+	public String artistasInvitados;
 	
 	public Cancion() {
 		

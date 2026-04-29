@@ -105,7 +105,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		Ventana_Login.add(list_1);
 		
 		JComboBox cbVerificar_1 = new JComboBox();
-		cbVerificar_1.setModel(new DefaultComboBoxModel(new String[] {"Cliente"}));
+		cbVerificar_1.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empleado", "Administrador"}));
 		cbVerificar_1.setToolTipText("");
 		cbVerificar_1.setBounds(156, 163, 86, 22);
 		Ventana_Login.add(cbVerificar_1);
