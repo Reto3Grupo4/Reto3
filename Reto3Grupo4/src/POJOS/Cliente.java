@@ -7,15 +7,15 @@ import Enums.Tipo;
 
 public class Cliente {
 
-	private String idCliente;
-	private String nombre;
-	private String apellido;
-	private Idioma idioma;
-	private String usuario;
-	private String clave;
-	private Date fecNacimiento;
-	private Date fecRegistro;
-	private Tipo tipoCliente;
+	public String idCliente;
+	public String nombre;
+	public String apellido;
+	public Idioma idioma;
+	public String usuario;
+	public String clave;
+	public Date fecNacimiento;
+	public Date fecRegistro;
+	public Tipo tipoCliente;
 	
 	public Cliente() {
 		

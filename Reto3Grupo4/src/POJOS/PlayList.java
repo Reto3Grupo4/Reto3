@@ -4,34 +4,34 @@ import java.util.Date;
 
 public class PlayList {
 
-	private int idList;
-	private String titulo;
-	private Date fecCreacion;
-	private Cliente idCliente;
+	public int idPlaylist;
+	public String titulo;
+	public Date fecCreacion;
+	public Cliente idCliente;
 	
 	public PlayList() {
 		
 	}
 
 	/**
-	 * @param idList
+	 * @param idPlaylist
 	 * @param titulo
 	 * @param fecCreacion
 	 * @param idCliente
 	 */
-	public PlayList(int idList, String titulo, Date fecCreacion, Cliente idCliente) {
-		this.idList = idList;
+	public PlayList(int idPlaylist, String titulo, Date fecCreacion, Cliente idCliente) {
+		this.idPlaylist = idPlaylist;
 		this.titulo = titulo;
 		this.fecCreacion = fecCreacion;
 		this.idCliente = idCliente;
 	}
 
-	public int getIdList() {
-		return idList;
+	public int getIdPlaylist() {
+		return idPlaylist;
 	}
 
-	public void setIdList(int idList) {
-		this.idList = idList;
+	public void setIdPlaylist(int idPlaylist) {
+		this.idPlaylist = idPlaylist;
 	}
 
 	public String getTitulo() {
