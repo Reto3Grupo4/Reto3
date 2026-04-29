@@ -1,0 +1,60 @@
+package pojos;
+
+import Enums.Tipo;
+
+public class Podcast extends Audio{
+	public String idPodcast;
+	public int colaboradores;
+	public Podcaster idPodcaster;
+	
+	
+	
+	public Podcast(String idAudio, String nombre, int duracion, String archivo, Tipo tipo, int nReproducciones,
+			String idPodcast, int colaboradores, Podcaster idPodcaster) {
+		super(idAudio, nombre, duracion, archivo, tipo, nReproducciones);
+		this.idPodcast = idPodcast;
+		this.colaboradores = colaboradores;
+		this.idPodcaster = idPodcaster;
+	}
+	public Podcast() {
+		
+	}
+	/**
+	 * @return the idPodcast
+	 */
+	public String getIdPodcast() {
+		return idPodcast;
+	}
+	/**
+	 * @return the colaboradores
+	 */
+	public int getColaboradores() {
+		return colaboradores;
+	}
+	/**
+	 * @return the idPodcaster
+	 */
+	public Podcaster getIdPodcaster() {
+		return idPodcaster;
+	}
+	/**
+	 * @param idPodcast the idPodcast to set
+	 */
+	public void setIdPodcast(String idPodcast) {
+		this.idPodcast = idPodcast;
+	}
+	/**
+	 * @param colaboradores the colaboradores to set
+	 */
+	public void setColaboradores(int colaboradores) {
+		this.colaboradores = colaboradores;
+	}
+	/**
+	 * @param idPodcaster the idPodcaster to set
+	 */
+	public void setIdPodcaster(Podcaster idPodcaster) {
+		this.idPodcaster = idPodcaster;
+	}
+	
+	
+}
