@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
@@ -26,8 +27,10 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private CardLayout cl;
 	private JPanel Ventana_Login;
 	private JPanel Ventana_Registro;
+	private JPanel Ventana_Menu;
 	private JTextField txtUsuario;
 	private JPasswordField pf_Clave;
 	private JTextField txtNombre;
@@ -41,8 +44,11 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 	private JButton btnRegistrar;
 	private JButton btnLogin;
 	private JButton btnAtras;
+	private JButton btnGuardar;
 	
 
+	private String usuarioRegistrado;
+	private String claveRegistrada;
 	/**
 	 * Launch the application.
 	 */
@@ -68,13 +74,14 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		setBounds(100, 100, 530, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		cl = new CardLayout();
+		contentPane.setLayout(cl);
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
 		
 		Ventana_Login = new JPanel();
 		Ventana_Login.setLayout(null);
 		Ventana_Login.setBorder(new TitledBorder(null, "Ventana Login", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(Ventana_Login, "name_620149251049000");
+		contentPane.add(Ventana_Login, "login");
 		
 		JLabel lblUsuario_1 = new JLabel("Usuario:");
 		lblUsuario_1.setBounds(88, 91, 46, 14);
@@ -104,6 +111,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		Ventana_Login.add(cbVerificar_1);
 		
 		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(this);
 		btnLogin.setBounds(71, 215, 89, 23);
 		Ventana_Login.add(btnLogin);
 		
@@ -114,7 +122,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		
 		Ventana_Registro = new JPanel();
 		Ventana_Registro.setBorder(new TitledBorder(null, "Ventana Registro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(Ventana_Registro, "name_620156069172700");
+		contentPane.add(Ventana_Registro, "registro");
 		Ventana_Registro.setLayout(null);
 		
 		btnAtras = new JButton("Atras");
@@ -201,7 +209,8 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		comboBox.setBounds(121, 308, 110, 22);
 		Ventana_Registro.add(comboBox);
 		
-		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
 		btnGuardar.setBounds(32, 374, 89, 23);
 		Ventana_Registro.add(btnGuardar);
 		
@@ -209,9 +218,9 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		btnComprarPremium.setBounds(196, 374, 122, 23);
 		Ventana_Registro.add(btnComprarPremium);
 		
-		JPanel Ventana_Menu = new JPanel();
+		Ventana_Menu = new JPanel();
 		Ventana_Menu.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ventana Menu", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		contentPane.add(Ventana_Menu, "name_622576064905800");
+		contentPane.add(Ventana_Menu, "menu");
 		Ventana_Menu.setLayout(null);
 		
 		JButton btnAtras_2 = new JButton("Atras");
@@ -241,7 +250,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		Ventana_Menu.add(btnMisPlaylist);
 		
 		JPanel Ventana_Artistas = new JPanel();
-		contentPane.add(Ventana_Artistas, "name_625363922644100");
+		contentPane.add(Ventana_Artistas, "artistas");
 		Ventana_Artistas.setLayout(null);
 		
 		JButton btnAtras_3 = new JButton("Atras");
@@ -262,7 +271,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		Ventana_Artistas.add(txtAreaListaArtistas);
 		
 		JPanel Ventana_Artista = new JPanel();
-		contentPane.add(Ventana_Artista, "name_625778799462100");
+		contentPane.add(Ventana_Artista, "artista");
 		Ventana_Artista.setLayout(null);
 		
 		JButton btnAtras_3_1 = new JButton("Atras");
@@ -293,17 +302,50 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		txtAreaInformacion.setBounds(10, 21, 207, 166);
 		pnlInformacion.add(txtAreaInformacion);
 
+		cl.show(contentPane, "login");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
-		if(evento.getSource() == btnRegistrar) {
-			Ventana_Login.setVisible(false);
-			Ventana_Registro.setVisible(true);
-		}
-		
-		if(evento.getSource() == btnAtras) {
-			Ventana_Login.setVisible(true);
+
+		    if (evento.getSource() == btnRegistrar) {
+		        cl.show(contentPane, "registro");
+		    }
+
+		    if (evento.getSource() == btnAtras) {
+		        cl.show(contentPane, "login");
+		    }
+
+		    if (evento.getSource() == btnLogin) {
+		        String usuario = txtUsuario.getText().trim();
+		        String clave = String.valueOf(pf_Clave.getPassword()).trim();
+
+		        if (usuario.isEmpty() || clave.isEmpty()) {
+		        	JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
+		        } else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
+		        	cl.show(contentPane, "menu");
+		        }else {
+		        	JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+		        }
+		    }
+		    
+		    if(evento.getSource()== btnGuardar) {
+		    	String usuario = txtUsuario_2.getText().trim();
+		    	String clave = String.valueOf(pfClave_2.getPassword()).trim();
+		    	String confirmar = String.valueOf(pfConfirmar.getPassword()).trim();
+		    	
+		    	if (usuario.isEmpty() || clave.isEmpty()) {
+		    	    JOptionPane.showMessageDialog(this, "Rellena los campos");
+		    	} else if (!clave.equals(confirmar)) {
+		    	    JOptionPane.showMessageDialog(this, "Las claves no coinciden");
+		    	} else {
+		    	    usuarioRegistrado = usuario;
+		    	    claveRegistrada = clave;
+		    	    
+		    	    JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
+
+		    	    cl.show(contentPane, "login");
+		    }
 		}
 	}
 }
