@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intranet — Nuestra App</title>
+  <link rel="stylesheet" href="estilos_prueba.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3zm0 2a7 7 0 1 1 0 14A7 7 0 0 1 12 5zm-1 3v4.382l-2.447 1.223.894 1.79L12 14.618l2.553-1.223.894-1.79L13 10.382V8h-2z"/>
+        </svg>
+      </div>
+      <h1>Nuestra<span>App</span></h1>
+    </div>
+    <div class="header-actions">
+      <a href="perfil.html" class="header-user">
+        <div class="avatar">A</div>
+        Admin
+      </a>
+    </div>
+  </header>
+
+  <!-- LAYOUT WRAPPER -->
+  <div class="pagina-wrapper">
+
+    <!-- BARRA LATERAL -->
+    <nav class="barra lateral">
+      <span class="nav">Explorar</span>
+      <a href="index.html" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Inicio
+      </a>
+      <a href="artistas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Artistas
+      </a>
+      <a href="albumes.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+        Álbumes
+      </a>
+      <a href="canciones.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        Canciones
+      </a>
+
+      <span class="nav-section-label">Podcast</span>
+      <a href="podcasters.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 1 3 3v8a3 3 0 0 1-6 0V4a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        Podcasters
+      </a>
+      <a href="podcasts.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Podcasts
+      </a>
+
+      <span class="nav-section-label">Cuenta</span>
+      <a href="perfil.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Mi Perfil
+      </a>
+      <a href="contacto.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Contacto
+      </a>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="content">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-tag">Intranet Corporativa</div>
+        <h2>Bienvenid@ a <em>Nuestra App</em></h2>
+        <p>Panel de control para explorar artistas, álbumes y canciones de la plataforma.</p>
+      </div>
+
+      <!-- ESTATÍSTICAS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-nombre">Artistas</div>
+          <div class="stat-valor">128</div>
+          <div class="stat-desc">músicos y solistas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-nombre">Álbumes</div>
+          <div class="stat-valor">347</div>
+          <div class="stat-desc">publicados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-nombre">Canciones</div>
+          <div class="stat-valor">4.2K</div>
+          <div class="stat-desc">en catálogo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-nombre">Podcasters</div>
+          <div class="stat-valor">54</div>
+          <div class="stat-desc">creadores activos</div>
+        </div>
+      </div>
+
+      <!-- ARTISTAS RECIENTES -->
+      <div class="seccion">
+        <div class="seccion-header">
+          <span class="section-titulo">Artistas destacados</span>
+          <a href="artistas.html" class="btn">Ver todos</a>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filtros">
+          <input type="text" class="filter-input" placeholder="Buscar artista…" id="filterArtist" oninput="filterTable()">
+          <select class="filtros-seleccion" id="GeneroFiltro" onchange="filterTable()">
+            <option value="">Todos los géneros</option>
+            <option value="Rock">Rock</option>
+            <option value="Pop">Pop</option>
+            <option value="Hip-Hop">Hip-Hop</option>
+            <option value="Electrónica">Electrónica</option>
+          </select>
+          <select class="filtros-seleccion" id="tipoFiltro" onchange="filterTable()">
+            <option value="">Tipo</option>
+            <option value="Solista">Solista</option>
+            <option value="Grupo">Grupo</option>
+          </select>
+        </div>
+
+        <div class="tabla-container">
+          <table id="TablaArtistas">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Artista</th>
+                <th>Género</th>
+                <th>Tipo</th>
+                <th>Álbumes</th>
+                <th>Reproducciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-name="Kaze" data-género="Rap" data-tipo="Solista">
+                <td>1</td>
+                <td><div class="artista"><div class="artista-placeholder">🎸</div><div><div class="td-name">Kaze</div><div class="td-sub">Desde 2012</div></div></div></td>
+                <td><span class="Genero musical">Rap</span></td>
+                <td>Solista</td>
+                <td>6</td>
+                <td>123.456</td>
+              </tr>
+              <tr data-name="Janus Lester" data-género="Pop" data-tipo="Solista">
+                <td>2</td>
+                <td><div class="td-artista"><div class="artista-placeholder">🎤</div><div><div class="td-name">Janus Lester</div><div class="td-sub">Desde 2018</div></div></div></td>
+                <td><span class="Genero musical">Pop</span></td>
+                <td>Solista</td>
+                <td>3</td>
+                <td>678.912</td>
+              </tr>
+              <tr data-name="Bulego" data-género="Hip-Hop" data-tipo="Grupo">
+                <td>3</td>
+                <td><div class="td-artista"><div class="artista-placeholder">🎧</div><div><div class="td-name">Bulego</div><div class="td-sub">Desde 2015</div></div></div></td>
+                <td><span class="Genero musical">Hip-Hop</span></td>
+                <td>Grupo</td>
+                <td>4</td>
+                <td>234.457</td>
+              </tr>
+              <tr data-name="Zea Mays" data-género="Rock" data-tipo="Grupo">
+                <td>4</td>
+                <td><div class="td-artista"><div class="artista-placeholder">🎵</div><div><div class="td-name">Zea Mays</div><div class="td-sub">Desde 1996</div></div></div></td>
+                <td><span class="Genero musical">Rock</span></td>
+                <td>Grupo</td>
+                <td>8</td>
+                <td>884.652</td>
+              </tr>
+              <tr data-name="AIA" data-género="Electrónica" data-tipo="Solista">
+                <td>5</td>
+                <td><div class="td-artista"><div class="artist-thumb-placeholder">🎹</div><div><div class="td-name">AIA</div><div class="td-sub">Desde 2014</div></div></div></td>
+                <td><span class="Genero musical">Electrónica</span></td>
+                <td>Solista</td>
+                <td>2</td>
+                <td>345.804</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>&copy; 2026 Nuestra App — Todos los derechos reservados.</span>
+    <nav class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="artistas.html">Artistas</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="perfil.html">Cuenta</a>
+    </nav>
+  </footer>
+
+ 
+
+</body>
+</html>

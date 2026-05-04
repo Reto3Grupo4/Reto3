@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Intranet-Nuestra App</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+
+    <h1>Intranet-Nuestra App</h1>
     <header>
         <nav>
             <ul>
-                <li><a href="canciones.html">Canciones</a></li>
-                <li><a href="artistas.html">Artistas</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="descubrir_musica.html">Canciones</a></li>
+                <li><a href="playlists.html">Playlists</a></li>
             </ul>
         </nav>
-        <h1>Bienvenid@ a Nuestra App</h1>
-        <h3>¡Explora nuestras canciones y disfruta de la experiencia!</h3>
         <img src="img/logo.png" alt="Logo de la App" width="200">
     </header>
-    
+    <main>
+        <section class="contenedor-principal">
+            <h2>¡Bienvenido a Nuestra App!</h2>
+            <p>Explora nuestra amplia colección de música, descubre nuevos artistas y disfruta de tus canciones favoritas.</p>
+            <form id="FormularioLogin">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nuestra App. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,208 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: #1DB954;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    background-color: transparent;
+    display: block;
+    margin: 0 auto;
+}
+
+header, footer {
+    background-color: #000;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.login-container {
+    flex:1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background-color: #282828;
+    padding: 2.5rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1DB954;
+}
+
+.grupo-de-entrada {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-de-entrada label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+button, .btn-secundario {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.btn-primario {
+    background-color: #1DB954;
+    color: black;
+}
+
+.btn-primario:hover {
+    background-color: #1ed760;
+}
+
+.login-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    border-top: 1px solid #3e3e3e;
+    padding-top: 1rem;
+}
+
+.registro-box {
+   max-width: 200px;
+   margin: 2rem 0;
+}
+
+.btn-atras {
+   display: block;
+   text-align: center;
+   margin-top: 1rem;
+   color: #b3b3b3;
+   text-decoration: none;
+   font-size: 0.9rem;
+}
+
+.btn-atras:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+input[type="date"]{
+    cursor:pointer
+}
+
+.menu-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.perfil-usuario{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.perfil-thumb{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #555;
+}
+
+.menu-contenedor{
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.texto-bienvenida{
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2rem;
+}
+
+.opciones-menu{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.menu-carta{
+    background-color: #181818;
+    padding: 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.menu-carta:hover{
+    background-color: #282828;
+    border-color: #1DB954;
+    transform: translateY(-5px);
+}
+
+.menu-carta h3{
+    color: #1DB954;
+    margin-bottom: 0.5rem;
+}
+
+.carta-premium{
+    border: 1px solid #e5c07b;
+}
+
+.btn-logout{
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 5px 15px;
+    border: 1px solid #b3b3b3;
+    border-radius: 20px;
+}
+
+.btn-logout:hover{
+    color: white;
+    border-color: white;
+}
