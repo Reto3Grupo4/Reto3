@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="artistas.xsl"?>
+<artistas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="artistas.xsd">
+    <artista id="1">
+        <nombre>Kaze</nombre>
+        <genero>Rap</genero>
+        <imagen>img/Kaze.jpg</imagen>
+        <album>
+            <titulo>Nombre Direccion</titulo>
+            <año>2023</año>
+            <reproducciones>1.327.701</reproducciones>
+        </album>
+
+    </artista>
+    <artista id="2">
+        <nombre>Bad Bunny</nombre>
+        <genero>Reggaeton</genero>
+        <imagen>img/bad_bunny.jpg</imagen>
+        <album>
+            <titulo>Un Verano sin Ti</titulo>
+            <año>2022</año>
+            <reproducciones>550.459.667</reproducciones>
+        </album>
+    </artista>
+    <artista id="3">
+        <nombre>Rosalia</nombre>
+        <genero>Flamenco</genero>
+        <imagen>img/rosalia.jpg</imagen>
+        <album>
+            <titulo>El Mal Querer</titulo>
+            <año>2018</año>
+            <reproducciones>1.000.000.000</reproducciones>
+        </album>
+    </artista>

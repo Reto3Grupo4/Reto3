@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="canciones">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="cancion" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="titulo" type="xsd:string"/>
+                            <xsd:element name="artista" type="xsd:string"/>
+                            <xsd:element name="album" type="xsd:string"/>
+                            <xsd:element name="genero" type="xsd:string"/>
+                            <xsd:element name="duracion" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

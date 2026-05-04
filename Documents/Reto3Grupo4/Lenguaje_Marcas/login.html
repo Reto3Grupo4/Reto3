@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="javascript.js"></script>
+    <script>validarLogin()</script>
 </head>
 <body>
     <header>
@@ -21,7 +23,7 @@
     <main class="login-container">
         <section class="login-box">
             <h2>Iniciar Sesión</h2>
-            <form id="login-form">
+            <form id="login-form" action="bienvenida.xml" method="post">
                 <div class="grupo-de-entrada">
                     <label for="usuario">Usuario:</label>
                     <input type="text" id="usuario" name="usuario" required>
@@ -31,6 +33,7 @@
                     <input type="password" id="contrasena" name="contrasena" required>
                 </div>
                 <button type="submit" class="btn-primario">Iniciar Sesión</button>
+                
             </form>
             <div class="login-footer">
                 <p>¿No tienes una cuenta? 
@@ -42,5 +45,7 @@
     <footer>
         <p>&copy; 2026 Nuestra App. Todos los derechos reservados.</p>
     </footer>
+
+    
 </body>
 </html>

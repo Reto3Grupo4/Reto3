@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<canciones xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="canciones.xsd">
+    <cancion>
+    <titulo>TKT</titulo>
+    <artista>Kaze</artista>
+    <album>Nombre Direccion</album>
+    <genero>Rap</genero>
+    <duracion>3:00</duracion>
+    </cancion>
+    <cancion>
+    <titulo>Tití Me Preguntó</titulo>
+    <artista>Bad Bunny</artista>
+    <album>Un Verano Sin Ti</album>
+    <genero>Reggaeton</genero>
+    <duracion>4:03</duracion>
+    </cancion>
+    <cancion>
+    <titulo>RENIEGO</titulo>
+    <artista>Rosalia</artista>
+    <album>El Mal Querer</album>
+    <genero>Flamenco</genero>
+    <duracion>3:28</duracion>
+    </cancion>
+</canciones>
