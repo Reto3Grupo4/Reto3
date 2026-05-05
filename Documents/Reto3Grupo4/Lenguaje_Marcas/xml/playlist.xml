@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="playlist.xsl"?>
+<PlayLists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="playlist.xsd">
+    <PlayList>
+        <IDPlayList>1</IDPlayList>
+        <titulo>Rap</titulo>
+        <fechaCreacion>2023-05-01</fechaCreacion>
+        <IDCliente>1</IDCliente>
+    </PlayList>
+    <PlayList>
+        <IDPlayList>2</IDPlayList>
+        <titulo>Reggaeton</titulo>
+        <fechaCreacion>2023-06-01</fechaCreacion>
+        <IDCliente>2</IDCliente>
+    </PlayList>
+</PlayLists>

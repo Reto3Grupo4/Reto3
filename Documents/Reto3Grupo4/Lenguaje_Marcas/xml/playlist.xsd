@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <xsd:element name="PlayLists"> 
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="PlayList" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name= "IDPlayList" type="xsd:integer"  minOccurs="1"/>
+                            <xsd:element name="titulo" type="xsd:string" minOccurs="1"/>
+                            <xsd:element name= "fechaCreacion" type="xsd:date" minOccurs="1"/>
+                            <xsd:element name= "IDCliente" type="xsd:integer" minOccurs="1"/>
+                        </xsd:sequence>   
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

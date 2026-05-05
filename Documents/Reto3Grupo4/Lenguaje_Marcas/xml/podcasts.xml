@@ -2,17 +2,17 @@
 <podcasts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="podcasts.xsd">
     <podcast>
-    <titulo>Podcast de Musica</titulo>
-    <podcaster>Juan Perez</podcaster>
-        <colaboradores>Maria Lopez, Carlos Garcia</colaboradores>
-    <genero>Musica</genero>
-    <duracion>60:00</duracion>
+        <titulo>Podcast de Musica</titulo>
+        <podcaster>Juan Perez</podcaster>
+        <colaboradores>1</colaboradores>
+        <genero>Musica</genero>
+        <duracion>60</duracion>
     </podcast>
     <podcast>
-    <titulo>Entrevista con Artistas</titulo>
-    <podcaster>Maria Lopez</podcaster>
-        <colaboradores>Carlos Garcia</colaboradores>
-    <genero>Entrevistas</genero>
-    <duracion>45:00</duracion>
+        <titulo>Entrevista con Artistas</titulo>
+        <podcaster>Maria Lopez</podcaster>
+        <colaboradores>2</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
     </podcast>
 </podcasts>
