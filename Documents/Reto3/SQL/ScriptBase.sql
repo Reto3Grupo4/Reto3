@@ -1,6 +1,6 @@
 create database if not exists destruyeSpotify;
-use destruyespotify;
-create table artista(
+use destruyeSpotify;
+create table Artista(
 IDArtista varchar(5) primary key,
 NombreArtistico char(20) not null unique,
 GeneroPredom char(20),
@@ -8,36 +8,40 @@ Imagen varchar(255),
 Descripcion varchar(255) not null
 );
 
-create table podcaster(
+create table Podcaster(
 IDPodcaster varchar(5) primary key,
-constraint fk_artista_podcaster foreign key(IDPodcaster)
-references artista (IDArtista) on update cascade
+constraint fk_Artista_Podcaster foreign key(IDPodcaster)
+references Artista (IDArtista) on update cascade
 );
 
 create table Musico(
 IDMusico varchar(5) primary key,
 Descripcion enum ('Solista', 'Grupo') not null,
-constraint fk_artista1 foreign key (IDMusico) 
-references artista (IDArtista) on update cascade
+constraint fk_Artista1 foreign key (IDMusico) 
+references Artista (IDArtista) on update cascade
 );
 
-create table podcast (
+create table Podcast (
 IDPodcast varchar(5) primary key,
+NombrePodcast varchar(45) not null,
 Colaboradores int,
 IDPodcaster varchar(5) not null,
-constraint fk_audio foreign key (IDPodcast) 
-references audio (IDAudio) on update cascade,
-constraint fk_artista foreign key (IDPodcaster) 
-references artista (IDArtista) on update cascade
+constraint fk_Audio foreign key (IDPodcast) 
+references Audio (IDAudio) on update cascade,
+constraint fk_Artista foreign key (IDPodcaster) 
+references Artista (IDArtista) on update cascade
 );
 
-create table audio(
+create table Audio(
 IDAudio varchar(5) primary key,
 Nombre char(20) not null unique,
 Duracion int not null,
 Archivo varchar(255),
 Tipo enum ('Podcast', 'Cancion') not null,
-NReproducciones int not null default 0
+NReproducciones int not null default 0,
+IDArtista varchar(5),
+constraint fk_audio_artista foreign key (IDArtista)
+references Artista (IDArtista) on update cascade
 );
 
 create table Album(
@@ -47,26 +51,26 @@ Año date not null,
 Genero char(15) not null,
 Imagen varchar(255),
 IDMusico varchar(5) not null,
-constraint fk_musico foreign key (IDMusico)
+constraint fk_Musico foreign key (IDMusico)
 references Musico (IDMusico) on update cascade
 );
 
-create table cancion (
+create table Cancion (
 IDCancion varchar(5) primary key,
 IDAlbum varchar(10) not null,
 Artistas_invitados varchar(50),
-constraint fk_audio_canc foreign key (IDCancion)
+constraint fk_Audio_canc foreign key (IDCancion)
 references Audio (IDAudio) on update cascade,
 constraint fk_Album_canc foreign key (IDAlbum)
 references Album (IDAlbum) on update cascade
 );
 
-create table idioma(
+create table Idioma(
 IDIdioma enum ('ES', 'EU', 'EN', 'FR', 'DE', 'CA', 'GA', 'AR') primary key,
 Descripcion char(100) not null
 );
 
-create table cliente(
+create table Cliente(
 IDCliente varchar(5) primary key, 
 Nombre char(15) not null,
 Apellido char (15) not null,
@@ -76,44 +80,44 @@ Contraseña varchar(64) not null,
 FechaNacimiento date not null,
 FechaRegistro date not null,
 Tipo enum ('Premium', 'Free') not null,
-Constraint fk_idioma foreign key (Idioma)
-references idioma (IDIdioma) on update cascade
+Constraint fk_Idioma foreign key (Idioma)
+references Idioma (IDIdioma) on update cascade
 );
 
 
-create table playlist (
+create table Playlist (
 IDPlaylist int unsigned primary key,
 Titulo varchar(20) not null,
 FechaCreacion date not null,
 IDCliente varchar(5) not null,
 Constraint fk_client foreign key (IDCliente)
-references cliente (IDCliente) on update cascade
+references Cliente (IDCliente) on update cascade
 );
 
 
-create table playlist_canciones(
+create table Playlist_Canciones(
 IDCancion varchar(5),
 IDPlaylist int unsigned,
-FechaPlayList_cancion date not null,
-Constraint pk_playlist primary key (IDCancion, IDPlaylist),
-Constraint fk_cancion foreign key (IDCancion)
-references cancion (IDCancion) on update cascade,
-Constraint fk_playlist foreign key (IDPlaylist)
+FechaPlaylist_Cancion date not null,
+Constraint pk_Playlist primary key (IDCancion, IDPlaylist),
+Constraint fk_Cancion foreign key (IDCancion)
+references Cancion (IDCancion) on update cascade,
+Constraint fk_Playlist foreign key (IDPlaylist)
 references Playlist (IDPlaylist) on update cascade
 );
 
-create table favoritos(
+create table Favoritos(
 IDCliente varchar(5) primary key,
 IDAudio varchar(5) not null,
-constraint fk_cliente_fav foreign key (IDCliente)
+constraint fk_Cliente_fav foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade,
-constraint fk_audio_fav foreign key (IDAudio)
+constraint fk_Audio_fav foreign key (IDAudio)
 references Audio (IDAudio) on update cascade
 );
 
-create table premium(
+create table Premium(
 IDCliente varchar(5) primary key,
 FechaCaducidad date not null,
-constraint fk_cliente foreign key (IDCliente)
+constraint fk_Cliente foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade
 );

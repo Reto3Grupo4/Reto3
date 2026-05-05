@@ -6,7 +6,9 @@ GRANT ALL PRIVILEGES ON destruyespotify.* TO 'DBADMIN';
 
 /*Creación del Usuario */
 CREATE USER IF NOT EXISTS 
-'AdminSpoty'@'localhost' IDENTIFIED BY '1234';
+'AdminSpoty'@'localhost' IDENTIFIED BY '12345678aB+';
+
+
 
 /*Asignación del rol creado anteriormente*/
 GRANT 'DBADMIN' TO 'AdminSpoty'@'localhost';
@@ -31,4 +33,4 @@ GRANT UPDATE ON destruyespotify.
 
 
 CREATE USER IF NOT EXISTS 
-'EmpleSpoty'@'localhost' IDENTIFIED BY '1234';
+'EmpleSpoty'@'localhost' IDENTIFIED BY '12345678aB+';
