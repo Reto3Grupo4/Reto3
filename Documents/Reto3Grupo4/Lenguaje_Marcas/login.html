@@ -6,7 +6,7 @@
     <title>LOGIN</title>
     <link rel="stylesheet" href="estilos.css">
     <script src="javascript.js"></script>
-    <script>validarLogin()</script>
+    <script>validarLogin();</script>
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
     <main class="login-container">
         <section class="login-box">
             <h2>Iniciar Sesión</h2>
-            <form id="login-form" action="bienvenida.xml" method="post">
+            <form id="login-form" action="menu.html" method="get">
                 <div class="grupo-de-entrada">
                     <label for="usuario">Usuario:</label>
                     <input type="text" id="usuario" name="usuario" required>
@@ -32,20 +32,17 @@
                     <label for="contrasena">Contraseña:</label>
                     <input type="password" id="contrasena" name="contrasena" required>
                 </div>
-                <button type="submit" class="btn-primario">Iniciar Sesión</button>
+                <button type="submit" class="btn-primario" >Iniciar Sesión</button>
                 
             </form>
             <div class="login-footer">
                 <p>¿No tienes una cuenta? 
                 <a href="registro.html" class="btn-secundario">Regístrate aquí</a></p>
             </div>
-            
         </section>
     </main>
     <footer>
         <p>&copy; 2026 Nuestra App. Todos los derechos reservados.</p>
     </footer>
-
-    
 </body>
 </html>

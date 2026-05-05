@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intranet-Nuestra App</title>
+    <title>Aleph App</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="javascript.js"></script>
+    <script>validarLogin();</script>
 </head>
 <body>
 
-    <h1>Intranet-Nuestra App</h1>
+    <h1>Aleph App</h1>
     <header>
         <nav>
             <ul>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="descubrir_musica.html">Canciones</a></li>
-                <li><a href="playlists.html">Playlists</a></li>
+                <li><a href="xml/canciones.xml">Canciones</a></li>
+                <li><a href="xml/playlist.xml">Playlists</a></li>
                 <li><a href="menu.html">Ir al menú</a></li>
             </ul>
         </nav>
@@ -24,7 +26,7 @@
         <section class="contenedor-principal">
             <h2>¡Bienvenido a Nuestra App!</h2>
             <p>Explora nuestra amplia colección de música, descubre nuevos artistas y disfruta de tus canciones favoritas.</p>
-            <form id="FormularioLogin">
+            <form id="FormularioLogin" action="menu.html" method="get">
                 <label for="usuario">Usuario:</label>
                 <input type="text" id="usuario" name="usuario" required>
                 </br>

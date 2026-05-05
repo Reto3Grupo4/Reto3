@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="bienvenida.xsl"?>
-<bienvenida>
+<bienvenida xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="bienvenida.xsd">
     <mensaje>Gracias por iniciar sesión, disfruta de tu música favorita y descubre nuevos artistas.</mensaje>
     <opciones>
         <menu>menu.html</menu>

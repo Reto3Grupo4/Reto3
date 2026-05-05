@@ -6,17 +6,15 @@
                 <xsd:element name="podcast" maxOccurs="unbounded">
                     <xsd:complexType>
                         <xsd:sequence>
-                            <xsd:element name="titulo" type="xsd:string"/>
+                            <xsd:element name="titulo" type="xsd:string" />
                             <xsd:element name="podcaster" type="xsd:string"/>
-                                <xsd:complexType>
-                                    <xsd:sequence>
-                                        <xsd:element name="colaboradores" type="xsd:string"/>
-                                    </xsd:sequence>
-                                </xsd:complexType>
+                            <xsd:element name="colaboradores" type="xsd:integer"/>
                             <xsd:element name="genero" type="xsd:string"/>
-                            <xsd:element name="duracion" type="xsd:string"/>
+                            <xsd:element name="duracion" type="xsd:int"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
+    </xsd:element>
+    </xsd:schema>

@@ -4,14 +4,16 @@
         <div class="artistas-contenedor">
             <h1>Artistas Destacados</h1>
             <xsl:for-each select="artistas/artista">
-                <div class="artista-carta">
+                <article class="artista-carta">
                     <img src="{imagen}" alt="{nombre}"/>
                     <h2><xsl:value-of select="nombre"/></h2>
                     <p><strong>Género:</strong> <xsl:value-of select="genero"/></p>
-                    <p class="album"><strong>Álbum:</strong> <xsl:value-of select="album/titulo"/></p>
-                    <p class="año"><strong>Año:</strong> <xsl:value-of select="album/año"/></p>
-                    <p class="reproducciones"><strong>Reproducciones:</strong> <xsl:value-of select="album/reproducciones"/></p>
-                </div>
+                    <div class="info-album">
+                        <p><strong>Titulo:</strong> <xsl:value-of select="album/titulo"/></p>
+                        <p><strong>Año:</strong> <xsl:value-of select="album/año"/></p>
+                        <p class="reproducciones"><strong>Reproducciones:</strong> <xsl:value-of select="album/reproducciones"/></p>
+                    </div>
+                </article>
             </xsl:for-each>
         </div>
     </xsl:template>

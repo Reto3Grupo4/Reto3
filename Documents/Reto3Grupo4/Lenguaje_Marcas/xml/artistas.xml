@@ -8,8 +8,8 @@
         <imagen>img/Kaze.jpg</imagen>
         <album>
             <titulo>Nombre Direccion</titulo>
-            <año>2023</año>
-            <reproducciones>1.327.701</reproducciones>
+            <año>2023-08-01</año>
+            <reproducciones>1327701</reproducciones>
         </album>
 
     </artista>
@@ -19,8 +19,8 @@
         <imagen>img/bad_bunny.jpg</imagen>
         <album>
             <titulo>Un Verano sin Ti</titulo>
-            <año>2022</año>
-            <reproducciones>550.459.667</reproducciones>
+            <año>2022-07-01</año>
+            <reproducciones>550459667</reproducciones>
         </album>
     </artista>
     <artista id="3">
@@ -29,7 +29,8 @@
         <imagen>img/rosalia.jpg</imagen>
         <album>
             <titulo>El Mal Querer</titulo>
-            <año>2018</año>
-            <reproducciones>1.000.000.000</reproducciones>
+            <año>2018-01-01</año>
+            <reproducciones>1000000000</reproducciones>
         </album>
     </artista>
+</artistas>
