@@ -4,14 +4,24 @@
  xsi:noNamespaceSchemaLocation="playlist.xsd">
     <PlayList>
         <IDPlayList>1</IDPlayList>
+<<<<<<< HEAD
         <titulo>Workout Mix</titulo>
         <fechaCreacion>2023-06-20</fechaCreacion>
+=======
+        <titulo>Rap</titulo>
+        <fechaCreacion>2023-05-01</fechaCreacion>
+>>>>>>> 3c63749c646b9d122946451728526ce9b61260c3
         <IDCliente>1</IDCliente>
     </PlayList>
     <PlayList>
         <IDPlayList>2</IDPlayList>
+<<<<<<< HEAD
         <titulo>Relax Vibes</titulo>
         <fechaCreacion>2024-01-05</fechaCreacion>
+=======
+        <titulo>Reggaeton</titulo>
+        <fechaCreacion>2023-06-01</fechaCreacion>
+>>>>>>> 3c63749c646b9d122946451728526ce9b61260c3
         <IDCliente>2</IDCliente>
     </PlayList>
 </PlayLists>
