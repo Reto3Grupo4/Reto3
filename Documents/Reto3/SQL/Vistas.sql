@@ -17,10 +17,10 @@ drop view masEscuchado;
 create view masEscuchado
 as select	nombreArtistico, sum(Nreproducciones) as 'mas_escuchado'
 from		Audio A join Artista AR on A.IDArtista = AR.IDArtista
-group by nombreArtistico,'mas_escuchado'
-order by 'mas_escuchado' desc;
+group by nombreArtistico;
 
-select * from masEscuchado;
+select * from masEscuchado
+order by mas_escuchado Desc;
 
 select Nreproducciones from Audio
 order by Nreproducciones desc;
