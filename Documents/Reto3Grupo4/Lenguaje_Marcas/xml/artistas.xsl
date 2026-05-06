@@ -9,9 +9,12 @@
                     <h2><xsl:value-of select="nombre"/></h2>
                     <p><strong>Género:</strong> <xsl:value-of select="genero"/></p>
                     <div class="info-album">
-                        <p><strong>Titulo:</strong> <xsl:value-of select="album/titulo"/></p>
-                        <p><strong>Año:</strong> <xsl:value-of select="album/año"/></p>
-                        <p class="reproducciones"><strong>Reproducciones:</strong> <xsl:value-of select="album/reproducciones"/></p>
+                <xsl:for-each select="album">
+                        <p><strong>Titulo:</strong> <xsl:value-of select="titulo"/></p>
+                        <p><strong>Año:</strong> <xsl:value-of select="año"/></p>
+                        <p class="reproducciones"><strong>Reproducciones:</strong> <xsl:value-of select="reproducciones"/> </p>
+                        <hr/>
+                </xsl:for-each>
                     </div>
                 </article>
             </xsl:for-each>

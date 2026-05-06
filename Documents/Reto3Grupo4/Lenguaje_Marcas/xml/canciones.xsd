@@ -12,6 +12,7 @@
                             <xsd:element name="genero" type="xsd:string"/>
                             <xsd:element name="duracion" type="xsd:string"/>
                         </xsd:sequence>
+                        <xsd:attribute name="id" type="xsd:string" use="required"/>
                     </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>

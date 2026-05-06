@@ -2,24 +2,255 @@
 <?xml-stylesheet type="text/xsl" href="canciones.xsl"?>
 <canciones xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="canciones.xsd">
-    <cancion>
+    <cancion id="1">
+        <titulo>Nombre Direccion</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:45</duracion>
+    </cancion>
+    <cancion id="2">
         <titulo>TKT</titulo>
         <artista>Kaze</artista>
         <album>Nombre Direccion</album>
         <genero>Rap</genero>
         <duracion>3:00</duracion>
     </cancion>
-    <cancion>
+    <cancion id="3">
+        <titulo>Guapa Cabrea</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:30</duracion>
+    </cancion>
+    <cancion id="4">
+        <titulo>La molecula de dios</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:15</duracion>
+    </cancion>
+    <cancion id="5">
+        <titulo>Compostela 12</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:20</duracion>
+    </cancion>
+    <cancion id="6">
+        <titulo>No Ice</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:25</duracion>
+    </cancion>
+    <cancion id="7">
+        <titulo>Record</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:30</duracion>
+    </cancion>
+    <cancion id="8">
+        <titulo>Los dos libros</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:35</duracion>
+    </cancion>
+    <cancion id="9">
+        <titulo>Ya me conoces</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:40</duracion>
+    </cancion>
+    <cancion id="10">
+        <titulo>Quiero Seis</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:45</duracion>
+    </cancion>
+    <cancion id="11">
+        <titulo>STKS</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:50</duracion>
+    </cancion>
+    <cancion id="12">
+        <titulo>El plan</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>3:55</duracion>
+    </cancion>
+    <cancion id="13">
+        <titulo>Relajateee</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:00</duracion>
+    </cancion>
+    <cancion id="14">
+        <titulo>Like Takis</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:05</duracion>
+    </cancion>
+    <cancion id="15">
+        <titulo>CC-1028</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:10</duracion>
+    </cancion>
+    <cancion id="16">
+        <titulo>4 Roses</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:15</duracion>
+    </cancion>
+    <cancion id="17">
+        <titulo>Por decidir</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:20</duracion>
+    </cancion>
+    <cancion id="18">
+        <titulo>La lloradita</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:25</duracion>
+    </cancion>
+    <cancion id="19">
+        <titulo>Ta To Clin</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:30</duracion>
+    </cancion>
+    <cancion id="20">
+        <titulo>Cris Starr</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:35</duracion>
+    </cancion>
+    <cancion id="21">
+        <titulo>Cuando Desperto</titulo>
+        <artista>Kaze</artista>
+        <album>Nombre Direccion</album>
+        <genero>Rap</genero>
+        <duracion>4:40</duracion>
+    </cancion>
+    <cancion id="22">
+        <titulo>Salgo calle</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>4:45</duracion>
+    </cancion>
+    <cancion id="23">
+        <titulo>No quiero tu</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>4:50</duracion>
+    </cancion>
+    <cancion id="24">
+        <titulo>Todo el rato</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>4:55</duracion>
+    </cancion>
+    <cancion id="25">
+        <titulo>Soportando el peso</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>5:00</duracion>
+    </cancion>
+    <cancion id="26">
+        <titulo>Le dedico un coro</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>5:05</duracion>
+    </cancion>
+    <cancion id="27">
+        <titulo>Antipop</titulo>
+        <artista>Kaze</artista>
+        <album>Antipop</album>
+        <genero>Rap</genero>
+        <duracion>5:10</duracion>
+    </cancion>
+    <cancion id="28">
+        <titulo>Caramelo</titulo>
+        <artista>Bad Bunny</artista>
+        <album>Oasis</album>
+        <genero>Reggaeton</genero>
+        <duracion>3:45</duracion>
+    </cancion>
+    <cancion id="29">
+        <titulo>La Cancion</titulo>
+        <artista>Bad Bunny</artista>
+        <album>Oasis</album>
+        <genero>Reggaeton</genero>
+        <duracion>3:45</duracion>
+    </cancion>
+    <cancion id="30">
+        <titulo>Otra Noche en Miami</titulo>
+        <artista>Bad Bunny</artista>
+        <album>Oasis</album>
+        <genero>Reggaeton</genero>
+        <duracion>3:45</duracion>
+    </cancion>
+    <cancion id="31">
         <titulo>Tití Me Preguntó</titulo>
         <artista>Bad Bunny</artista>
         <album>Un Verano Sin Ti</album>
         <genero>Reggaeton</genero>
         <duracion>4:03</duracion>
     </cancion>
-    <cancion>
+    <cancion id="32">
         <titulo>Malamente</titulo>
         <artista>Rosalia</artista>
         <album>El Mal Querer</album>
+        <genero>Flamenco</genero>
+        <duracion>3:28</duracion>
+    </cancion>
+    <cancion id="33">
+        <titulo>Saoko</titulo>
+        <artista>Rosalia</artista>
+        <album>Motomami</album>
+        <genero>Flamenco</genero>
+        <duracion>3:28</duracion>
+    </cancion>
+    <cancion id="34">
+        <titulo>Candy</titulo>
+        <artista>Rosalia</artista>
+        <album>Motomami</album>
+        <genero>Flamenco</genero>
+        <duracion>3:28</duracion>
+    </cancion>
+    <cancion id="35">
+        <titulo>Bizcochito</titulo>
+        <artista>Rosalia</artista>
+        <album>Motomami</album>
+        <genero>Flamenco</genero>
+        <duracion>3:28</duracion>
+    </cancion>
+    <cancion id="36">
+        <titulo>Chicken Teriyaki</titulo>
+        <artista>Rosalia</artista>
+        <album>Motomami</album>
         <genero>Flamenco</genero>
         <duracion>3:28</duracion>
     </cancion>

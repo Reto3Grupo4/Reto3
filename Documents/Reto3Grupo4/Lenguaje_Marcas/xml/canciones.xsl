@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
-<<<<<<< HEAD
         <html lang="es">
             <head>
                 <meta charset="UTF-8" />
@@ -33,9 +32,9 @@
                 </section>
                 <br/>
                  <section class="navegacion">
-                    <a href="menu.html" class="btn-menu">Ir al Menu</a>
+                    <a href="../menu.html" class="btn-menu">Ir al Menu</a>
                     <br/>
-                    <a href="index.html">Volver a la página principal</a>
+                    <a href="../index.html">Volver a la página principal</a>
                 </section> 
                 
                 <footer>
@@ -43,19 +42,5 @@
                 </footer>
             </body>
         </html>
-=======
-        <div class= "canciones_contenedor">
-            <h1>Canciones</h1>
-                <xsl:for-each select="Canciones/cancion">
-                    <div class= "cancion_datos">
-                        <h2><xsl:value-of select="titulo"/></h2>
-                        <h3><xsl:value-of select="artista"/></h3>
-                        <p><xsl:value-of select="album"/></p>
-                        <p><xsl:value-of select="genero"/></p>
-                        <p><xsl:value-of select="duracion"/></p>
-                    </div>
-                </xsl:for-each>
-        </div>
->>>>>>> 3c63749c646b9d122946451728526ce9b61260c3
     </xsl:template>
 </xsl:stylesheet>

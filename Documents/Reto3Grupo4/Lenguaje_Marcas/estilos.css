@@ -227,21 +227,6 @@ input[type="date"]{
     border-color: white;
 }
 
-@media (max-width: 600px) {
-    .menu-header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .header-derecha {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .menu-contenedor {
-        padding: 1.5rem;
-    }
-}
 
 /* Estilos para la sección de artistas */
 .artistas-contenedor {

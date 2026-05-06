@@ -9,7 +9,7 @@
               <xs:element name="nombre" type="xs:string"/>
               <xs:element name="genero" type="xs:string"/>
               <xs:element name="imagen" type="xs:string"/>
-              <xs:element name="album">
+              <xs:element name="album" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="titulo" type="xs:string"/>
