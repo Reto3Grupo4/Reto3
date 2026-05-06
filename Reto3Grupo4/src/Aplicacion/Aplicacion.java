@@ -1,4 +1,4 @@
-package Aplicacion_Usuario;
+package Aplicacion;
 
 import java.awt.EventQueue;
 
@@ -23,7 +23,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
 
-public class Aplicacion_usuario extends JFrame implements ActionListener{
+public class Aplicacion extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -47,8 +47,8 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 	private JButton btnGuardar;
 	
 
-	private String usuarioRegistrado;
-	private String claveRegistrada;
+	public String usuarioRegistrado;
+	public String claveRegistrada;
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +56,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Aplicacion_usuario frame = new Aplicacion_usuario();
+					Aplicacion frame = new Aplicacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +68,7 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Aplicacion_usuario() {
+	public Aplicacion() {
 		setTitle("Aplicacion Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 579);
@@ -303,6 +303,8 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		pnlInformacion.add(txtAreaInformacion);
 
 		cl.show(contentPane, "login");
+		
+		
 	}
 
 	@Override
@@ -317,35 +319,77 @@ public class Aplicacion_usuario extends JFrame implements ActionListener{
 		    }
 
 		    if (evento.getSource() == btnLogin) {
-		        String usuario = txtUsuario.getText().trim();
-		        String clave = String.valueOf(pf_Clave.getPassword()).trim();
-
-		        if (usuario.isEmpty() || clave.isEmpty()) {
-		        	JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
-		        } else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
-		        	cl.show(contentPane, "menu");
-		        }else {
-		        	JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-		        }
+		    	validarLogin();
 		    }
 		    
 		    if(evento.getSource()== btnGuardar) {
-		    	String usuario = txtUsuario_2.getText().trim();
-		    	String clave = String.valueOf(pfClave_2.getPassword()).trim();
-		    	String confirmar = String.valueOf(pfConfirmar.getPassword()).trim();
-		    	
-		    	if (usuario.isEmpty() || clave.isEmpty()) {
-		    	    JOptionPane.showMessageDialog(this, "Rellena los campos");
-		    	} else if (!clave.equals(confirmar)) {
-		    	    JOptionPane.showMessageDialog(this, "Las claves no coinciden");
-		    	} else {
-		    	    usuarioRegistrado = usuario;
-		    	    claveRegistrada = clave;
-		    	    
-		    	    JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
-
-		    	    cl.show(contentPane, "login");
+		    	validarRegistro();
 		    }
+	}
+	/**
+	 * Metodo encargado deverificar que el registro se haga correctamente
+	 * @return confirmar variable para confirmar la clave
+	 */
+	public String validarRegistro() {
+	
+			String usuario = txtUsuario_2.getText().trim();
+			String clave = String.valueOf(pfClave_2.getPassword()).trim();
+			String confirmar = String.valueOf(pfConfirmar.getPassword()).trim();
+		
+		if (usuario.isEmpty() || clave.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Rellena los campos");
+		} else if (!clave.equals(confirmar)) {
+			JOptionPane.showMessageDialog(this, "Las claves no coinciden");
+		} else {
+			usuarioRegistrado = usuario;
+			claveRegistrada = clave;
+				
+			JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
+			
+			cl.show(contentPane, "login");
 		}
+		return confirmar;
+		
+	}
+	/**
+	 * Metodo encargado de verificar si el usuario y la clave estan registradas
+	 * @return clave variable para sacar la clave registrada
+	 */
+	public String validarLogin() {
+		String usuario = txtUsuario.getText().trim();
+		String clave = String.valueOf(pf_Clave.getPassword()).trim();
+	
+		if (usuario.isEmpty() || clave.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
+		} else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
+			cl.show(contentPane, "menu");
+		}else {
+			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+		}
+		return clave;
+	}
+	
+	public boolean comprobarLogin(String usuario, String clave) {
+		
+		if(usuario.isEmpty() || clave.isEmpty()) {
+			return false;
+		}
+		
+		
+		return usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada);	
+	}
+	
+	public boolean comprobarRegistro(String usuario, String clave, String confirmar) {
+		
+		if(usuario.isEmpty() || clave.isEmpty()) {
+			return false;
+		}else if(!clave.equals(confirmar)) {
+			return false;
+		}
+		
+		usuarioRegistrado = usuario;
+		claveRegistrada = clave;
+		
+		return true;
 	}
 }
