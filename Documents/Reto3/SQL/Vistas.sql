@@ -15,9 +15,10 @@ Select * from clienteSecured;
 drop view masEscuchado;
 
 create view masEscuchado
-as select	nombreArtistico, Nreproducciones as 'mas_escuchado'
+as select	nombreArtistico, sum(Nreproducciones) as 'mas_escuchado'
 from		Audio A join Artista AR on A.IDArtista = AR.IDArtista
-order by Nreproducciones desc;
+group by nombreArtistico,'mas_escuchado'
+order by 'mas_escuchado' desc;
 
 select * from masEscuchado;
 
