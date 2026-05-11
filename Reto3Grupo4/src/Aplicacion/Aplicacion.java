@@ -22,7 +22,6 @@ import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
-
 public class Aplicacion extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -31,21 +30,25 @@ public class Aplicacion extends JFrame implements ActionListener{
 	private JPanel Ventana_Login;
 	private JPanel Ventana_Registro;
 	private JPanel Ventana_Menu;
-	private JTextField txtUsuario;
-	private JPasswordField pf_Clave;
+	public JTextField txtUsuario;
+	public JPasswordField pf_Clave;
 	private JTextField txtNombre;
-	private JTextField txtUsuario_2;
+	public JTextField txtUsuario_2;
 	private JTextField txtApellidos;
-	private JPasswordField pfClave_2;
-	private JPasswordField pfConfirmar;
+	public JPasswordField pfClave_2;
+	public JPasswordField pfConfirmar;
+
 	private JTextField txtFecNac;
 	private JTextField txtFecRegistro;
 	private JTextField txtPremium;
 	private JButton btnRegistrar;
 	private JButton btnLogin;
 	private JButton btnAtras;
+	private JButton btnAtras_2;
+	private JButton btnAtras_3;
 	private JButton btnGuardar;
-	
+	private JButton btnDescubrirMusica;
+
 
 	public String usuarioRegistrado;
 	public String claveRegistrada;
@@ -53,6 +56,46 @@ public class Aplicacion extends JFrame implements ActionListener{
 	public String usuarioARegistrar;
 	public String claveARegistrar;
 	public String claveAConfirmar;
+	
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+	
+	public void setTxtUsuario(JTextField txtUsuario) {
+		this.txtUsuario = txtUsuario;
+	}
+	
+	public JPasswordField getPf_Clave() {
+		return pf_Clave;
+	}
+	
+	public void setPf_Clave(JPasswordField pf_Clave) {
+		this.pf_Clave = pf_Clave;
+	}
+	
+	public JPasswordField getPfConfirmar() {
+		return pfConfirmar;
+	}
+	
+	public void setPfConfirmar(JPasswordField pfConfirmar) {
+		this.pfConfirmar = pfConfirmar;
+	}
+	public JTextField getTxtUsuario_2() {
+		return txtUsuario_2;
+	}
+
+	public void setTxtUsuario_2(JTextField txtUsuario_2) {
+		this.txtUsuario_2 = txtUsuario_2;
+	}
+
+	public JPasswordField getPfClave_2() {
+		return pfClave_2;
+	}
+
+	public void setPfClave_2(JPasswordField pfClave_2) {
+		this.pfClave_2 = pfClave_2;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -227,7 +270,8 @@ public class Aplicacion extends JFrame implements ActionListener{
 		contentPane.add(Ventana_Menu, "menu");
 		Ventana_Menu.setLayout(null);
 		
-		JButton btnAtras_2 = new JButton("Atras");
+		btnAtras_2 = new JButton("Atras");
+		btnAtras_2.addActionListener(this);
 		btnAtras_2.setBounds(10, 24, 89, 23);
 		Ventana_Menu.add(btnAtras_2);
 		
@@ -241,7 +285,8 @@ public class Aplicacion extends JFrame implements ActionListener{
 		lblEscoger.setBounds(167, 28, 57, 14);
 		Ventana_Menu.add(lblEscoger);
 		
-		JButton btnDescubrirMusica = new JButton("Descubrir musica");
+		btnDescubrirMusica = new JButton("Descubrir musica");
+		btnDescubrirMusica.addActionListener(this);
 		btnDescubrirMusica.setBounds(130, 88, 126, 23);
 		Ventana_Menu.add(btnDescubrirMusica);
 		
@@ -257,7 +302,8 @@ public class Aplicacion extends JFrame implements ActionListener{
 		contentPane.add(Ventana_Artistas, "artistas");
 		Ventana_Artistas.setLayout(null);
 		
-		JButton btnAtras_3 = new JButton("Atras");
+		btnAtras_3 = new JButton("Atras");
+		btnAtras_3.addActionListener(this);
 		btnAtras_3.setBounds(10, 11, 89, 23);
 		Ventana_Artistas.add(btnAtras_3);
 		
@@ -271,7 +317,7 @@ public class Aplicacion extends JFrame implements ActionListener{
 		Ventana_Artistas.add(lblListaArtistas);
 		
 		JTextArea txtAreaListaArtistas = new JTextArea();
-		txtAreaListaArtistas.setBounds(71, 61, 255, 193);
+		txtAreaListaArtistas.setBounds(119, 81, 255, 193);
 		Ventana_Artistas.add(txtAreaListaArtistas);
 		
 		JPanel Ventana_Artista = new JPanel();
@@ -324,6 +370,15 @@ public class Aplicacion extends JFrame implements ActionListener{
 		    if (evento.getSource() == btnAtras) {
 		        cl.show(contentPane, "login");
 		    }
+		    
+		    if (evento.getSource() == btnAtras_2) {
+		        cl.show(contentPane, "login");
+		    }
+		    
+		    if (evento.getSource() == btnAtras_2) {
+		        cl.show(contentPane, "menu");
+		    }
+		    
 
 		    if (evento.getSource() == btnLogin) {
 		    	validarLogin();
@@ -331,6 +386,10 @@ public class Aplicacion extends JFrame implements ActionListener{
 		    
 		    if(evento.getSource()== btnGuardar) {
 		    	validarRegistro();
+		    }
+		    
+		    if(evento.getSource() == btnDescubrirMusica) {
+		    	cl.show(contentPane, "artista");
 		    }
 	}
 	/**
@@ -351,8 +410,8 @@ public class Aplicacion extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Las claves no coinciden");
 				validado = false;
 			} else {
-				usuarioARegistrar = usuario;
-				claveARegistrar = clave;
+				usuarioRegistrado = usuario; 
+			    claveRegistrada = clave;
 					
 				JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
 				validado = true;
@@ -374,44 +433,15 @@ public class Aplicacion extends JFrame implements ActionListener{
 	
 		if (usuario.isEmpty() || clave.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
+			validado = false;
 		} else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
 			cl.show(contentPane, "menu");
 			validado = true;
 		}else {
 			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+			validado = false;
 		}
 		return validado;
 	}
 	
-	/**
-	 * Método creado para comprobar en el JUnit si el login funciona correctamente
-	 * @param usuario
-	 * @param clave
-	 * @return
-	 */
-	public boolean comprobarLogin(String usuario, String clave) {
-		boolean comprobar = true;
-		if(usuario.isEmpty() || clave.isEmpty()) {
-			comprobar = false;
-		}else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)) {
-			comprobar = true;
-		}
-		
-		
-		return comprobar;	
-	}
-	
-	public boolean comprobarRegistro(String usuario, String clave, String confirmar) {
-		boolean comprobar = true;
-		if(usuario.isEmpty() || clave.isEmpty()) {
-			comprobar = false;
-		}else if(!clave.equals(confirmar)) {
-			comprobar = false;
-		}
-		
-		usuarioRegistrado = usuario;
-		claveRegistrada = clave;
-		
-		return comprobar;
-	}
 }
