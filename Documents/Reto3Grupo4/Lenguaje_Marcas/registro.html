@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Intranet-Nuestra App</h1>
+    </header>
+
+    <main class="login-container">
+        <section class="registro-box">
+            <h2>Registrarse</h2>
+            <form id="registro-form" action="login.html" method="get">
+                <div class="grupo-de-entrada">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="grupo-de-entrada">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="grupo-de-entrada">
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" required>
+                </div>
+
+                <div class="grupo-de-entrada">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                </div>
+
+                <div class="grupo-de-entrada">
+                    <label for="confirmar-contrasena">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="fecha-nac">Jaiotze data / Fecha nacimiento:</label>
+                    <input type="date" id="fecha-nac" name="fecha-nac" required>
+                </div>
+
+                <button type="submit" class="btn-primario">Finalizar Registro</button>
+                <a href="login.html" class="btn-atras">Volver al Login</a>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nuestra App. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
