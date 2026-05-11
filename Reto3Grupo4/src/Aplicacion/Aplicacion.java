@@ -49,6 +49,10 @@ public class Aplicacion extends JFrame implements ActionListener{
 
 	public String usuarioRegistrado;
 	public String claveRegistrada;
+	
+	public String usuarioARegistrar;
+	public String claveARegistrar;
+	public String claveAConfirmar;
 	/**
 	 * Launch the application.
 	 */
@@ -71,7 +75,7 @@ public class Aplicacion extends JFrame implements ActionListener{
 	public Aplicacion() {
 		setTitle("Aplicacion Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 579);
+		setBounds(100, 100, 530, 551);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		cl = new CardLayout();
@@ -306,7 +310,10 @@ public class Aplicacion extends JFrame implements ActionListener{
 		
 		
 	}
-
+	
+	/**
+	 * Metodo dedicado a realizar una accion al pulsar botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 
@@ -330,32 +337,38 @@ public class Aplicacion extends JFrame implements ActionListener{
 	 * Metodo encargado deverificar que el registro se haga correctamente
 	 * @return confirmar variable para confirmar la clave
 	 */
-	public String validarRegistro() {
-	
+	public boolean validarRegistro() {
+			boolean validado = false;
 			String usuario = txtUsuario_2.getText().trim();
 			String clave = String.valueOf(pfClave_2.getPassword()).trim();
 			String confirmar = String.valueOf(pfConfirmar.getPassword()).trim();
 		
-		if (usuario.isEmpty() || clave.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Rellena los campos");
-		} else if (!clave.equals(confirmar)) {
-			JOptionPane.showMessageDialog(this, "Las claves no coinciden");
-		} else {
-			usuarioRegistrado = usuario;
-			claveRegistrada = clave;
-				
-			JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
 			
-			cl.show(contentPane, "login");
-		}
-		return confirmar;
+			if (usuario.isEmpty() || clave.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Rellena los campos");
+				validado = false;
+			} else if (!clave.equals(confirmar)) {
+				JOptionPane.showMessageDialog(this, "Las claves no coinciden");
+				validado = false;
+			} else {
+				usuarioARegistrar = usuario;
+				claveARegistrar = clave;
+					
+				JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
+				validado = true;
+				cl.show(contentPane, "login");
+			}
+		
+		
+		return validado;
 		
 	}
 	/**
 	 * Metodo encargado de verificar si el usuario y la clave estan registradas
 	 * @return clave variable para sacar la clave registrada
 	 */
-	public String validarLogin() {
+	public boolean validarLogin() {
+		boolean validado = false;
 		String usuario = txtUsuario.getText().trim();
 		String clave = String.valueOf(pf_Clave.getPassword()).trim();
 	
@@ -363,33 +376,42 @@ public class Aplicacion extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
 		} else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
 			cl.show(contentPane, "menu");
+			validado = true;
 		}else {
 			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
 		}
-		return clave;
+		return validado;
 	}
 	
+	/**
+	 * Método creado para comprobar en el JUnit si el login funciona correctamente
+	 * @param usuario
+	 * @param clave
+	 * @return
+	 */
 	public boolean comprobarLogin(String usuario, String clave) {
-		
+		boolean comprobar = true;
 		if(usuario.isEmpty() || clave.isEmpty()) {
-			return false;
+			comprobar = false;
+		}else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)) {
+			comprobar = true;
 		}
 		
 		
-		return usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada);	
+		return comprobar;	
 	}
 	
 	public boolean comprobarRegistro(String usuario, String clave, String confirmar) {
-		
+		boolean comprobar = true;
 		if(usuario.isEmpty() || clave.isEmpty()) {
-			return false;
+			comprobar = false;
 		}else if(!clave.equals(confirmar)) {
-			return false;
+			comprobar = false;
 		}
 		
 		usuarioRegistrado = usuario;
 		claveRegistrada = clave;
 		
-		return true;
+		return comprobar;
 	}
 }

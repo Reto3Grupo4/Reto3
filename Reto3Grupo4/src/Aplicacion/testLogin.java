@@ -27,7 +27,7 @@ public class testLogin{
 	@Test
 	public void testLoginUsuarioCorrecto() {
 		
-		boolean resultado = app.comprobarLogin("Ander", "Elorrieta00");
+		boolean resultado = app.validarLogin();
 		assertTrue(resultado);
 	}
 

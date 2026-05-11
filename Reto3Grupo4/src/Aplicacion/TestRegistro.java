@@ -12,11 +12,14 @@ public class TestRegistro {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		app = new Aplicacion();
+		app.usuarioARegistrar = "Ander";
+		app.claveARegistrar = "Elorrieta00";
+		app.claveAConfirmar = "Elorrieta00";
 	}
 
 	@Test
 	public void testRegistroCorrecto() {
-		boolean resultado = app.comprobarRegistro("Ander", "Elorrieta00", "Elorrieta00");
+		boolean resultado = app.validarRegistro("Ander", "Elorrieta00", "Elorrieta00");
 		assertTrue(resultado);
 	}
 	
