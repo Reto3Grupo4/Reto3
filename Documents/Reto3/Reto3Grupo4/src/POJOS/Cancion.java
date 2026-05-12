@@ -1,23 +1,23 @@
 package POJOS;
 
+import java.util.ArrayList;
+
 public class Cancion extends Audio{
 
 	public String idCancion;
 	public String idAlbum;
-	public String artistasInvitados;
+	protected ArrayList<String> artistasInvitados;
 	
 	public Cancion() {
 		
-		
 	}
-	
-	
+
 	/**
 	 * @param idCancion
 	 * @param idAlbum
 	 * @param artistasInvitados
 	 */
-	public Cancion(String idCancion, String idAlbum, String artistasInvitados) {
+	public Cancion(String idCancion, String idAlbum, ArrayList<String> artistasInvitados) {
 		this.idCancion = idCancion;
 		this.idAlbum = idAlbum;
 		this.artistasInvitados = artistasInvitados;
@@ -40,11 +40,11 @@ public class Cancion extends Audio{
 		this.idAlbum = idAlbum;
 	}
 
-	public String getArtistasInvitados() {
+	public ArrayList<String> getArtistasInvitados() {
 		return artistasInvitados;
 	}
 
-	public void setArtistasInvitados(String artistasInvitados) {
+	public void setArtistasInvitados(ArrayList<String> artistasInvitados) {
 		this.artistasInvitados = artistasInvitados;
 	}
 

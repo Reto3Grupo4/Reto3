@@ -30,7 +30,7 @@ public class Podcast extends Audio{
 	/**
 	 * @return the colaboradores
 	 */
-	public int getColaboradores() {
+	public ArrayList<String> getColaboradores() {
 		return colaboradores;
 	}
 	/**
@@ -48,7 +48,7 @@ public class Podcast extends Audio{
 	/**
 	 * @param colaboradores the colaboradores to set
 	 */
-	public void setColaboradores(int colaboradores) {
+	public void setColaboradores(ArrayList<String> colaboradores) {
 		this.colaboradores = colaboradores;
 	}
 	/**
