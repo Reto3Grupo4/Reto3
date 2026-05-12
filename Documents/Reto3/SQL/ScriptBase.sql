@@ -1,7 +1,7 @@
-create database if not exists destruyeSpotify;
-use destruyeSpotify;
+create database if not exists DestruyeSpotify1;
+use DestruyeSpotify1;
 create table Artista(
-IDArtista varchar(5) primary key,
+IDArtista char(5) primary key,
 NombreArtistico char(20) not null unique,
 GeneroPredom char(20),
 Imagen varchar(255),
@@ -9,23 +9,23 @@ Descripcion varchar(255) not null
 );
 
 create table Podcaster(
-IDPodcaster varchar(5) primary key,
+IDPodcaster char(5) primary key,
 constraint fk_Artista_Podcaster foreign key(IDPodcaster)
 references Artista (IDArtista) on update cascade
 );
 
 create table Musico(
-IDMusico varchar(5) primary key,
+IDMusico char(5) primary key,
 Descripcion enum ('Solista', 'Grupo') not null,
 constraint fk_Artista1 foreign key (IDMusico) 
 references Artista (IDArtista) on update cascade
 );
 
 create table Podcast (
-IDPodcast varchar(5) primary key,
+IDPodcast char(5) primary key,
 NombrePodcast varchar(45) not null,
 Colaboradores int,
-IDPodcaster varchar(5) not null,
+IDPodcaster char(5) not null,
 constraint fk_Audio foreign key (IDPodcast) 
 references Audio (IDAudio) on update cascade,
 constraint fk_Artista foreign key (IDPodcaster) 
@@ -33,31 +33,31 @@ references Artista (IDArtista) on update cascade
 );
 
 create table Audio(
-IDAudio varchar(5) primary key,
+IDAudio char(5) primary key,
 Nombre char(20) not null unique,
 Duracion int not null,
 Archivo varchar(255),
 Tipo enum ('Podcast', 'Cancion') not null,
 NReproducciones int not null default 0,
-IDArtista varchar(5),
+IDArtista char(5),
 constraint fk_audio_artista foreign key (IDArtista)
 references Artista (IDArtista) on update cascade
 );
 
 create table Album(
-IDAlbum varchar(10) primary key,
+IDAlbum char(10) primary key,
 Titulo varchar(20) not null,
 Año date not null,
 Genero char(15) not null,
 Imagen varchar(255),
-IDMusico varchar(5) not null,
+IDMusico char(5) not null,
 constraint fk_Musico foreign key (IDMusico)
 references Musico (IDMusico) on update cascade
 );
 
 create table Cancion (
-IDCancion varchar(5) primary key,
-IDAlbum varchar(10) not null,
+IDCancion char(5) primary key,
+IDAlbum char(10) not null,
 Artistas_invitados varchar(50),
 constraint fk_Audio_canc foreign key (IDCancion)
 references Audio (IDAudio) on update cascade,
@@ -71,11 +71,11 @@ Descripcion char(100) not null
 );
 
 create table Cliente(
-IDCliente varchar(5) primary key, 
-Nombre char(15) not null,
-Apellido char (15) not null,
+IDCliente char(5) primary key, 
+Nombre varchar(15) not null,
+Apellido varchar (15) not null,
 Idioma enum ('ES', 'EU', 'EN', 'FR', 'DE', 'CA', 'GA', 'AR') not null,
-Usuario char(10) not null,
+Usuario varchar(10) not null,
 Contraseña varchar(64) not null,
 FechaNacimiento date not null,
 FechaRegistro date not null,
@@ -86,18 +86,18 @@ references Idioma (IDIdioma) on update cascade
 
 
 create table Playlist (
-IDPlaylist int unsigned primary key,
+IDPlaylist int unsigned primary key auto_increment,
 Titulo varchar(20) not null,
 FechaCreacion date not null,
-IDCliente varchar(5) not null,
+IDCliente char(5) not null,
 Constraint fk_client foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade
 );
 
 
 create table Playlist_Canciones(
-IDCancion varchar(5),
-IDPlaylist int unsigned,
+IDCancion char(5),
+IDPlaylist int unsigned auto_increment,
 FechaPlaylist_Cancion date not null,
 Constraint pk_Playlist primary key (IDCancion, IDPlaylist),
 Constraint fk_Cancion foreign key (IDCancion)
@@ -107,8 +107,8 @@ references Playlist (IDPlaylist) on update cascade
 );
 
 create table Favoritos(
-IDCliente varchar(5) primary key,
-IDAudio varchar(5) not null,
+IDCliente char(5) primary key,
+IDAudio char(5) not null,
 constraint fk_Cliente_fav foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade,
 constraint fk_Audio_fav foreign key (IDAudio)
@@ -116,7 +116,7 @@ references Audio (IDAudio) on update cascade
 );
 
 create table Premium(
-IDCliente varchar(5) primary key,
+IDCliente char(5) primary key,
 FechaCaducidad date not null,
 constraint fk_Cliente foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade
