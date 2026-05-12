@@ -1,4 +1,4 @@
-use destruyeSpotify;
+use DestruyeSpotify;
 create view clienteSecured 
 as select	IDCliente, 
 			Nombre, 
@@ -24,3 +24,16 @@ order by mas_escuchado Desc;
 
 select Nreproducciones from Audio
 order by Nreproducciones desc;
+
+create view cancionMasEscuchada 
+as select A.IDAudio, A.Nombre, AR.nombreArtistico, A.IDArtista, sum(A.NReproducciones) as 'Reproducciones'
+from	Audio A join Artista AR on A.IDArtista = AR.IDArtista
+group by IDAudio;
+
+select * from cancionMasEscuchada
+order by Reproducciones desc;
+
+
+select AR.nombreArtistico, sum(A.Nreproducciones) as 'reproducciones'
+from Audio A join Artista AR on A.IDArtista = AR.IDArtista
+group by nombreArtistico;
