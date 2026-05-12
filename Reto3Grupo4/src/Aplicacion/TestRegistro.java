@@ -12,29 +12,48 @@ public class TestRegistro {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		app = new Aplicacion();
+		app.usuarioARegistrar = "Ander";
+		app.claveARegistrar = "Elorrieta00";
+		app.claveAConfirmar = "Elorrieta00";
 	}
 
 	@Test
 	public void testRegistroCorrecto() {
-		boolean resultado = app.comprobarRegistro("Ander", "Elorrieta00", "Elorrieta00");
+		app.getTxtUsuario_2().setText("Ander");
+		app.getPfClave_2().setText("Elorrieta00");
+		app.getPfConfirmar().setText("Elorrieta00");
+		
+		boolean resultado = app.validarRegistro();
 		assertTrue(resultado);
 	}
 	
 	@Test
 	public void testRegistroUsuarioVacio() {
-		boolean resultado = app.comprobarRegistro("", "Elorrieta00", "Elorrieta00");
+		app.getTxtUsuario_2().setText("");
+		app.getPfClave_2().setText("Elorrieta00");
+		app.getPfConfirmar().setText("Elorrieta00");
+		
+		boolean resultado = app.validarRegistro();
 		assertFalse(resultado);
 	}
 
 	@Test
 	public void testRegistroClaveVacia() {
-		boolean resultado = app.comprobarRegistro("Ander", "", "");
+		app.getTxtUsuario_2().setText("Ander");
+		app.getPfClave_2().setText("");
+		app.getPfConfirmar().setText("");
+		
+		boolean resultado = app.validarRegistro();
 		assertFalse(resultado);
 	}
 	
 	@Test
 	public void testRegistroClavesIncorrectas() {
-		boolean resultado = app.comprobarRegistro("Ander", "Elorrieta00", "1234");
+		app.getTxtUsuario_2().setText("Ander");
+		app.getPfClave_2().setText("Elorrieta00");
+		app.getPfConfirmar().setText("1234");
+		
+		boolean resultado = app.validarRegistro();
 		assertFalse(resultado);
 	}
 }
