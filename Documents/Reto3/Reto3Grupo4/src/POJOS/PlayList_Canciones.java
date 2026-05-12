@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PlayList_Canciones {
 
-	public Cancion idCancion;
+	public Audio idAudio;
 	public PlayList idPlayList;
 	public Date fecPlayList_Cancion;
 	
@@ -18,20 +18,20 @@ public class PlayList_Canciones {
 	 * @param idPlayList
 	 * @param fecPlayList_Cancion
 	 */
-	public PlayList_Canciones(Cancion idCancion, PlayList idPlayList, Date fecPlayList_Cancion) {
+	public PlayList_Canciones(Audio idAudio, PlayList idPlayList, Date fecPlayList_Cancion) {
 		super();
-		this.idCancion = idCancion;
+		this.idAudio = idAudio;
 		this.idPlayList = idPlayList;
 		this.fecPlayList_Cancion = fecPlayList_Cancion;
 	}
 
 
-	public Cancion getIdCancion() {
-		return idCancion;
+	public Audio getIdAudio() {
+		return idAudio;
 	}
 
-	public void setIdCancion(Cancion idCancion) {
-		this.idCancion = idCancion;
+	public void setIdCancion(Audio idAudio) {
+		this.idAudio = idAudio;
 	}
 
 	public PlayList getIdPlayList() {

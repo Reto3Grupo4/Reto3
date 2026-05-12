@@ -5,7 +5,7 @@ import Enums.TipoMusico;
 public class Musico extends Artista{
 	private TipoMusico caracteristica;
 	
-	public Musico(String idArtista, String nombreArtistico, String genero) {
+	public Musico(String idArtista, String nombreArtistico, String genero, TipoMusico caracteristica) {
 		super(idArtista, nombreArtistico, genero);
 		this.caracteristica = caracteristica;
 		

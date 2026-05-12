@@ -4,8 +4,8 @@ public class Podcaster extends Artista{
 	
 	
 
-	public Podcaster() {
-		super();
+	public Podcaster(String idArtista, String nombreArtistico, String genero) {
+		super(idArtista, nombreArtistico, genero);
 	}
 
 }

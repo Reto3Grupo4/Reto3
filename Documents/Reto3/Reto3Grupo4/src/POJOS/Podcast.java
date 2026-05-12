@@ -1,16 +1,18 @@
 package POJOS;
 
+import java.util.ArrayList;
+
 import Enums.TipoCliente;
 
 public class Podcast extends Audio{
 	public String idPodcast;
-	public int colaboradores;
+	protected ArrayList<String>colaboradores;
 	public Audio idArtista;
 	
 	
 	
 	public Podcast(String idAudio, String nombre, int duracion, String archivo, TipoCliente tipo, int nReproducciones,
-			String idPodcast, int colaboradores, Podcaster idPodcaster) {
+			String idPodcast, ArrayList<String> colaboradores, Podcaster idPodcaster, Audio idArtista) {
 		super(idAudio, nombre, duracion, archivo, tipo, nReproducciones);
 		this.idPodcast = idPodcast;
 		this.colaboradores = colaboradores;

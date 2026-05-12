@@ -10,7 +10,7 @@ public class Cliente {
 	public String idCliente;
 	public String nombre;
 	public String apellido;
-	public Idioma idioma;
+	public IdiomaE idioma;
 	public String usuario;
 	public String clave;
 	public Date fecNacimiento;
@@ -33,7 +33,7 @@ public class Cliente {
 	 * @param fecRegistro
 	 * @param tipoCliente
 	 */
-	public Cliente(String idCliente, String nombre, String apellido, Idioma idioma, String usuario, String clave, Date fecNacimiento, Date fecRegistro, TipoCliente tipoCliente) {
+	public Cliente(String idCliente, String nombre, String apellido, IdiomaE idioma, String usuario, String clave, Date fecNacimiento, Date fecRegistro, TipoCliente tipoCliente) {
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -70,11 +70,11 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public Idioma getIdioma() {
+	public IdiomaE getIdioma() {
 		return idioma;
 	}
 
-	public void setIdioma(Idioma idioma) {
+	public void setIdioma(IdiomaE idioma) {
 		this.idioma = idioma;
 	}
 
