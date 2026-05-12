@@ -2,31 +2,47 @@ package Aplicacion;
 
 import java.awt.EventQueue;
 
+/*Imports de la aplicacion*/
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.border.TitledBorder;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
-public class Aplicacion extends JFrame implements ActionListener{
+
+/*Imports para la conexion con la Base de Datos*/
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.ListModel;
+
+public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private CardLayout cl;
+	private JPanel Aplicacion_usuario;
+	private CardLayout cl_aplicacion_usuario;
 	private JPanel Ventana_Login;
 	private JPanel Ventana_Registro;
 	private JPanel Ventana_Menu;
@@ -46,8 +62,16 @@ public class Aplicacion extends JFrame implements ActionListener{
 	private JButton btnAtras;
 	private JButton btnAtras_2;
 	private JButton btnAtras_3;
+	private JButton btnAtras_4;
+	private JButton btnAtras_5;
 	private JButton btnGuardar;
 	private JButton btnDescubrirMusica;
+	private JList<String> listaArtistas; 
+	private DefaultListModel<String> modeloArtistas;
+	
+	private JList<String> listaDiscos;
+	private DefaultListModel<String> modeloDiscos;
+
 
 
 	public String usuarioRegistrado;
@@ -119,16 +143,16 @@ public class Aplicacion extends JFrame implements ActionListener{
 		setTitle("Aplicacion Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 551);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		cl = new CardLayout();
-		contentPane.setLayout(cl);
-		setContentPane(contentPane);
+		Aplicacion_usuario = new JPanel();
+		Aplicacion_usuario.setBorder(new EmptyBorder(5, 5, 5, 5));
+		cl_aplicacion_usuario = new CardLayout();
+		Aplicacion_usuario.setLayout(cl_aplicacion_usuario);
+		setContentPane(Aplicacion_usuario);
 		
 		Ventana_Login = new JPanel();
 		Ventana_Login.setLayout(null);
 		Ventana_Login.setBorder(new TitledBorder(null, "Ventana Login", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(Ventana_Login, "login");
+		Aplicacion_usuario.add(Ventana_Login, "login");
 		
 		JLabel lblUsuario_1 = new JLabel("Usuario:");
 		lblUsuario_1.setBounds(88, 91, 46, 14);
@@ -169,7 +193,7 @@ public class Aplicacion extends JFrame implements ActionListener{
 		
 		Ventana_Registro = new JPanel();
 		Ventana_Registro.setBorder(new TitledBorder(null, "Ventana Registro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		contentPane.add(Ventana_Registro, "registro");
+		Aplicacion_usuario.add(Ventana_Registro, "registro");
 		Ventana_Registro.setLayout(null);
 		
 		btnAtras = new JButton("Atras");
@@ -267,7 +291,7 @@ public class Aplicacion extends JFrame implements ActionListener{
 		
 		Ventana_Menu = new JPanel();
 		Ventana_Menu.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ventana Menu", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		contentPane.add(Ventana_Menu, "menu");
+		Aplicacion_usuario.add(Ventana_Menu, "menu");
 		Ventana_Menu.setLayout(null);
 		
 		btnAtras_2 = new JButton("Atras");
@@ -299,7 +323,7 @@ public class Aplicacion extends JFrame implements ActionListener{
 		Ventana_Menu.add(btnMisPlaylist);
 		
 		JPanel Ventana_Artistas = new JPanel();
-		contentPane.add(Ventana_Artistas, "artistas");
+		Aplicacion_usuario.add(Ventana_Artistas, "artistas");
 		Ventana_Artistas.setLayout(null);
 		
 		btnAtras_3 = new JButton("Atras");
@@ -316,17 +340,23 @@ public class Aplicacion extends JFrame implements ActionListener{
 		lblListaArtistas.setBounds(142, 25, 118, 14);
 		Ventana_Artistas.add(lblListaArtistas);
 		
-		JTextArea txtAreaListaArtistas = new JTextArea();
-		txtAreaListaArtistas.setBounds(119, 81, 255, 193);
-		Ventana_Artistas.add(txtAreaListaArtistas);
+		modeloArtistas = new DefaultListModel<>();
+		listaArtistas = new JList<>(modeloArtistas);
+		listaArtistas.addMouseListener(this);
+		listaArtistas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JScrollPane scrollLista = new JScrollPane(listaArtistas);
+		scrollLista.setBounds(119, 81, 255, 193);
+		Ventana_Artistas.add(scrollLista);
 		
 		JPanel Ventana_Artista = new JPanel();
-		contentPane.add(Ventana_Artista, "artista");
+		Aplicacion_usuario.add(Ventana_Artista, "artista");
 		Ventana_Artista.setLayout(null);
 		
-		JButton btnAtras_3_1 = new JButton("Atras");
-		btnAtras_3_1.setBounds(10, 11, 89, 23);
-		Ventana_Artista.add(btnAtras_3_1);
+		btnAtras_4 = new JButton("Atras");
+		btnAtras_4.addActionListener(this);
+		btnAtras_4.setBounds(10, 11, 89, 23);
+		Ventana_Artista.add(btnAtras_4);
 		
 		JButton btnPerfil_2 = new JButton("Perfil");
 		btnPerfil_2.setBounds(325, 11, 89, 23);
@@ -334,74 +364,78 @@ public class Aplicacion extends JFrame implements ActionListener{
 		
 		JPanel pnlListaDisco = new JPanel();
 		pnlListaDisco.setBorder(new TitledBorder(null, "Lista Disco", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlListaDisco.setBounds(10, 55, 227, 464);
+		pnlListaDisco.setBounds(10, 38, 234, 464);
 		Ventana_Artista.add(pnlListaDisco);
 		pnlListaDisco.setLayout(null);
 		
-		JTextArea txtAreaDiscos = new JTextArea();
-		txtAreaDiscos.setBounds(10, 21, 207, 166);
-		pnlListaDisco.add(txtAreaDiscos);
+		modeloDiscos = new DefaultListModel<>();
+		listaDiscos = new JList<>(modeloDiscos);
+		listaDiscos.addMouseListener(this);
+		listaDiscos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JScrollPane scrollListaDiscos = new JScrollPane(listaDiscos);
+		scrollListaDiscos.setBounds(10, 21, 214, 169);
+		pnlListaDisco.add(scrollListaDiscos);
+		
+		
+		
+		
 		
 		JPanel pnlInformacion = new JPanel();
 		pnlInformacion.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pnlInformacion.setBounds(247, 55, 247, 464);
+		pnlInformacion.setBounds(247, 38, 247, 464);
 		Ventana_Artista.add(pnlInformacion);
 		pnlInformacion.setLayout(null);
 		
 		JTextArea txtAreaInformacion = new JTextArea();
-		txtAreaInformacion.setBounds(10, 21, 207, 166);
+		txtAreaInformacion.setBounds(10, 25, 227, 166);
 		pnlInformacion.add(txtAreaInformacion);
 
-		cl.show(contentPane, "login");
+		cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
+		
+		JPanel Ventana_Album = new JPanel();
+		Aplicacion_usuario.add(Ventana_Album, "name_121079825793600");
+		Ventana_Album.setLayout(null);
+		
+		btnAtras_5 = new JButton("Atras");
+		btnAtras_5.addActionListener(this);
+		btnAtras_5.setBounds(10, 11, 89, 23);
+		Ventana_Album.add(btnAtras_5);
+		
+		JPanel pnlListaAlbum = new JPanel();
+		pnlListaAlbum.setLayout(null);
+		pnlListaAlbum.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Lista Albums", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlListaAlbum.setBounds(0, 38, 227, 464);
+		Ventana_Album.add(pnlListaAlbum);
+		
+		
+		JPanel pnlInformacion_1 = new JPanel();
+		pnlInformacion_1.setLayout(null);
+		pnlInformacion_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informacion Albums", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlInformacion_1.setBounds(257, 38, 247, 464);
+		Ventana_Album.add(pnlInformacion_1);
+		
+		JTextArea txtAreaInformacion_1 = new JTextArea();
+		txtAreaInformacion_1.setBounds(10, 21, 207, 166);
+		pnlInformacion_1.add(txtAreaInformacion_1);
 		
 		
 	}
 	
-	/**
-	 * Metodo dedicado a realizar una accion al pulsar botones
-	 */
-	@Override
-	public void actionPerformed(ActionEvent evento) {
-
-		    if (evento.getSource() == btnRegistrar) {
-		        cl.show(contentPane, "registro");
-		    }
-
-		    if (evento.getSource() == btnAtras) {
-		        cl.show(contentPane, "login");
-		    }
-		    
-		    if (evento.getSource() == btnAtras_2) {
-		        cl.show(contentPane, "login");
-		    }
-		    
-		    if (evento.getSource() == btnAtras_2) {
-		        cl.show(contentPane, "menu");
-		    }
-		    
-
-		    if (evento.getSource() == btnLogin) {
-		    	validarLogin();
-		    }
-		    
-		    if(evento.getSource()== btnGuardar) {
-		    	validarRegistro();
-		    }
-		    
-		    if(evento.getSource() == btnDescubrirMusica) {
-		    	cl.show(contentPane, "artista");
-		    }
-	}
 	/**
 	 * Metodo encargado deverificar que el registro se haga correctamente
 	 * @return confirmar variable para confirmar la clave
 	 */
 	public boolean validarRegistro() {
 			boolean validado = false;
+			
 			String usuario = txtUsuario_2.getText().trim();
 			String clave = String.valueOf(pfClave_2.getPassword()).trim();
 			String confirmar = String.valueOf(pfConfirmar.getPassword()).trim();
-		
+			String nombre = txtNombre.getText().trim();
+			String apellido = txtApellidos.getText().trim();
+			String fecNac = txtFecNac.getText().trim();
+			String fecReg = txtFecRegistro.getText().trim();
 			
 			if (usuario.isEmpty() || clave.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Rellena los campos");
@@ -410,14 +444,41 @@ public class Aplicacion extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Las claves no coinciden");
 				validado = false;
 			} else {
+				
+				String consulta = "INSERT INTO Cliente (IDCliente, Nombre, Apellido, Idioma, Usuario, Contraseña, FechaNacimiento, FechaRegistro, Tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+			try {
+				
+				Connection con = conexionBD.conexion.getConnection();
+				PreparedStatement sentencia = con.prepareStatement(consulta);
+				
+				
+				
+				sentencia.setString(1, usuario.length()>5 ? usuario.substring(0,5): usuario);
+				sentencia.setString(2, nombre);
+				sentencia.setString(3, apellido);
+				sentencia.setString(4, "ES");
+				sentencia.setString(5, usuario);
+				sentencia.setString(6, clave);
+				sentencia.setString(7, fecNac);
+				sentencia.setString(8, fecReg);
+				sentencia.setString(9, "Free");
+				
+				int ejecucion = sentencia.executeUpdate();
+				
+				if(ejecucion > 0) {
 				usuarioRegistrado = usuario; 
 			    claveRegistrada = clave;
 					
 				JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
 				validado = true;
-				cl.show(contentPane, "login");
+				cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
+				}
+			}catch(SQLException error) {
+				JOptionPane.showMessageDialog(this, "Error de SQL: " + error.getMessage());
+				error.printStackTrace();
 			}
-		
+		}
 		
 		return validado;
 		
@@ -430,18 +491,205 @@ public class Aplicacion extends JFrame implements ActionListener{
 		boolean validado = false;
 		String usuario = txtUsuario.getText().trim();
 		String clave = String.valueOf(pf_Clave.getPassword()).trim();
+		
 	
 		if (usuario.isEmpty() || clave.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Introduce usuario y contraseña");
 			validado = false;
-		} else if(usuario.equals(usuarioRegistrado) && clave.equals(claveRegistrada)){
-			cl.show(contentPane, "menu");
-			validado = true;
-		}else {
-			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-			validado = false;
-		}
+		} 
+		
+		String consulta = "select * from Cliente where Usuario = ? and Contraseña = ?";
+		
+		try {
+			Connection con = conexionBD.conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			sentencia.setString(1, usuario);
+			sentencia.setString(2, clave);
+			
+			ResultSet resultado = sentencia.executeQuery();
+			
+			if(resultado.next()) {
+				JOptionPane.showMessageDialog(this, "¡Bienvenido, " + resultado.getString("Nombre") + "!");
+				
+				usuarioRegistrado = resultado.getString("Usuario");
+				claveRegistrada = resultado.getString("Contraseña");
+				
+				cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
+				validado = true;
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+				validado = false;
+			}
+			
+			resultado.close();
+			sentencia.close();
+			
+		} catch (SQLException error) {
+	        JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos");
+	        error.printStackTrace();
+	    }
+		
 		return validado;
 	}
 	
+	private void abrirVentanaArtista(String seleccion) {
+		if(seleccion != null) {
+			
+			String nombreLimpio = seleccion.split(" \\(")[0];
+
+			llamarDiscos(nombreLimpio);
+			
+			
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
+		}
+	}
+	
+	public void llamarArtistas() {
+		modeloArtistas.clear();
+		
+		String consulta = "select AR.nombreArtistico, sum(A.Nreproducciones) as 'Reproducciones' "
+				+ "from Audio A join Artista AR on A.IDArtista = AR.IDArtista "
+				+ "join Musico M on AR.IDArtista = M.IDMusico " 
+				+ "group by nombreArtistico";
+		
+		try {
+			Connection con = conexionBD.conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				String nombre = resultado.getString("NombreArtistico");
+				int reproducciones = resultado.getInt("Reproducciones");
+				
+				modeloArtistas.addElement(nombre + " (" + reproducciones + " reproducciones)");
+			}
+			
+			resultado.close();
+			sentencia.close();
+			
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	public void llamarDiscos(String nombreArtistico) {
+		modeloDiscos.clear();
+		
+		String consulta = "select AL.Titulo, year(AL.Año) as Anio, count(C.IDCancion) as NumCanciones "
+				+ "from Album AL left join Artista AR on AL.IDMusico = AR.IDArtista "
+				+ "left join Cancion C on AL.IDAlbum = C.IDAlbum "
+				+ "where AR.NombreArtistico = ? "
+				+ "group by AL.Titulo, AL.Año";
+		
+		try {
+			Connection con = conexionBD.conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			sentencia.setString(1, nombreArtistico);
+			
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				String fila = resultado.getString("Titulo") + " - " +
+							  resultado.getString("Anio") + " - " +
+							  resultado.getString("NumCanciones") + " canciones";
+				
+				modeloDiscos.addElement(fila);
+			}
+			
+			resultado.close();
+			sentencia.close();
+		}catch(SQLException error) {
+			JOptionPane.showMessageDialog(this, "Error al cargar discos: " + error.getMessage());
+			error.printStackTrace();
+			
+		}
+		
+		
+	}
+	
+	
+
+	@Override
+	public void mouseClicked(MouseEvent evento) {
+		
+		if(evento.getClickCount() == 2) {
+			String artistaSeleccionado = listaArtistas.getSelectedValue();
+			abrirVentanaArtista(artistaSeleccionado);
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+
+/**
+ * Metodo dedicado a realizar una accion al pulsar botones
+ */
+	@Override
+	public void actionPerformed(ActionEvent evento) {
+		
+		if (evento.getSource() == btnRegistrar) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "registro");
+		}
+		
+		if (evento.getSource() == btnAtras) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
+		}
+		
+		if (evento.getSource() == btnAtras_2) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
+		}
+		
+		if (evento.getSource() == btnAtras_3) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
+		}
+		
+		if (evento.getSource() == btnAtras_4) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "artistas");
+		}
+		
+		if (evento.getSource() == btnAtras_5) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
+		}
+		
+		
+		if (evento.getSource() == btnLogin) {
+			validarLogin();
+		}
+		
+		if(evento.getSource()== btnGuardar) {
+			validarRegistro();
+		}
+		
+		if(evento.getSource() == btnDescubrirMusica) {
+			llamarArtistas();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "artistas");
+		}
+		
+	}	
 }
