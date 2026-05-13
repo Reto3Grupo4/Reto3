@@ -196,11 +196,11 @@ INSERT INTO Cancion (IDCancion, IDAlbum, Artistas_invitados) VALUES
 
 -- 9. CLIENTE
 INSERT INTO Cliente (IDCliente, Nombre, Apellido, Idioma, Usuario, Contraseña, FechaNacimiento, FechaRegistro, Tipo) VALUES
-('C001', 'Carlos',  'García',    'ES', 'carlosg',  'pass1234',  '1995-03-15', '2022-01-10', 'Premium'),
-('C002', 'Laura',   'Martínez',  'EN', 'lauramtz', 'secur456',  '1998-07-22', '2023-05-18', 'Free'),
-('C003', 'Pedro',   'López',     'CA', 'pedrolop', 'pedro789',  '2001-11-30', '2024-02-01', 'Premium'),
-('C004', 'Amaia',   'Etxeberri', 'EU', 'amaiaetx', 'amaia000',  '1990-05-05', '2021-08-20', 'Free'),
-('C005', 'Sophie',  'Dupont',    'FR', 'sophiedp', 'sophie321', '1997-09-14', '2023-11-03', 'Premium');
+('C0001', 'Carlos',  'García',    'ES', 'carlosg',  'pass1234',  '1995-03-15', '2022-01-10', 'Premium'),
+('C0002', 'Laura',   'Martínez',  'EN', 'lauramtz', 'secur456',  '1998-07-22', '2023-05-18', 'Free'),
+('C0003', 'Pedro',   'López',     'CA', 'pedrolop', 'pedro789',  '2001-11-30', '2024-02-01', 'Premium'),
+('C0004', 'Amaia',   'Etxeberri', 'EU', 'amaiaetx', 'amaia000',  '1990-05-05', '2021-08-20', 'Free'),
+('C0005', 'Sophie',  'Dupont',    'FR', 'sophiedp', 'sophie321', '1997-09-14', '2023-11-03', 'Premium');
 
 -- 10. PLAYLIST
 INSERT INTO Playlist (IDPlaylist, Titulo, FechaCreacion, IDCliente) VALUES
