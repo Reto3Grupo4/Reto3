@@ -17,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.border.TitledBorder;
+
+import conexionBD.conexion;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -37,6 +40,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ListModel;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.SpringLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.Component;
+import java.awt.Insets;
 
 public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 
@@ -53,6 +67,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JTextField txtApellidos;
 	public JPasswordField pfClave_2;
 	public JPasswordField pfConfirmar;
+	private JTextArea txtAreaInformacion;
+	private JTextArea txtAreaInfoAlbum;
+	
 
 	private JTextField txtFecNac;
 	private JTextField txtFecRegistro;
@@ -64,22 +81,51 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JButton btnAtras_3;
 	private JButton btnAtras_4;
 	private JButton btnAtras_5;
+	private JButton btnAtras_6;
+	private JButton btnAtras_7;
+	private JButton btnAtras_8;
+	private JButton btnAtras_9;
 	private JButton btnGuardar;
 	private JButton btnDescubrirMusica;
+	private JButton btnDescubrirPodcast;
+	private JButton btnCliente;
+	private JButton btnCliente2;
+	private JButton btnCliente3;
+	private JButton btnCrearPlaylist;
+	private JButton btnBorrarPlaylist;
+	private JButton btnImportar;
+	private JButton btnExportar;
+	private JButton btnMisPlaylists;
+
+	
+	
+	
 	private JList<String> listaArtistas; 
 	private DefaultListModel<String> modeloArtistas;
 	
 	private JList<String> listaDiscos;
 	private DefaultListModel<String> modeloDiscos;
 
+	private JList<String> listaCanciones;
+	private DefaultListModel<String> modeloCanciones;
+	
+	private JList<String> listaPlaylist;
+	private DefaultListModel<String> modeloPlaylist;
+	
+	private JList<String> listaPodcasters;
+	private DefaultListModel<String> modeloPodcasters;
 
-
+	private JList<String> listaPodcasts;
+	private DefaultListModel<String> modeloPodcasts;
+	
 	public String usuarioRegistrado;
 	public String claveRegistrada;
 	
 	public String usuarioARegistrar;
 	public String claveARegistrar;
 	public String claveAConfirmar;
+	private JLabel lblListaDePodcasters;
+	
 	
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
@@ -142,7 +188,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	public Aplicacion() {
 		setTitle("Aplicacion Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 551);
+		setBounds(100, 100, 650, 551);
 		Aplicacion_usuario = new JPanel();
 		Aplicacion_usuario.setBorder(new EmptyBorder(5, 5, 5, 5));
 		cl_aplicacion_usuario = new CardLayout();
@@ -314,13 +360,15 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnDescubrirMusica.setBounds(130, 88, 126, 23);
 		Ventana_Menu.add(btnDescubrirMusica);
 		
-		JButton btnDescubrirPodcast = new JButton("Descubrir podcast");
+		btnDescubrirPodcast = new JButton("Descubrir podcast");
+		btnDescubrirPodcast.addActionListener(this);
 		btnDescubrirPodcast.setBounds(130, 122, 126, 23);
 		Ventana_Menu.add(btnDescubrirPodcast);
 		
-		JButton btnMisPlaylist = new JButton("Mis Playlist");
-		btnMisPlaylist.setBounds(130, 156, 126, 23);
-		Ventana_Menu.add(btnMisPlaylist);
+		btnMisPlaylists = new JButton("Mis Playlist");
+		btnMisPlaylists.addActionListener(this);
+		btnMisPlaylists.setBounds(130, 156, 126, 23);
+		Ventana_Menu.add(btnMisPlaylists);
 		
 		JPanel Ventana_Artistas = new JPanel();
 		Aplicacion_usuario.add(Ventana_Artistas, "artistas");
@@ -342,12 +390,13 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		modeloArtistas = new DefaultListModel<>();
 		listaArtistas = new JList<>(modeloArtistas);
+		JScrollPane scrollListaArtistas = new JScrollPane(listaArtistas);
+		scrollListaArtistas.setBounds(119, 81, 255, 193);
+		Ventana_Artistas.add(scrollListaArtistas);
+		
+		listaArtistas.setBounds(119, 82, 253, 191);
 		listaArtistas.addMouseListener(this);
 		listaArtistas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
-		JScrollPane scrollLista = new JScrollPane(listaArtistas);
-		scrollLista.setBounds(119, 81, 255, 193);
-		Ventana_Artistas.add(scrollLista);
 		
 		JPanel Ventana_Artista = new JPanel();
 		Aplicacion_usuario.add(Ventana_Artista, "artista");
@@ -359,7 +408,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		Ventana_Artista.add(btnAtras_4);
 		
 		JButton btnPerfil_2 = new JButton("Perfil");
-		btnPerfil_2.setBounds(325, 11, 89, 23);
+		btnPerfil_2.setBounds(405, 11, 89, 23);
 		Ventana_Artista.add(btnPerfil_2);
 		
 		JPanel pnlListaDisco = new JPanel();
@@ -387,14 +436,18 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		Ventana_Artista.add(pnlInformacion);
 		pnlInformacion.setLayout(null);
 		
-		JTextArea txtAreaInformacion = new JTextArea();
+		txtAreaInformacion = new JTextArea();
 		txtAreaInformacion.setBounds(10, 25, 227, 166);
 		pnlInformacion.add(txtAreaInformacion);
+		
+		JLabel lblFotoArtista = new JLabel("imagen");
+		lblFotoArtista.setBounds(96, 293, 46, 14);
+		pnlInformacion.add(lblFotoArtista);
 
 		cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
 		
 		JPanel Ventana_Album = new JPanel();
-		Aplicacion_usuario.add(Ventana_Album, "name_121079825793600");
+		Aplicacion_usuario.add(Ventana_Album, "album");
 		Ventana_Album.setLayout(null);
 		
 		btnAtras_5 = new JButton("Atras");
@@ -402,11 +455,20 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnAtras_5.setBounds(10, 11, 89, 23);
 		Ventana_Album.add(btnAtras_5);
 		
-		JPanel pnlListaAlbum = new JPanel();
-		pnlListaAlbum.setLayout(null);
-		pnlListaAlbum.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Lista Albums", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pnlListaAlbum.setBounds(0, 38, 227, 464);
-		Ventana_Album.add(pnlListaAlbum);
+		JPanel pnlListaCanciones = new JPanel();
+		pnlListaCanciones.setLayout(null);
+		pnlListaCanciones.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Lista Canciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlListaCanciones.setBounds(0, 38, 247, 464);
+		Ventana_Album.add(pnlListaCanciones);
+		
+		modeloCanciones = new DefaultListModel<>();
+		listaCanciones = new JList<>(modeloCanciones);
+		listaCanciones.addMouseListener(this);
+		listaCanciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JScrollPane scrollListaAlbums = new JScrollPane(listaCanciones);
+		scrollListaAlbums.setBounds(10, 21, 214, 169);
+		pnlListaCanciones.add(scrollListaAlbums);
 		
 		
 		JPanel pnlInformacion_1 = new JPanel();
@@ -415,9 +477,125 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		pnlInformacion_1.setBounds(257, 38, 247, 464);
 		Ventana_Album.add(pnlInformacion_1);
 		
-		JTextArea txtAreaInformacion_1 = new JTextArea();
-		txtAreaInformacion_1.setBounds(10, 21, 207, 166);
-		pnlInformacion_1.add(txtAreaInformacion_1);
+		txtAreaInfoAlbum = new JTextArea();
+		txtAreaInfoAlbum.setEditable(false);
+		txtAreaInfoAlbum.setBounds(10, 21, 207, 166);
+		pnlInformacion_1.add(txtAreaInfoAlbum);
+		
+		JLabel lblFotoAlbum = new JLabel("Imagen");
+		lblFotoAlbum.setBounds(79, 298, 46, 14);
+		pnlInformacion_1.add(lblFotoAlbum);
+		
+		JPanel Ventana_Reproduccion = new JPanel();
+		Aplicacion_usuario.add(Ventana_Reproduccion, "reproduccion");
+		Ventana_Reproduccion.setLayout(null);
+		
+		JLabel lblFotoAlbum_2 = new JLabel("New label");
+		lblFotoAlbum_2.setBounds(212, 195, 46, 14);
+		Ventana_Reproduccion.add(lblFotoAlbum_2);
+		
+		JButton btnAtras_6 = new JButton("Atras");
+		btnAtras_6.setBounds(10, 11, 89, 23);
+		Ventana_Reproduccion.add(btnAtras_6);
+		
+		JButton btnPerfil_2_1 = new JButton("Perfil");
+		btnPerfil_2_1.setBounds(405, 11, 89, 23);
+		Ventana_Reproduccion.add(btnPerfil_2_1);
+		
+		JPanel Ventana_Playlists = new JPanel();
+		Aplicacion_usuario.add(Ventana_Playlists, "playlists");
+		Ventana_Playlists.setLayout(null);
+		
+		btnAtras_7 = new JButton("Atras");
+		btnAtras_7.addActionListener(this);
+		btnAtras_7.setBounds(10, 11, 89, 23);
+		Ventana_Playlists.add(btnAtras_7);
+		
+		modeloPlaylist = new DefaultListModel<>();
+		listaPlaylist = new JList<>(modeloPlaylist);
+		JScrollPane scrollPlaylists = new JScrollPane(listaPlaylist);
+		scrollPlaylists.setBounds(10, 50, 250, 350);
+		Ventana_Playlists.add(scrollPlaylists);
+		
+		btnCliente = new JButton("Perfil");
+		btnCliente.setBounds(397, 11, 79, 23);
+		btnCliente.addActionListener(this);
+		Ventana_Playlists.add(btnCliente);
+		
+		btnCrearPlaylist = new JButton("Crear nueva");
+		btnCrearPlaylist.setBounds(318, 153, 158, 37);
+		btnCrearPlaylist.addActionListener(this);
+		Ventana_Playlists.add(btnCrearPlaylist);
+		
+		btnBorrarPlaylist = new JButton("Borrar");
+		btnBorrarPlaylist.setBounds(318, 201, 158, 37);
+		btnBorrarPlaylist.addActionListener(this);
+		Ventana_Playlists.add(btnBorrarPlaylist);
+		
+		btnImportar = new JButton("Importar");
+		btnImportar.setBounds(318, 249, 158, 37);
+		btnImportar.addActionListener(this);
+		Ventana_Playlists.add(btnImportar);
+		
+		btnExportar = new JButton("Exportar");
+		btnExportar.setBounds(318, 297, 158, 37);
+		btnExportar.addActionListener(this);
+		Ventana_Playlists.add(btnExportar);
+		
+		JPanel Ventana_Podcasters = new JPanel();
+		Ventana_Podcasters.setBorder(new TitledBorder(null, "Descubrir Podcasts", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		Aplicacion_usuario.add(Ventana_Podcasters, "podcasts");
+		Ventana_Podcasters.setLayout(null);
+		
+		btnAtras_8 = new JButton("Atras");
+		btnAtras_8.addActionListener(this);
+		btnAtras_8.setBounds(10, 34, 89, 23);
+		Ventana_Podcasters.add(btnAtras_8);
+		
+		btnCliente2 = new JButton("Perfil");
+		btnCliente2.addActionListener(this);
+		btnCliente2.setBounds(415, 34, 79, 23);
+		Ventana_Podcasters.add(btnCliente2);
+		
+		modeloPodcasters = new DefaultListModel<String>();
+		listaPodcasters = new JList<>(modeloPodcasters);
+		JScrollPane scrollListaPodcasters = new JScrollPane(listaPodcasters);
+		scrollListaPodcasters.setBounds(89, 107, 338, 250);
+		Ventana_Podcasters.add(scrollListaPodcasters);
+		
+		scrollListaPodcasters.setViewportView(listaPodcasters);
+		
+		JLabel lblPodcasters = new JLabel("Lista de Podcasters disponibles");
+		lblPodcasters.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPodcasters.setBounds(147, 82, 200, 14);
+		Ventana_Podcasters.add(lblPodcasters);
+		
+		JPanel Ventana_Podcasts = new JPanel();
+		Aplicacion_usuario.add(Ventana_Podcasts, "podcasters");
+		Ventana_Podcasts.setLayout(null);
+		
+		btnAtras_9 = new JButton("Atras");
+		btnAtras_9.addActionListener(this);
+		btnAtras_9.setBounds(10, 36, 89, 23);
+		Ventana_Podcasts.add(btnAtras_9);
+		
+		btnCliente3 = new JButton("Perfil");
+		btnCliente3.setBounds(535, 36, 79, 23);
+		Ventana_Podcasts.add(btnCliente3);
+		
+		lblListaDePodcasters = new JLabel("Lista de Podcasts disponibles");
+		lblListaDePodcasters.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaDePodcasters.setBounds(230, 72, 200, 14);
+		listaPodcasters.addMouseListener(this);
+		Ventana_Podcasts.add(lblListaDePodcasters);
+		
+		modeloPodcasts = new DefaultListModel<String>();
+		listaPodcasts = new JList<>(modeloPodcasts);
+		listaPodcasts.setBounds(121, 116, 256, 297);
+		
+		JScrollPane scrollListaPodcasts = new JScrollPane(listaPodcasts);
+		scrollListaPodcasts.setBounds(121, 116, 425, 297);
+		Ventana_Podcasts.add(scrollListaPodcasts);
 		
 		
 	}
@@ -445,24 +623,23 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				validado = false;
 			} else {
 				
-				String consulta = "INSERT INTO Cliente (IDCliente, Nombre, Apellido, Idioma, Usuario, Contraseña, FechaNacimiento, FechaRegistro, Tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String consulta = "INSERT INTO Cliente (Nombre, Apellido, Idioma, Usuario, Contraseña, FechaNacimiento, FechaRegistro, Tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				
 			try {
 				
-				Connection con = conexionBD.conexion.getConnection();
+				Connection con = conexion.getConnection();
 				PreparedStatement sentencia = con.prepareStatement(consulta);
 				
 				
 				
-				sentencia.setString(1, usuario.length()>5 ? usuario.substring(0,5): usuario);
-				sentencia.setString(2, nombre);
-				sentencia.setString(3, apellido);
-				sentencia.setString(4, "ES");
-				sentencia.setString(5, usuario);
-				sentencia.setString(6, clave);
-				sentencia.setString(7, fecNac);
-				sentencia.setString(8, fecReg);
-				sentencia.setString(9, "Free");
+				sentencia.setString(1, nombre);
+				sentencia.setString(2, apellido);
+				sentencia.setString(3, "ES");
+				sentencia.setString(4, usuario);
+				sentencia.setString(5, clave);
+				sentencia.setString(6, fecNac);
+				sentencia.setString(7, fecReg);
+				sentencia.setString(8, "Free");
 				
 				int ejecucion = sentencia.executeUpdate();
 				
@@ -498,10 +675,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			validado = false;
 		} 
 		
-		String consulta = "select * from Cliente where Usuario = ? and Contraseña = ?";
+		String consulta = "select * from Cliente where Usuario = ? and Contraseña = SHA2(?, 256)";
 		
 		try {
-			Connection con = conexionBD.conexion.getConnection();
+			Connection con = conexion.getConnection();
 			PreparedStatement sentencia = con.prepareStatement(consulta);
 			sentencia.setString(1, usuario);
 			sentencia.setString(2, clave);
@@ -534,17 +711,27 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	}
 	
 	private void abrirVentanaArtista(String seleccion) {
+		
 		if(seleccion != null) {
 			
 			String nombreLimpio = seleccion.split(" \\(")[0];
 
 			llamarDiscos(nombreLimpio);
+			cargarInfoArtista(nombreLimpio);
 			
 			
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
 		}
 	}
-	
+	private void abrirVentanaPodcasts(String seleccion) {
+		if (seleccion != null) {
+			
+			String nombreLimpio = seleccion.split(" \\(")[0];
+			
+			llamarPodcasts(nombreLimpio);
+			cl_aplicacion_usuario.show(Aplicacion_usuario,"podcasters");
+		}
+	}
 	public void llamarArtistas() {
 		modeloArtistas.clear();
 		
@@ -553,8 +740,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				+ "join Musico M on AR.IDArtista = M.IDMusico " 
 				+ "group by nombreArtistico";
 		
+		
 		try {
-			Connection con = conexionBD.conexion.getConnection();
+			Connection con = conexion.getConnection();
 			PreparedStatement sentencia = con.prepareStatement(consulta);
 			
 			ResultSet resultado = sentencia.executeQuery();
@@ -584,7 +772,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				+ "group by AL.Titulo, AL.Año";
 		
 		try {
-			Connection con = conexionBD.conexion.getConnection();
+			Connection con = conexion.getConnection();
 			PreparedStatement sentencia = con.prepareStatement(consulta);
 			sentencia.setString(1, nombreArtistico);
 			
@@ -609,16 +797,180 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 	}
 	
+	public void cargarInfoArtista(String nombreArtistico) {
+		String consultaSQL = "select AR.GeneroPredom, AL.Año, AR.Descripcion "
+				+ "from Artista AR join Album AL on AR.IDArtista = AL.IDMusico "
+				+ "where AR.NombreArtistico = ?";
+		
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consultaSQL);
+			sentencia.setString(1, nombreArtistico);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			if(resultado.next()) {
+				txtAreaInformacion.setText("Genero: " + resultado.getString("GeneroPredom") + "\n"
+						+ "Año inicio: " + resultado.getString("Año") + "\n"
+						+  "Descripcion: \n " + resultado.getString("Descripcion")
+						);
+			}
+			resultado.close();
+			sentencia.close();
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
 	
-
+	private void abrirVentanaAlbum(String seleccion) {
+		if(seleccion != null) {
+			String tituloLimpio = seleccion.split(" - ")[0];
+			
+			cargarCanciones(tituloLimpio);
+			cargarInfoAlbum(tituloLimpio);
+			
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "album");
+		}
+	}
+	
+	public void cargarCanciones(String tituloAlbum) {
+		modeloCanciones.clear();
+		
+		String consultaSQL = "select A.Nombre from Audio A join Cancion C "
+				+ "on A.IDAudio = C.IDCancion "
+				+ "join Album AL on C.IDAlbum = AL.IDAlbum "
+				+ "where AL.Titulo = ?";
+		
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consultaSQL);
+			sentencia.setString(1, tituloAlbum);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				modeloCanciones.addElement(resultado.getString("Nombre"));
+			}
+			
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	public void cargarInfoAlbum(String tituloAlbum) {
+		String consultaSQL = "select AL.Titulo, year(AL.Año) as Anio, AL.Genero, "
+				+ "(select count(*) from Cancion where IDAlbum = AL.IDAlbum) as TotalCanciones "
+				+ "from Album AL where AL.Titulo = ?";
+		
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consultaSQL);
+			sentencia.setString(1, tituloAlbum);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			if(resultado.next()) {
+				txtAreaInfoAlbum.setText("Titulo: " + resultado.getString("Titulo") + "\n"
+						+ "Año de salida: " + resultado.getString("Anio") + "\n"
+						+  "Genero: \n " + resultado.getString("Genero")
+						);
+			}	
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	public void llamarPlaylists() {
+		modeloPlaylist.clear();
+		
+		String consultaSQL = "select P.Titulo from Playlist P "
+				+ "where IDCliente = (select IDCliente from Cliente where Usuario = ?) ";
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consultaSQL);
+			sentencia.setString(1, usuarioRegistrado);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				modeloPlaylist.addElement(resultado.getString("Titulo"));
+			}
+			resultado.close();
+			sentencia.close();		
+		}catch(SQLException error) {
+			error.printStackTrace();
+			System.out.println(error.getMessage());
+		}
+	}
+	
+	public void llamarPodcasters() {
+		modeloPodcasters.clear();
+		String consulta = "select AR.nombreArtistico, sum(A.NReproducciones) as 'Reproducciones' "
+				+ "from Audio A join Artista AR on A.IDArtista = AR.IDArtista "
+				+ "join Podcast P on AR.IDArtista = P.IDPodcaster " 
+				+ "group by nombreArtistico";
+		try {
+			Connection conn = conexion.getConnection();
+			PreparedStatement sentencia = conn.prepareStatement(consulta);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				String nombre = resultado.getString("NombreArtistico");
+				int reproducciones = resultado.getInt("Reproducciones");
+				
+				modeloPodcasters.addElement(nombre + " (" + reproducciones + " reproducciones)");
+			}
+			
+			resultado.close();
+			sentencia.close();
+			
+		}catch(SQLException error){
+			error.getMessage();
+		}
+		
+	}
+	public void llamarPodcasts(String nombrePodcaster) {
+		modeloPodcasts.clear();
+		String consulta =  "select P.NombrePodcast, A.Duracion, P.Colaboradores "
+				+ "from Podcast P join Audio A on A.IDAudio = P.IDPodcast "
+				+ "join Artista AR on A.IDArtista = AR.IDArtista "
+				+ "where AR.NombreArtistico = ? ";
+		try {
+			Connection conn = conexion.getConnection();
+			PreparedStatement sentencia = conn.prepareStatement(consulta);
+			sentencia.setString(1, nombrePodcaster);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			while(resultado.next()) {
+				String nombre = resultado.getString("NombrePodcast");
+				int duracion = resultado.getInt("Duracion");
+				int colaboradores = resultado.getInt("Colaboradores");
+				
+				modeloPodcasts.addElement(nombre +" (De duracion: " + duracion + " minutos, "
+						+ " hay: " + colaboradores + " colaboradores)");
+	} 
+		}catch(SQLException error) {
+			error.getMessage();
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent evento) {
 		
 		if(evento.getClickCount() == 2) {
-			String artistaSeleccionado = listaArtistas.getSelectedValue();
-			abrirVentanaArtista(artistaSeleccionado);
+			if(evento.getSource()== listaArtistas) {
+				String artistaSeleccionado = listaArtistas.getSelectedValue();
+				if(artistaSeleccionado != null) {
+					abrirVentanaArtista(artistaSeleccionado);
+				}
+			}else if (evento.getSource() == listaDiscos) {
+				String discoSeleccionado = listaDiscos.getSelectedValue();
+				if(discoSeleccionado != null) {
+					abrirVentanaAlbum(discoSeleccionado);		
+				}
+			}else if(evento.getSource() == listaPodcasters) {
+				String podcasterSeleccionado = listaPodcasters.getSelectedValue();
+				if(podcasterSeleccionado != null) {
+					abrirVentanaPodcasts(podcasterSeleccionado);
+				}
+			}
 		}
-		
 	}
 
 	@Override
@@ -645,6 +997,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 	}
 	
+
 
 
 /**
@@ -677,6 +1030,19 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
 		}
 		
+		if (evento.getSource() == btnAtras_6) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "album");
+		}
+		
+		if (evento.getSource() == btnAtras_7) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
+		}
+		if(evento.getSource() == btnAtras_8) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
+		}
+		if (evento.getSource() == btnAtras_9) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "podcasts");
+		}
 		
 		if (evento.getSource() == btnLogin) {
 			validarLogin();
@@ -689,6 +1055,21 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		if(evento.getSource() == btnDescubrirMusica) {
 			llamarArtistas();
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "artistas");
+		}
+		
+		if(evento.getSource() == btnMisPlaylists) {
+			llamarPlaylists();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "playlists");
+		}
+		
+		if (evento.getSource() == btnCliente2) {
+			
+		}
+		
+		
+		if (evento.getSource() == btnDescubrirPodcast) {
+			llamarPodcasters();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "podcasts");
 		}
 		
 	}	

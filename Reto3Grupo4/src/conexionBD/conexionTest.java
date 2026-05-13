@@ -7,7 +7,7 @@ import java.sql.*;
 public class conexionTest { 
 	
 	@Test 
-	public void test() { 
+	public void test() throws SQLException { 
 		Connection conn = conexion.getConnection(); 
 		assertNotNull ("La conexion se realiza correctamente", conn); 
 		
