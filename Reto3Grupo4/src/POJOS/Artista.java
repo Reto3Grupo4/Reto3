@@ -2,11 +2,28 @@ package POJOS;
 
 public class Artista {
 
-	public String idArtista;
-	public String nombreArtistico;
-	public String genero;
-	public String imagen;
-	public String descripcion;
+	protected String idArtista;
+	protected String nombreArtistico;
+	protected String genero;
+	protected String imagen;
+	protected String descripcion;
+	
+	/**
+	 * Método dedicado a la creacion de MUSICOS.
+	 * @param idArtista
+	 * @param nombreArtistico
+	 * @param genero
+	 */
+	public Artista(String idArtista, String nombreArtistico, String genero) {
+		this.idArtista = idArtista;
+		this.nombreArtistico = nombreArtistico;
+		this.genero = genero;
+	}
+	
+	public Artista(String idArista) {
+		this.idArtista = idArista;
+	}
+	
 	
 	public Artista() {
 		

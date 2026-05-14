@@ -2,9 +2,8 @@ package POJOS;
 
 import java.util.Date;
 
-public class Premium {
+public class Premium extends Cliente{
 
-	public Cliente idCliente;
 	public Date fecCaducidad;
 	
 	public Premium() {
@@ -15,18 +14,9 @@ public class Premium {
 	 * @param idCliente
 	 * @param fecCaducidad
 	 */
-	public Premium(Cliente idCliente, Date fecCaducidad) {
-		super();
-		this.idCliente = idCliente;
+	public Premium(String idCliente, Date fecCaducidad) {
+		super(idCliente);
 		this.fecCaducidad = fecCaducidad;
-	}
-
-	public Cliente getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
 	}
 
 	public Date getFecCaducidad() {

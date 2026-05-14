@@ -2,23 +2,28 @@ package POJOS;
 
 import java.util.Date;
 
-import Enums.Idioma;
-import Enums.Tipo;
+import Enums.IdiomaE;
+import Enums.TipoCliente;
 
 public class Cliente {
 
 	public String idCliente;
 	public String nombre;
 	public String apellido;
-	public Idioma idioma;
+	public IdiomaE idioma;
 	public String usuario;
 	public String clave;
 	public Date fecNacimiento;
 	public Date fecRegistro;
-	public Tipo tipoCliente;
+	public TipoCliente tipoCliente;
 	
 	public Cliente() {
 		
+	}
+	
+	public Cliente (String usuario, String clave) {
+		this.usuario = usuario;
+		this.clave= clave;
 	}
 
 	
@@ -33,7 +38,7 @@ public class Cliente {
 	 * @param fecRegistro
 	 * @param tipoCliente
 	 */
-	public Cliente(String idCliente, String nombre, String apellido, Idioma idioma, String usuario, String clave, Date fecNacimiento, Date fecRegistro, Tipo tipoCliente) {
+	public Cliente(String idCliente, String nombre, String apellido, IdiomaE idioma, String usuario, String clave, Date fecNacimiento, Date fecRegistro, TipoCliente tipoCliente) {
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -43,6 +48,20 @@ public class Cliente {
 		this.fecNacimiento = fecNacimiento;
 		this.fecRegistro = fecRegistro;
 		this.tipoCliente = tipoCliente;
+	}
+	public Cliente(String nombre, String apellido, IdiomaE idioma, String usuario, String clave, Date fecNacimiento, Date fecRegistro, TipoCliente tipoCliente) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.idioma = idioma;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.fecNacimiento = fecNacimiento;
+		this.fecRegistro = fecRegistro;
+		this.tipoCliente = tipoCliente;
+	}
+	
+	public Cliente(String idCliente) {
+		this.idCliente = idCliente;
 	}
 
 
@@ -70,11 +89,11 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public Idioma getIdioma() {
+	public IdiomaE getIdioma() {
 		return idioma;
 	}
 
-	public void setIdioma(Idioma idioma) {
+	public void setIdioma(IdiomaE idioma) {
 		this.idioma = idioma;
 	}
 
@@ -110,11 +129,11 @@ public class Cliente {
 		this.fecRegistro = fecRegistro;
 	}
 
-	public Tipo getTipoCliente() {
+	public TipoCliente getTipoCliente() {
 		return tipoCliente;
 	}
 
-	public void setTipoCliente(Tipo tipoCliente) {
+	public void setTipoCliente(TipoCliente tipoCliente) {
 		this.tipoCliente = tipoCliente;
 	}
 

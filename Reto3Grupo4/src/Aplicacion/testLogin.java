@@ -23,7 +23,7 @@ public class testLogin{
 		app.claveRegistrada = "Elorrieta00";
 		
 	}
-	/*
+	
 	@Test
 	public void testLoginUsuarioCorrecto() {
 		app.getTxtUsuario().setText("Ander");
@@ -32,7 +32,6 @@ public class testLogin{
 		boolean resultado = app.validarLogin();
 		assertTrue("El login deberia ser valido por el usuario correcto", resultado);
 	}
-	*/
 	
 	@Test
 	public void testLoginUsuarioIncorrecto() {

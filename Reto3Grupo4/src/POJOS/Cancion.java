@@ -1,50 +1,44 @@
 package POJOS;
 
-public class Cancion {
+import java.util.ArrayList;
 
-	public String idCancion;
-	public String idAlbum;
-	public String artistasInvitados;
+public class Cancion extends Audio{
+	
+	public Album idAlbum;
+	protected ArrayList<String> artistasInvitados;
 	
 	public Cancion() {
 		
-		
 	}
-	
-	
+
 	/**
 	 * @param idCancion
 	 * @param idAlbum
 	 * @param artistasInvitados
 	 */
-	public Cancion(String idCancion, String idAlbum, String artistasInvitados) {
-		this.idCancion = idCancion;
+	public Cancion(String idAudio, Album idAlbum, ArrayList<String> artistasInvitados) {
+		super(idAudio);
 		this.idAlbum = idAlbum;
 		this.artistasInvitados = artistasInvitados;
 	}
 
 
-	public String getIdCancion() {
-		return idCancion;
-	}
+	
 
-	public void setIdCancion(String idCancion) {
-		this.idCancion = idCancion;
-	}
-
-	public String getIdAlbum() {
+	
+	public Album getIdAlbum() {
 		return idAlbum;
 	}
 
-	public void setIdAlbum(String idAlbum) {
+	public void setIdAlbum(Album idAlbum) {
 		this.idAlbum = idAlbum;
 	}
 
-	public String getArtistasInvitados() {
+	public ArrayList<String> getArtistasInvitados() {
 		return artistasInvitados;
 	}
 
-	public void setArtistasInvitados(String artistasInvitados) {
+	public void setArtistasInvitados(ArrayList<String> artistasInvitados) {
 		this.artistasInvitados = artistasInvitados;
 	}
 
