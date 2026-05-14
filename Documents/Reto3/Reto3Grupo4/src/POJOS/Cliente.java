@@ -44,6 +44,10 @@ public class Cliente {
 		this.fecRegistro = fecRegistro;
 		this.tipoCliente = tipoCliente;
 	}
+	
+	public Cliente(String idCliente) {
+		this.idCliente = idCliente;
+	}
 
 
 	public String getIdCliente() {

@@ -20,6 +20,11 @@ public class Audio {
 		this.tipo = tipo;
 		this.nReproducciones = nReproducciones;
 	}
+	
+	public Audio(String idAudio) {
+		this.idAudio = idAudio;
+	}
+	
 	public Audio() {
 		
 	}

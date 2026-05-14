@@ -14,8 +14,8 @@ public class Premium extends Cliente{
 	 * @param idCliente
 	 * @param fecCaducidad
 	 */
-	public Premium(Cliente idCliente, Date fecCaducidad) {
-		super();
+	public Premium(String idCliente, Date fecCaducidad) {
+		super(idCliente);
 		this.fecCaducidad = fecCaducidad;
 	}
 
