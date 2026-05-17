@@ -2,7 +2,7 @@ package POJOS;
 
 import Enums.TipoCliente;
 
-public class Audio {
+public class Audio extends Artista{
 
 	public String idAudio;
 	public String nombre;
@@ -12,7 +12,18 @@ public class Audio {
 	public int nReproducciones;
 	
 	
+
 	public Audio(String idAudio, String nombre, int duracion, String archivo, TipoCliente tipo, int nReproducciones) {
+		this.idAudio = idAudio;
+		this.nombre = nombre;
+		this.duracion = duracion;
+		this.archivo = archivo;
+		this.tipo = tipo;
+		this.nReproducciones = nReproducciones;
+	}
+	
+	public Audio(String idArtista, String idAudio, String nombre, int duracion, String archivo, TipoCliente tipo, int nReproducciones) {
+		super(idArtista);
 		this.idAudio = idAudio;
 		this.nombre = nombre;
 		this.duracion = duracion;
@@ -28,7 +39,12 @@ public class Audio {
 	public Audio() {
 		
 	}
-	
+	public Audio ( String nombre, int duracion, int nReproducciones, String idArtista) {
+		super(idArtista);
+		this.nombre = nombre;
+		this.duracion = duracion;
+		this.nReproducciones = nReproducciones;
+	}
 	
 	/**
 	 * @return the idAudio
@@ -102,6 +118,7 @@ public class Audio {
 	public void setnReproducciones(int nReproducciones) {
 		this.nReproducciones = nReproducciones;
 	}
+	
 	
 	
 }

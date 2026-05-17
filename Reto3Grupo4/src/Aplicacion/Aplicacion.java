@@ -22,11 +22,13 @@ import javax.swing.border.TitledBorder;
 import Enums.IdiomaE;
 import Enums.TipoCliente;
 import POJOS.Cliente;
+import POJOS.Podcast;
 import conexionBD.conexion;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -145,6 +147,8 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JButton btnEditarPerfil;
 	private JButton btnPerfilAlbums;
 	
+	private ArrayList<Podcast> cargarPodcasts = new ArrayList<Podcast>();
+	
 	
 	
 	public JTextField getTxtUsuario() {
@@ -208,7 +212,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	public Aplicacion() {
 		setTitle("Aplicacion Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 551);
+		setBounds(100, 100, 650, 795);
 		Aplicacion_usuario = new JPanel();
 		Aplicacion_usuario.setBorder(new EmptyBorder(5, 5, 5, 5));
 		cl_aplicacion_usuario = new CardLayout();
@@ -221,20 +225,20 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		Aplicacion_usuario.add(panelLogin, "login");
 		
 		JLabel lblUsuario_1 = new JLabel("Usuario:");
-		lblUsuario_1.setBounds(88, 91, 46, 14);
+		lblUsuario_1.setBounds(171, 160, 46, 14);
 		panelLogin.add(lblUsuario_1);
 		
 		JLabel lblClave_1 = new JLabel("Clave:");
-		lblClave_1.setBounds(88, 123, 46, 14);
+		lblClave_1.setBounds(171, 191, 46, 14);
 		panelLogin.add(lblClave_1);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(156, 88, 86, 20);
+		txtUsuario.setBounds(226, 157, 86, 20);
 		panelLogin.add(txtUsuario);
 		
 		pf_Clave = new JPasswordField();
-		pf_Clave.setBounds(156, 120, 85, 20);
+		pf_Clave.setBounds(227, 188, 85, 20);
 		panelLogin.add(pf_Clave);
 		
 		JList list_1 = new JList();
@@ -244,17 +248,17 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		JComboBox cbVerificar_1 = new JComboBox();
 		cbVerificar_1.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empleado", "Administrador"}));
 		cbVerificar_1.setToolTipText("");
-		cbVerificar_1.setBounds(156, 163, 86, 22);
+		cbVerificar_1.setBounds(226, 219, 86, 22);
 		panelLogin.add(cbVerificar_1);
 		
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(this);
-		btnLogin.setBounds(71, 215, 89, 23);
+		btnLogin.setBounds(123, 277, 89, 23);
 		panelLogin.add(btnLogin);
 		
 		btnRegistrar = new JButton("Registrate");
 		btnRegistrar.addActionListener(this);
-		btnRegistrar.setBounds(234, 215, 89, 23);
+		btnRegistrar.setBounds(338, 277, 89, 23);
 		panelLogin.add(btnRegistrar);
 		
 		panelRegistro = new JPanel();
@@ -366,28 +370,28 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		btnPerfilMenu = new JButton();
 		btnPerfilMenu.addActionListener(this);
-		btnPerfilMenu.setBounds(301, 24, 89, 23);
+		btnPerfilMenu.setBounds(505, 24, 89, 23);
 		panelMenu.add(btnPerfilMenu);
 		
 		JLabel lblEscoger = new JLabel("ESCOGE");
 		lblEscoger.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEscoger.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEscoger.setBounds(167, 28, 57, 14);
+		lblEscoger.setBounds(277, 26, 57, 14);
 		panelMenu.add(lblEscoger);
 		
 		btnDescubrirMusica = new JButton("Descubrir musica");
 		btnDescubrirMusica.addActionListener(this);
-		btnDescubrirMusica.setBounds(130, 88, 126, 23);
+		btnDescubrirMusica.setBounds(230, 76, 126, 23);
 		panelMenu.add(btnDescubrirMusica);
 		
 		btnDescubrirPodcast = new JButton("Descubrir podcast");
 		btnDescubrirPodcast.addActionListener(this);
-		btnDescubrirPodcast.setBounds(130, 122, 126, 23);
+		btnDescubrirPodcast.setBounds(230, 110, 126, 23);
 		panelMenu.add(btnDescubrirPodcast);
 		
 		btnMisPlaylists = new JButton("Mis Playlist");
 		btnMisPlaylists.addActionListener(this);
-		btnMisPlaylists.setBounds(130, 156, 126, 23);
+		btnMisPlaylists.setBounds(230, 144, 126, 23);
 		panelMenu.add(btnMisPlaylists);
 		
 		JPanel panelArtistas = new JPanel();
@@ -401,21 +405,21 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		btnPerfilArtistas = new JButton("");
 		btnPerfilArtistas.addActionListener(this);
-		btnPerfilArtistas.setBounds(314, 11, 89, 23);
+		btnPerfilArtistas.setBounds(525, 11, 89, 23);
 		panelArtistas.add(btnPerfilArtistas);
 		
 		JLabel lblListaArtistas = new JLabel("Lista de artistas");
 		lblListaArtistas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListaArtistas.setBounds(142, 25, 118, 14);
+		lblListaArtistas.setBounds(256, 20, 118, 14);
 		panelArtistas.add(lblListaArtistas);
 		
 		modeloArtistas = new DefaultListModel<>();
-		listaArtistas = new JList<>(modeloArtistas);
-		JScrollPane scrollListaArtistas = new JScrollPane(listaArtistas);
-		scrollListaArtistas.setBounds(119, 81, 255, 193);
+		JScrollPane scrollListaArtistas = new JScrollPane();
+		scrollListaArtistas.setBounds(190, 118, 265, 193);
 		panelArtistas.add(scrollListaArtistas);
+		listaArtistas = new JList<>(modeloArtistas);
 		
-		listaArtistas.setBounds(119, 82, 253, 191);
+		listaArtistas.setBounds(190, 118, 253, 191);
 		listaArtistas.addMouseListener(this);
 		listaArtistas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -900,10 +904,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	public void llamarArtistas() {
 		modeloArtistas.clear();
 		
-		String consulta = "select AR.nombreArtistico, sum(A.Nreproducciones) as 'Reproducciones' "
+		String consulta = "select AR.NombreArtistico, sum(A.NReproducciones) as 'Reproducciones' "
 				+ "from Audio A join Artista AR on A.IDArtista = AR.IDArtista "
 				+ "join Musico M on AR.IDArtista = M.IDMusico " 
-				+ "group by nombreArtistico";
+				+ "group by NombreArtistico";
 		
 		
 		try {
@@ -1159,7 +1163,42 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 	}
 	
+	public void cargarArrayPodcasts(String nombrePodcast) {
+		
+		String consultaSQL = " Select P.NombrePodcast, A.Duracion, A.NReproducciones, "
+				+ " P.Colaboradores, AR.Imagen, AR.IDArtista, AR.NombreArtistico "
+				+ "from Audio A join Podcast P on A.IDAudio = P.IDPodcast "
+				+ "join Artista AR on AR.IDArtista = A.IDArtista "
+				+ "where P.NombrePodcast = ?";
+		
+		try {
+			Connection conn = conexion.getConnection();
+			PreparedStatement sentencia = conn.prepareStatement(consultaSQL);
+			sentencia.setString(1, nombrePodcast);
+			ResultSet resultado = sentencia.executeQuery();
+			
+			if(resultado.next()) {
+				
+				Podcast p = new Podcast();
+				
+				p.setNombre(resultado.getString("NombrePodcast"));
+				p.setDuracion(resultado.getInt("Duracion"));
+				p.setnReproducciones(resultado.getInt("NReproducciones"));
+				p.setColaboradores(resultado.getInt("Colaboradores"));
+				p.setImagen(resultado.getString("Imagen"));
+				p.setIdArtista(resultado.getString("IDArtista"));
+				p.setNombreArtistico(resultado.getString("NombreArtistico"));
+				
+				cargarPodcasts.add(p);
+			}
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+		
+	}
+	
 	public void abrirReproductorPodcast(String nombrePodcast) {
+		
 		if (nombrePodcast == null) {
 			return;	
 		}
@@ -1168,7 +1207,6 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				+ "from Audio A join Podcast P on A.IDAudio = P.IDPodcast "
 				+ "join Artista AR on AR.IDArtista = A.IDArtista "
 				+ "where P.NombrePodcast = ?";
-		
 		try {
 			Connection conn = conexion.getConnection();
 			PreparedStatement sentencia = conn.prepareStatement(consultaSQL);
@@ -1181,9 +1219,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 												 " Duracion: " +resultado.getInt("Duracion");
 				lblInfoAudioReproducido.setText(infoPodcastSeleccionada);
 				String rutaImagen = "";
+				
 				rutaImagen = resultado.getString("Imagen");
 		
-			if(rutaImagen != null || rutaImagen != "") {
+			if(rutaImagen != null || rutaImagen.isEmpty()) {
 				
 				if(rutaImagen.startsWith("/")) {
 					rutaImagen = rutaImagen.substring(1);
@@ -1205,6 +1244,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 			
 	}
+	
 	
 	
 	
@@ -1230,11 +1270,20 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			}else if(evento.getSource() == listaCanciones) {
 				String seleccionCancion = listaCanciones.getSelectedValue();
 				abrirReproductorCancion(seleccionCancion);
+				
 			}else if(evento.getSource() == listaPodcasts){
-				String seleccionPodcasts = listaPodcasts.getSelectedValue();
-				String nombrePodcast = seleccionPodcasts.split(" \\(")[0];
-				if(seleccionPodcasts != null) {
-					abrirReproductorPodcast(nombrePodcast);
+				int indice = 0;
+				indice = listaPodcasts.getSelectedIndex();
+					if (indice < cargarPodcasts.size()) {
+						Podcast podcastSeleccionado = cargarPodcasts.get(indice);
+						abrirReproductorPodcast(podcastSeleccionado.getNombre());
+					}
+				
+					String seleccionPodcasts = listaPodcasts.getSelectedValue();
+					
+					if(seleccionPodcasts != null) {
+						String nombrePodcast = seleccionPodcasts.split(" \\(")[0];
+						abrirReproductorPodcast(nombrePodcast);
 				}
 			}
 		}
@@ -1299,7 +1348,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
 		}
 		
-		if (evento.getSource() == btnAtrasReproduccion) {
+		if (evento.getSource() == btnAtrasReproduccion ) {
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "album");
 		}
 		
@@ -1341,7 +1390,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			panelAnterior = "artistas";
 			abrirPanelPerfil();
 		}
-			//
+			
 		if(evento.getSource() == btnPerfilArtista) {
 			panelAnterior = "artista";
 			abrirPanelPerfil();
@@ -1379,7 +1428,14 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 		
 		if(evento.getSource() == btnCancionAnterior) {
-			
+			 int indice =0;
+			 indice = listaPodcasts.getSelectedIndex();
+			 if(indice > 0) {
+				 indice = indice -1;
+				 listaPodcasts.setSelectedIndex(indice);
+				 Podcast p = cargarPodcasts.get(indice);
+				 abrirReproductorPodcast(p.getNombre());
+			 }
 		}
 		
 		if(evento.getSource() == btnSiguienteCancion) {
