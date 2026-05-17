@@ -414,10 +414,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelArtistas.add(lblListaArtistas);
 		
 		modeloArtistas = new DefaultListModel<>();
-		JScrollPane scrollListaArtistas = new JScrollPane();
+		listaArtistas = new JList<>(modeloArtistas);
+		JScrollPane scrollListaArtistas = new JScrollPane(listaArtistas);
 		scrollListaArtistas.setBounds(190, 118, 265, 193);
 		panelArtistas.add(scrollListaArtistas);
-		listaArtistas = new JList<>(modeloArtistas);
 		
 		listaArtistas.setBounds(190, 118, 253, 191);
 		listaArtistas.addMouseListener(this);
