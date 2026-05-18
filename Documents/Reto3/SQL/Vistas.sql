@@ -34,6 +34,4 @@ select * from cancionMasEscuchada
 order by Reproducciones desc;
 
 
-select AR.nombreArtistico, sum(A.Nreproducciones) as 'reproducciones'
-from Audio A join Artista AR on A.IDArtista = AR.IDArtista
-group by nombreArtistico;
+

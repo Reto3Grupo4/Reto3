@@ -10,5 +10,12 @@ group by nombreArtistico;
 
 select AL.Titulo, year(AL.Año), count(C.IDCancion)
 from Album AL left join Cancion C on AL.IDAlbum = C.IDAlbum
-where IDMusico = 'A001'
+where IDMusico = ?
 group by AL.Titulo, AL.Año, AL.Genero;
+
+
+select P.Titulo from Playlist P 
+where IDCliente = (select IDCliente From Cliente where Usuario = 'carlosg');
+
+
+insert into Cancion (IDCancion) values
