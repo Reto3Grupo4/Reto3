@@ -1593,7 +1593,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		JScrollPane scrollPanelTabla = new JScrollPane(tablaEstadisticas);
 		
-		panelTablaEstadisticas.add(scrollPanelTabla, BorderLayout());
+		panelTablaEstadisticas.add(scrollPanelTabla, BorderLayout.CENTER);
+		
+		panelTablaEstadisticas.revalidate();
+		panelTablaEstadisticas.repaint();
 	}
 
 	@Override
