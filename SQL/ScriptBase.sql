@@ -1,5 +1,5 @@
 create database if not exists DestruyeSpotify1;
-use DestruyeSpotify1;
+use DestruyeSpotify;
 create table Artista(
 IDArtista char(5) primary key,
 NombreArtistico char(20) not null unique,
@@ -64,7 +64,14 @@ references Audio (IDAudio) on update cascade,
 constraint fk_Album_canc foreign key (IDAlbum)
 references Album (IDAlbum) on update cascade
 );
-
+alter table Cancion
+drop foreign key fk_Audio_canc;
+Alter table Cancion
+add constraint fk_Audio_canc
+foreign key (IDCancion) 
+references Audio(IDAudio)
+on update cascade
+on delete cascade;
 create table Idioma(
 IDIdioma enum ('ES', 'EU', 'EN', 'FR', 'DE', 'CA', 'GA', 'AR') primary key,
 Descripcion char(100) not null
@@ -121,3 +128,4 @@ FechaCaducidad date not null,
 constraint fk_Cliente foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade
 );
+
