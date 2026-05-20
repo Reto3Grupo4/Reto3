@@ -114,13 +114,16 @@ references Playlist (IDPlaylist) on update cascade
 );
 
 create table Favoritos(
-IDCliente char(5) primary key,
+IDCliente char(5) not null,
 IDAudio char(5) not null,
+constraint pk_Favoritos primary key (IDCliente, IDAudio),
 constraint fk_Cliente_fav foreign key (IDCliente)
 references Cliente (IDCliente) on update cascade,
 constraint fk_Audio_fav foreign key (IDAudio)
 references Audio (IDAudio) on update cascade
 );
+drop table if exiSts Favoritos;
+
 
 create table Premium(
 IDCliente char(5) primary key,
