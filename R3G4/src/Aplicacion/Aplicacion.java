@@ -37,6 +37,7 @@ import java.awt.Image;
 
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+
 import javax.swing.JTextArea;
 
 /*Imports para la conexion con la Base de Datos*/
@@ -46,16 +47,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import javax.swing.JCheckBox;
 import java.awt.event.MouseAdapter;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Enums.TipoCliente;
+
+import java.awt.FlowLayout;
 
 
 public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	
 	private static final long serialVersionUID = 1L;
 	private CardLayout cl_aplicacion_usuario;
+	
+	//JPANELS//
+	
 	private JPanel Aplicacion_usuario;
 	private JPanel panelLogin;
 	private JPanel panelRegistro;
@@ -69,21 +83,41 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JPanel panelInformacionAlbums;
 	private JPanel panelReproduccion;
 	private JPanel panelPlaylists;
+	private JPanel panelAñadirCancionPlaylist;
 	private JPanel panelPodcasters;
 	private JPanel panelPodcasts;
 	private JPanel panelAdministracion;
 	private JPanel panelMenuEstadisticas;
 	private JPanel panelEstadisticas;
 	private JPanel panelTablaEstadisticas;
+	private JPanel panelAdministrarMusica;
+	private JPanel panelModificarMusica;
+	private JPanel panelCrearPlaylist;
+	private JPanel panelPerfil;
+	
+	
+	/*JTEXTFIELDS*/
+	
 	public JTextField txtUsuario;
 	public JPasswordField pf_Clave;
 	private JTextField txtNombreRegistro;
 	public JTextField txtUsuario_2;
 	private JTextField txtApellidos;
+	private JTextField txtFecNac;
+	private JTextField txtFecRegistro;
+	private JTextField txtNombrePlaylist;
+	private JTextField txtNombrePerfil;
+	private JTextField txtIDCliente;
+	private JTextField txtApellidoPerfil;
+	private JTextField txtUsuarioPerfil;
+	
+	
+	//PASSWORDFIELDS//
+	
 	public JPasswordField pfClave_2;
 	public JPasswordField pfConfirmar;
-	private JTextArea txtAreaInformacion;
-	private JTextArea txtAreaInfoAlbum;
+	
+	//JLABELS//
 	private JLabel lblFotoReproduccion;
 	private JLabel lblInfoAudioReproducido;
 	private JLabel lblFotoArtista;
@@ -106,8 +140,19 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JLabel lblApellidoPerfil;
 	private JLabel lblUsuarioPerfil;
 	private JLabel lblAdministracion;
-	private JTextField txtFecNac;
-	private JTextField txtFecRegistro;
+	private JLabel lblNombrePlaylist;
+	private JLabel lblNombreCancionReproductor;
+	private JLabel lblListaDePodcasters;
+	private JLabel lblIDAudioModificar;
+	private JLabel lblBusquedaModificar;
+	
+	//JTEXTAREAS//
+	
+	private JTextArea txtAreaInformacion;
+	private JTextArea txtAreaInfoAlbum;
+	
+	/*JBUTTONS*/
+	
 	private JButton btnComprarPremiumRegistro;
 	private JButton btnRegistrar;
 	private JButton btnLogin;
@@ -147,6 +192,29 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JButton btnGestionarMusica;
 	private JButton btnGestionarPodcast;
 	private JButton btnEstadisticas;
+	private JButton btnPerfilAdministrarMusica;
+	private JButton btnPerfilAñadirMusica;
+	private JButton btnAtrasAdministrarMusica;
+	private JButton btnAñadirMusica;
+	private JButton btnEliminarMusica;
+	private JButton btnModificarMusica;
+	private JButton btnConfirmarAñadirMusica;
+	private JButton btnAtrasAdministarAñadirMusica;
+	private JButton btnGuardarPlaylist;
+	private JButton btnAtrasCrearPlaylist;
+	private JButton btnAtrasMenuEstadisticas;
+	private JButton btnEditarPerfil;
+	private JButton btnPerfilAlbums;
+	
+	private JButton btnTopCanciones;
+	private JButton btnTopPodcast;
+	private JButton btnTopReproducciones;
+	private JButton btnTopPlaylist;
+	private JButton btnAtrasEstadisticas;
+	private JButton btnSemanas;
+	private JButton btnMeses;
+	private JButton btnAnos;
+	//JSCROLLPANES//
 	
 	private JScrollPane scrollListaArtistas;
 	private JScrollPane scrollListaDiscos; 
@@ -155,8 +223,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JScrollPane scrollListaPodcasters; 
 	private JScrollPane scrollListaPodcasts;
 	private JCheckBox chckbxPremiumRegistro;
-	private JComboBox cBIdioma;
-	private JComboBox cbVerificar_1;
+	private JComboBox<String> cBIdioma;
+	private JComboBox<String> cbVerificar;
+	
+	//JLISTS CON SUS MODELOS//
 	
 	private JList<String> listaArtistas; 
 	private DefaultListModel<String> modeloArtistas;
@@ -176,6 +246,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	private JList<String> listaPodcasts;
 	private DefaultListModel<String> modeloPodcasts;
 	
+	private ArrayList<String> colaDeReproduccion = new ArrayList<String>();
+	private int posicionActualEnCola = -1;
+	
 	public String usuarioRegistrado;
 	public String claveRegistrada;
 	
@@ -187,30 +260,34 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	public String usuarioARegistrar;
 	public String claveARegistrar;
 	public String claveAConfirmar;
-	private JLabel lblListaDePodcasters;
-	private JPanel panelPerfil;
 	private Cliente clienteLogueado;
 	private JLabel lblNombrePerfil;
-	private JTextField txtNombrePerfil;
-	private JTextField txtIDCliente;
-	private JTextField txtApellidoPerfil;
-	private JTextField txtUsuarioPerfil;
-	private JButton btnEditarPerfil;
-	private JButton btnPerfilAlbums;
+	
 	
 	private ArrayList<Podcast> cargarPodcasts = new ArrayList<Podcast>();
 	private ArrayList<Cancion> cargarCanciones = new ArrayList<Cancion>();
 	private JTable tablaEstadisticas;
-	private JButton btnAtrasMenuEstadisticas;
 	private JLabel lblMenuEstadisticas;
-	private JButton btnTopCanciones;
-	private JButton btnTopPodcast;
-	private JButton btnTopReproducciones;
-	private JButton btnTopPlaylist;
-	private JButton btnAtrasEstadisticas;
-	private JButton btnSemanas;
-	private JButton btnMeses;
-	private JButton btnAnos;
+	private JPanel panelAdministrarAñadirMusica;
+	private JTextField txtNombreAdministrarAñadirMusica;
+	private JTextField txtDuracionAdministrarAñadirCancion;
+	private JTextField txtArchivoAdministrarAñadirCancion;
+	private JPanel panelEliminarMusica;
+	private JLabel lblNombreEliminarMusica;
+	private JButton btnAtrasEliminarMusica;
+	private JButton btnPerfilEliminarMusica;
+	private JButton btnConfirmarEliminarMusica;
+	private JButton btnAtrasModificarMusica;
+	private JButton btnPerfilModificarMusica;
+	private JTextField txtNombreEliminarMusica;
+	private JTextField txtNombreModificarMusica;
+	private JTextField txtDuracionModificarCancion;
+	private JTextField txtArchivoModificarCancion;
+	private JButton btnConfirmarModificarMusica;
+	private JLabel lblNReproduccionesModificar;
+	private JTextField txtNReproduccionesModificar;
+	private JTextField txtIDAudioModificarCancion;
+	
 	
 	
 	public JTextField getTxtUsuario() {
@@ -306,11 +383,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		pf_Clave.setBounds(237, 80, 85, 20);
 		panelLogin.add(pf_Clave);
 		
-		cbVerificar_1 = new JComboBox();
-		cbVerificar_1.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empleado", "Administrador"}));
-		cbVerificar_1.setToolTipText("");
-		cbVerificar_1.setBounds(236, 111, 86, 22);
-		panelLogin.add(cbVerificar_1);
+		cbVerificar = new JComboBox();
+		cbVerificar.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empleado", "Administrador"}));
+		cbVerificar.setToolTipText("");
+		cbVerificar.setBounds(236, 111, 86, 22);
+		panelLogin.add(cbVerificar);
 		
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(this);
@@ -405,7 +482,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		lblIdiomaRegistro.setBounds(65, 312, 46, 14);
 		panelRegistro.add(lblIdiomaRegistro);
 		
-		cBIdioma = new JComboBox();
+		cBIdioma = new JComboBox<String>();
 		cBIdioma.setModel(new DefaultComboBoxModel(new String[] {"ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR"}));
 		cBIdioma.setBounds(121, 308, 46, 22);
 		panelRegistro.add(cBIdioma);
@@ -507,6 +584,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelArtista.add(btnAtrasArtista);
 		
 		btnPerfilArtista = new JButton("Perfil");
+		btnPerfilArtista.addActionListener(this);
 		btnPerfilArtista.setBounds(325, 11, 89, 23);
 		panelArtista.add(btnPerfilArtista);
 		
@@ -631,7 +709,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnSiguienteCancion.setBounds(362, 329, 41, 23);
 		panelReproduccion.add(btnSiguienteCancion);
 		
-		btnFavorito = new JButton("Favorito");
+		btnFavorito = new JButton("Me gusta");
 		btnFavorito.addActionListener(this);
 		btnFavorito.setBounds(413, 329, 89, 23);
 		panelReproduccion.add(btnFavorito);
@@ -640,6 +718,12 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		lblInfoAudioReproducido.setVerticalAlignment(SwingConstants.TOP);
 		lblInfoAudioReproducido.setBounds(52, 405, 525, 86);
 		panelReproduccion.add(lblInfoAudioReproducido);
+		
+		lblNombreCancionReproductor = new JLabel("Seleccione una canción...");
+		lblNombreCancionReproductor.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreCancionReproductor.setForeground(new Color(0, 0, 0));
+		lblNombreCancionReproductor.setBounds(185, 363, 300, 25);
+		panelReproduccion.add(lblNombreCancionReproductor);
 	}
 	
 	public void crearPanelPlaylist() {
@@ -682,6 +766,46 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnExportar.setBounds(318, 297, 158, 37);
 		btnExportar.addActionListener(this);
 		panelPlaylists.add(btnExportar);
+	}
+	
+	public void crearPanelCrearPlaylist() {
+		panelCrearPlaylist = new JPanel();
+		Aplicacion_usuario.add(panelCrearPlaylist, "crear playlists");
+		panelCrearPlaylist.setLayout(null);
+		
+		lblNombrePlaylist = new JLabel("Nombre de la nueva Playlist:");
+		lblNombrePlaylist.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombrePlaylist.setForeground(new Color(0, 0, 0));
+		lblNombrePlaylist.setBounds(50, 80, 250, 25);
+		panelCrearPlaylist.add(lblNombrePlaylist);
+		
+		txtNombrePlaylist = new JTextField();
+		txtNombrePlaylist.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNombrePlaylist.setBounds(50, 120, 300, 30);
+		panelCrearPlaylist.add(txtNombrePlaylist);
+		txtNombrePlaylist.setColumns(10);
+		
+		btnGuardarPlaylist = new JButton("Guardar Playlist");
+		btnGuardarPlaylist.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnGuardarPlaylist.setBounds(50, 180, 140, 35);
+		btnGuardarPlaylist.addActionListener(this);
+		panelCrearPlaylist.add(btnGuardarPlaylist);
+		
+		btnAtrasCrearPlaylist = new JButton("Atras");
+		btnAtrasCrearPlaylist.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnAtrasCrearPlaylist.setBounds(210, 180, 140, 35);
+		btnAtrasCrearPlaylist.addActionListener(this); 
+		panelCrearPlaylist.add(btnAtrasCrearPlaylist);
+	}
+	
+	public void crearPanelAnadirCancion_Playlist() {
+		panelAñadirCancionPlaylist = new JPanel();
+		Aplicacion_usuario.add(panelAñadirCancionPlaylist, "añadir canciones a playlists");
+		panelAñadirCancionPlaylist.setLayout(null);
+		
+		JButton btnAtrasAñadirCancion_Playlist = new JButton("Atras");
+		btnAtrasAñadirCancion_Playlist.setBounds(10, 11, 89, 23);
+		panelAñadirCancionPlaylist.add(btnAtrasAñadirCancion_Playlist);
 	}
 	
 	public void crearPanelPodcasters() {
@@ -814,6 +938,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelAdministracion.setLayout(null);
 		
 		btnAtrasAdministracion = new JButton("Atras");
+		btnAtrasAdministracion.addActionListener(this);
 		btnAtrasAdministracion.setBounds(181, 139, 89, 23);
 		panelAdministracion.add(btnAtrasAdministracion);
 		
@@ -823,6 +948,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelAdministracion.add(lblAdministracion);
 		
 		btnGestionarMusica = new JButton("Gestionar Musica");
+		btnGestionarMusica.addActionListener(this);
 		btnGestionarMusica.setBounds(191, 173, 260, 23);
 		panelAdministracion.add(btnGestionarMusica);
 		
@@ -899,7 +1025,189 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    
 	    panelTablaEstadisticas.setLayout(new java.awt.BorderLayout()); 
 	    panelEstadisticas.add(panelTablaEstadisticas);
-				
+	    
+	    			
+	}
+	
+	public void crearPanelAdministrarAñadirMusica() {
+		panelAdministrarAñadirMusica = new JPanel();
+	    Aplicacion_usuario.add(panelAdministrarAñadirMusica, "añadir musica");
+	    panelAdministrarAñadirMusica.setLayout(null);
+	    
+	    btnAtrasAdministarAñadirMusica = new JButton("Atras");
+	    btnAtrasAdministarAñadirMusica.addActionListener(this);
+	    btnAtrasAdministarAñadirMusica.setBounds(10, 11, 89, 23);   
+	    panelAdministrarAñadirMusica.add(btnAtrasAdministarAñadirMusica);
+	    
+	    btnPerfilAñadirMusica = new JButton("Perfil");
+	    btnPerfilAñadirMusica.addActionListener(this);
+	    btnPerfilAñadirMusica.setBounds(535, 11, 89, 23);
+	    panelAdministrarAñadirMusica.add(btnPerfilAñadirMusica);
+	    
+	    JLabel lblNombreAdministarAñadirMusica = new JLabel("Nombre de la canción:");
+	    lblNombreAdministarAñadirMusica.setBounds(66, 94, 139, 14);
+	    panelAdministrarAñadirMusica.add(lblNombreAdministarAñadirMusica);
+	    
+	    txtNombreAdministrarAñadirMusica = new JTextField();
+	    txtNombreAdministrarAñadirMusica.setBounds(199, 91, 233, 20);
+	    panelAdministrarAñadirMusica.add(txtNombreAdministrarAñadirMusica);
+	    txtNombreAdministrarAñadirMusica.setColumns(10);
+	    
+	    JLabel lblDuracionAdministrarAñadirCancion = new JLabel("Cuanto dura la canción? (Minutos)");
+	    lblDuracionAdministrarAñadirCancion.setBounds(10, 119, 183, 14);
+	    panelAdministrarAñadirMusica.add(lblDuracionAdministrarAñadirCancion);
+	    
+	    txtDuracionAdministrarAñadirCancion = new JTextField();
+	    txtDuracionAdministrarAñadirCancion.setBounds(199, 116, 233, 20);
+	    panelAdministrarAñadirMusica.add(txtDuracionAdministrarAñadirCancion);
+	    txtDuracionAdministrarAñadirCancion.setColumns(10);
+	    
+	    JLabel lblArchivoAdministrarAñadirCancion = new JLabel("Ruta del archivo:");
+	    lblArchivoAdministrarAñadirCancion.setBounds(90, 142, 103, 14);
+	    panelAdministrarAñadirMusica.add(lblArchivoAdministrarAñadirCancion);
+	    
+	    txtArchivoAdministrarAñadirCancion = new JTextField();
+	    txtArchivoAdministrarAñadirCancion.setBounds(199, 139, 233, 20);
+	    panelAdministrarAñadirMusica.add(txtArchivoAdministrarAñadirCancion);
+	    txtArchivoAdministrarAñadirCancion.setColumns(10);    
+	    
+	    btnConfirmarAñadirMusica = new JButton("Añadir musica");
+	    btnConfirmarAñadirMusica.addActionListener(this);
+	    btnConfirmarAñadirMusica.setBounds(233, 214, 147, 23);
+	    panelAdministrarAñadirMusica.add(btnConfirmarAñadirMusica);
+	}
+	
+	public void crearPanelEliminarMusica() {
+		panelEliminarMusica = new JPanel();
+	    Aplicacion_usuario.add(panelEliminarMusica, "eliminar musica");
+	    panelEliminarMusica.setLayout(null);
+	    
+	    lblNombreEliminarMusica = new JLabel("Nombre de cancion:");
+	    lblNombreEliminarMusica.setBounds(130, 139, 117, 14);
+	    panelEliminarMusica.add(lblNombreEliminarMusica);
+	    
+	    btnAtrasEliminarMusica = new JButton("Atras");
+	    btnAtrasEliminarMusica.addActionListener(this);
+	    btnAtrasEliminarMusica.setBounds(10, 11, 89, 23);
+	    panelEliminarMusica.add(btnAtrasEliminarMusica);
+	    
+	    btnPerfilEliminarMusica = new JButton("Perfil");
+	    btnPerfilEliminarMusica.addActionListener(this);
+	    btnPerfilEliminarMusica.setBounds(535, 11, 89, 23);
+	    panelEliminarMusica.add(btnPerfilEliminarMusica);
+	    
+	    txtNombreEliminarMusica = new JTextField();
+	    txtNombreEliminarMusica.setBounds(257, 136, 146, 20);
+	    panelEliminarMusica.add(txtNombreEliminarMusica);
+	    txtNombreEliminarMusica.setColumns(10);
+	    
+	    btnConfirmarEliminarMusica = new JButton("Eliminar");
+	    btnConfirmarEliminarMusica.addActionListener(this);
+	    btnConfirmarEliminarMusica.setBounds(241, 204, 89, 23);
+	    panelEliminarMusica.add(btnConfirmarEliminarMusica);
+	}
+	
+	public void crearPanelModificarMusica() {
+		panelModificarMusica = new JPanel();
+	    Aplicacion_usuario.add(panelModificarMusica, "modificar musica");
+	    panelModificarMusica.setLayout(null);
+	    
+	    btnAtrasModificarMusica = new JButton("Atras");
+	    btnAtrasModificarMusica.addActionListener(this);
+	    btnAtrasModificarMusica.setBounds(10, 11, 89, 23);   
+	    panelModificarMusica.add(btnAtrasModificarMusica);
+	    
+	    btnPerfilModificarMusica = new JButton("Perfil");
+	    btnPerfilModificarMusica.addActionListener(this);
+	    btnPerfilModificarMusica.setBounds(535, 11, 89, 23);
+	    panelModificarMusica.add(btnPerfilModificarMusica);
+	    
+	    JLabel lblNombreModificarMusica = new JLabel("Nombre de la canción:");
+	    lblNombreModificarMusica.setBounds(59, 119, 139, 14);
+	    panelModificarMusica.add(lblNombreModificarMusica);
+	    
+	    txtNombreModificarMusica = new JTextField();
+	    txtNombreModificarMusica.setBounds(199, 116, 233, 20);
+	    panelModificarMusica.add(txtNombreModificarMusica);
+	    txtNombreModificarMusica.setColumns(10);
+	    
+	    JLabel lblDuracionModificarCancion = new JLabel("Cuanto dura la canción? (Minutos)");
+	    lblDuracionModificarCancion.setBounds(10, 142, 183, 14);
+	    panelModificarMusica.add(lblDuracionModificarCancion);
+	    
+	    txtDuracionModificarCancion = new JTextField();
+	    txtDuracionModificarCancion.setBounds(199, 139, 233, 20);
+	    panelModificarMusica.add(txtDuracionModificarCancion);
+	    txtDuracionModificarCancion.setColumns(10);
+	    
+	    JLabel lblArchivoModificarCancion = new JLabel("Ruta del archivo:");
+	    lblArchivoModificarCancion.setBounds(86, 171, 103, 14);
+	    panelModificarMusica.add(lblArchivoModificarCancion);
+	    
+	    txtArchivoModificarCancion = new JTextField();
+	    txtArchivoModificarCancion.setBounds(199, 168, 233, 20);
+	    panelModificarMusica.add(txtArchivoModificarCancion);
+	    txtArchivoModificarCancion.setColumns(10);    
+	    
+	    btnConfirmarModificarMusica = new JButton("Modificar musica");
+	    btnConfirmarModificarMusica.addActionListener(this);
+	    btnConfirmarModificarMusica.setBounds(237, 230, 147, 23);
+	    panelModificarMusica.add(btnConfirmarModificarMusica);
+	    
+	    lblNReproduccionesModificar = new JLabel("Nº Reproducciones:");
+	    lblNReproduccionesModificar.setBounds(86, 202, 107, 14);
+	    panelModificarMusica.add(lblNReproduccionesModificar);
+	    
+	    txtNReproduccionesModificar = new JTextField();
+	    txtNReproduccionesModificar.setColumns(10);
+	    txtNReproduccionesModificar.setBounds(199, 199, 233, 20);
+	    panelModificarMusica.add(txtNReproduccionesModificar);
+	    
+	    txtIDAudioModificarCancion = new JTextField();
+	    txtIDAudioModificarCancion.setColumns(10);
+	    txtIDAudioModificarCancion.setBounds(199, 91, 233, 20);
+	    panelModificarMusica.add(txtIDAudioModificarCancion);
+	    
+	    lblIDAudioModificar = new JLabel("IDAudio:");
+	    lblIDAudioModificar.setBounds(119, 94, 107, 14);
+	    panelModificarMusica.add(lblIDAudioModificar);
+	    
+	    lblBusquedaModificar = new JLabel("Busqueda en base a nombre");
+	    lblBusquedaModificar.setBounds(251, 66, 139, 14);
+	    panelModificarMusica.add(lblBusquedaModificar);
+	}
+	
+	public void crearPanelGestionarMusica() {
+		panelAdministrarMusica = new JPanel();
+	    Aplicacion_usuario.add(panelAdministrarMusica, "administrar musica");
+	    panelAdministrarMusica.setLayout(null);
+	    
+	    btnAtrasAdministrarMusica = new JButton("Atras");
+	    btnAtrasAdministrarMusica.addActionListener(this);
+	    btnAtrasAdministrarMusica.setBounds(10, 11, 89, 23);
+	    panelAdministrarMusica.add(btnAtrasAdministrarMusica);
+	    
+	    btnPerfilAdministrarMusica = new JButton("Perfil");
+	    btnPerfilAdministrarMusica.addActionListener(this);
+	    btnPerfilAdministrarMusica.setBounds(535, 11, 89, 23);
+	    panelAdministrarMusica.add(btnPerfilAdministrarMusica);
+	    
+	    btnAñadirMusica = new JButton("Añadir musica");
+	    btnAñadirMusica.addActionListener(this);
+	    btnAñadirMusica.setBounds(244, 81, 169, 23);
+	    panelAdministrarMusica.add(btnAñadirMusica);
+	    
+	    btnEliminarMusica = new JButton("Eliminar musica");
+	    btnEliminarMusica.addActionListener(this);
+	    btnEliminarMusica.setBounds(244, 115, 169, 23);
+	    panelAdministrarMusica.add(btnEliminarMusica);
+	    
+	    btnModificarMusica = new JButton("Modificar musica");
+	    btnModificarMusica.addActionListener(this);
+	    btnModificarMusica.setBounds(244, 149, 169, 23);
+	    panelAdministrarMusica.add(btnModificarMusica);   
+	    
+	   
 	}
 	public Aplicacion() {		
 		configurarVentana();
@@ -911,10 +1219,16 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		crearPanelAlbums();
 		crearPanelReproduccion();
 		crearPanelPlaylist();
+		crearPanelCrearPlaylist();
+		crearPanelAnadirCancion_Playlist();
 		crearPanelPodcasters();
 		crearPanelPodcasts();
 		crearPanelPerfil();
 		crearPanelAdministracion();
+		crearPanelGestionarMusica();
+		crearPanelAdministrarAñadirMusica();
+		crearPanelEliminarMusica();
+		crearPanelModificarMusica();
 		crearPanelMenuEstadisticas();
 		crearPanelEstadisticas();
 	}
@@ -988,6 +1302,8 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				validado = true;
 				cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
 				}
+				sentencia.close();
+				con.close();
 			}catch(SQLException error) {
 				JOptionPane.showMessageDialog(this, "Error de SQL: " + error.getMessage());
 				error.printStackTrace();
@@ -1032,6 +1348,14 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				clienteLogueado.setApellido(resultado.getString("Apellido"));
 				clienteLogueado.setUsuario(resultado.getString("Usuario"));
 				
+				String clienteTipo = resultado.getString("Tipo");
+				if(clienteTipo.equals("Premium")) {
+					clienteLogueado.setTipoCliente(TipoCliente.Premium);
+				}else {
+					clienteLogueado.setTipoCliente(TipoCliente.Free);
+				}
+				
+				
 				usuarioRegistrado = resultado.getString("Usuario");
 				claveRegistrada = resultado.getString("Contraseña");
 				
@@ -1043,8 +1367,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				btnPerfilPodcasts.setText(clienteLogueado.getUsuario());
 				btnPerfilReproduccion.setText(clienteLogueado.getUsuario());
 				btnPerfilAlbums.setText(clienteLogueado.getUsuario());
+				btnPerfilAdministrarMusica.setText(clienteLogueado.getUsuario());
+				btnPerfilEliminarMusica.setText(clienteLogueado.getUsuario());
+				btnPerfilAñadirMusica.setText(clienteLogueado.getUsuario());
+				btnPerfilModificarMusica.setText(clienteLogueado.getUsuario());
 				
-				cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
 				validado = true;
 			}
 			else {
@@ -1054,7 +1381,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 			resultado.close();
 			sentencia.close();
-			
+			con.close();
 		} catch (SQLException error) {
 	        JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos");
 	        error.printStackTrace();
@@ -1106,6 +1433,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				lblFotoArtista.setIcon(new ImageIcon(imagenRedimensionada));
 				lblFotoArtista.setText("");
 			}
+			resultado.close();
+			sentencia.close();
+			con.close();
 		}catch(Exception error) {
 			error.printStackTrace();
 		}
@@ -1154,7 +1484,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 			resultado.close();
 			sentencia.close();
-			
+			con.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
@@ -1186,6 +1516,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 			resultado.close();
 			sentencia.close();
+			con.close();
 		}catch(SQLException error) {
 			JOptionPane.showMessageDialog(this, "Error al cargar discos: " + error.getMessage());
 			error.printStackTrace();
@@ -1214,10 +1545,13 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			}
 			resultado.close();
 			sentencia.close();
+			con.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
 	}
+	
+	
 	
 	private void abrirVentanaAlbum(String seleccion) {
 		if(seleccion != null) {
@@ -1259,6 +1593,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				lblFotoAlbum.setIcon(new ImageIcon(imagenRedimensionada));
 				lblFotoAlbum.setText("");
 			}
+			resultado.close();
+			sentencia.close();
+			con.close();
 		}catch(Exception error) {
 			error.printStackTrace();
 		}
@@ -1281,7 +1618,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			while(resultado.next()) {
 				modeloCanciones.addElement(resultado.getString("Nombre"));
 			}
-			
+			resultado.close();
+			sentencia.close();
+			con.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
@@ -1304,6 +1643,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 						+  "Genero: \n " + resultado.getString("Genero")
 						);
 			}	
+			resultado.close();
+			sentencia.close();
+			con.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
@@ -1312,22 +1654,26 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	public void llamarPlaylists() {
 		modeloPlaylist.clear();
 		
-		String consultaSQL = "select P.Titulo from Playlist P "
-				+ "where IDCliente = (select IDCliente from Cliente where Usuario = ?) ";
+		String consultaSQL = "select Titulo from Playlist  "
+				+ "where IDCliente = ? ";
 		try {
 			Connection con = conexion.getConnection();
 			PreparedStatement sentencia = con.prepareStatement(consultaSQL);
-			sentencia.setString(1, usuarioRegistrado);
+			sentencia.setString(1, clienteLogueado.getIdCliente());
 			ResultSet resultado = sentencia.executeQuery();
 			
 			while(resultado.next()) {
 				modeloPlaylist.addElement(resultado.getString("Titulo"));
 			}
+			
+			listaPlaylist.setModel(modeloPlaylist);
+			
 			resultado.close();
-			sentencia.close();		
+			sentencia.close();
+			con.close();
 		}catch(SQLException error) {
-			error.printStackTrace();
-			System.out.println(error.getMessage());
+			JOptionPane.showMessageDialog(this, "Error al cargar tus playlists: " + error.getMessage());
+	        error.printStackTrace();
 		}
 	}
 	
@@ -1351,7 +1697,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 			resultado.close();
 			sentencia.close();
-			
+			conn.close();
 		}catch(SQLException error){
 			error.getMessage();
 		}
@@ -1378,6 +1724,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 						+ " hay: " + colaboradores + " colaboradores)");
 				
 			} 
+			resultado.close();
+			sentencia.close();
+			resultado.close();
 		}catch(SQLException error) {
 			error.getMessage();
 		}
@@ -1390,7 +1739,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			return;	
 		}
 		
-		String consultaSQL = "select A.Nombre, AL.Titulo, AL.Imagen, A.Duracion "
+		String consultaSQL = "select A.IDAudio, A.Nombre, AL.Titulo, AL.Imagen, A.Duracion "
 				+ "from Audio A join Cancion C on A.IDAudio = C.IDCancion "
 				+ "join Album AL on C.IDAlbum = AL.IDAlbum "
 				+ "where A.Nombre = ?";
@@ -1402,9 +1751,8 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			ResultSet resultado = sentencia.executeQuery();
 			
 			if(resultado.next()) {
-				String infoCancionSeleccionada = " Cancion: " +resultado.getString("Nombre") + "\n" +
-												 " Album: " +resultado.getString("Titulo") + "\n" +
-												 " Duracion: " +resultado.getInt("Duracion");
+				String infoCancionSeleccionada = " Cancion: " +resultado.getString("Nombre") + " Album: " +
+												   resultado.getString("Titulo") + " Duracion: " +resultado.getInt("Duracion");
 				lblInfoAudioReproducido.setText(infoCancionSeleccionada);
 				
 				String rutaImagen = resultado.getString("Imagen");
@@ -1423,47 +1771,16 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				
 				cl_aplicacion_usuario.show(Aplicacion_usuario, "reproduccion");
 			}
+			resultado.close();
+			sentencia.close();
+			conn.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
 			
 	}
 	
-	public void cargarArrayPodcasts(String nombrePodcast) {
-		
-		String consultaSQL = " Select P.NombrePodcast, A.Duracion, A.NReproducciones, "
-				+ " P.Colaboradores, AR.Imagen, AR.IDArtista, AR.NombreArtistico "
-				+ "from Audio A join Podcast P on A.IDAudio = P.IDPodcast "
-				+ "join Artista AR on AR.IDArtista = A.IDArtista "
-				+ "where P.NombrePodcast = ?";
-		
-		try {
-			Connection conn = conexion.getConnection();
-			PreparedStatement sentencia = conn.prepareStatement(consultaSQL);
-			sentencia.setString(1, nombrePodcast);
-			ResultSet resultado = sentencia.executeQuery();
-			
-			if(resultado.next()) {
-				
-				Podcast p = new Podcast();
-				
-				p.setNombre(resultado.getString("NombrePodcast"));
-				p.setDuracion(resultado.getInt("Duracion"));
-				p.setnReproducciones(resultado.getInt("NReproducciones"));
-				p.setColaboradores( resultado.getInt("Colaboradores"));
-				p.setImagen(resultado.getString("Imagen"));
-				p.setIdArtista(resultado.getString("IDArtista"));
-				p.setNombreArtistico(resultado.getString("NombreArtistico"));
-				
-				
-				
-				cargarPodcasts.add(p);
-			}
-		}catch(SQLException error) {
-			error.printStackTrace();
-		}
-		
-	}
+
 	
 	public void abrirReproductorPodcast(String nombrePodcast) {
 		
@@ -1509,6 +1826,8 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				
 				cl_aplicacion_usuario.show(Aplicacion_usuario, "reproduccion");
 			}
+			sentencia.close();
+			conn.close();
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
@@ -1518,46 +1837,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	
 	
 	
-	@Override
-	public void mouseClicked(MouseEvent evento) {
-		
-		if(evento.getClickCount() == 2) {
-			if(evento.getSource()== listaArtistas) {
-				String artistaSeleccionado = listaArtistas.getSelectedValue();
-				if(artistaSeleccionado != null) {
-					abrirVentanaArtista(artistaSeleccionado);
-				}
-			}else if (evento.getSource() == listaDiscos) {
-				String discoSeleccionado = listaDiscos.getSelectedValue();
-				if(discoSeleccionado != null) {
-					abrirVentanaAlbum(discoSeleccionado);		
-				}
-			}else if(evento.getSource() == listaPodcasters) {
-				String podcasterSeleccionado = listaPodcasters.getSelectedValue();
-				if(podcasterSeleccionado != null) {
-					abrirVentanaPodcasts(podcasterSeleccionado);
-				}
-			}else if(evento.getSource() == listaCanciones) {
-				String seleccionCancion = listaCanciones.getSelectedValue();
-				abrirReproductorCancion(seleccionCancion);
-				
-			}else if(evento.getSource() == listaPodcasts){
-				int indice = 0;
-				indice = listaPodcasts.getSelectedIndex();
-					if (indice < cargarPodcasts.size()) {
-						Podcast podcastSeleccionado = cargarPodcasts.get(indice);
-						abrirReproductorPodcast(podcastSeleccionado.getNombre());
-					}
-				
-					String seleccionPodcasts = listaPodcasts.getSelectedValue();
-					
-					if(seleccionPodcasts != null) {
-						String nombrePodcast = seleccionPodcasts.split(" \\(")[0];
-						abrirReproductorPodcast(nombrePodcast);
-				}
-			}
-		}
-	}
+	
 	
 	public void actualizarTablaEstadisticas(String tipoTop) {
 		panelTablaEstadisticas.removeAll();
@@ -1598,6 +1878,285 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelTablaEstadisticas.revalidate();
 		panelTablaEstadisticas.repaint();
 	}
+	
+	public void añadirCancion() {
+		
+		String nombre =txtNombreAdministrarAñadirMusica.getText().trim();
+		
+		int duracion= Integer.parseInt(txtDuracionAdministrarAñadirCancion.getText());
+		String archivo = txtArchivoAdministrarAñadirCancion.getText(); 
+		String tipo = "Cancion";
+		int nReproducciones= 1;
+				
+		
+		if (nombre.isEmpty()){
+			JOptionPane.showMessageDialog(this, "Rellena los campos"); 
+			
+	} else {
+			
+			
+			String consulta = "INSERT INTO Audio(Nombre, Duracion, Archivo, Tipo, NReproducciones) VALUES (?, ?, ?, ?, ?)";
+			
+		try {
+			
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			
+			
+			sentencia.setString(1, nombre);
+			sentencia.setInt(2, duracion);
+			sentencia.setString(3, archivo);
+			sentencia.setString(4, tipo);
+			sentencia.setInt(5, nReproducciones);
+			
+			
+			int ejecucion = sentencia.executeUpdate();
+			
+			if(ejecucion > 0) {
+				
+			JOptionPane.showMessageDialog(this, "Cancion registrada correctamente");
+		
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+			}else {
+				JOptionPane.showMessageDialog(Aplicacion_usuario, "No se ha podido añadir la cancion deseada");
+			}
+			sentencia.close();
+			con.close();
+		}catch(SQLException error) {
+			JOptionPane.showMessageDialog(this, "Error de SQL: " + error.getMessage());
+			error.printStackTrace();
+		}
+	}
+}
+	public void eliminarCancion() {
+		
+		String nombre = txtNombreEliminarMusica.getText().trim();
+		
+		
+		if (nombre.isEmpty()){
+			JOptionPane.showMessageDialog(this, "Rellena los campos"); 
+			
+	} else {
+			
+			
+			String consulta = "DELETE FROM Audio WHERE Nombre = ?";
+			
+		try {
+			
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			
+			
+			sentencia.setString(1, nombre);
+			
+			int ejecucion = sentencia.executeUpdate();
+			
+			if(ejecucion > 0) {
+				
+			JOptionPane.showMessageDialog(this, "Cancion eliminada correctamente");
+		
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+			}else {
+				JOptionPane.showMessageDialog(Aplicacion_usuario, "No se ha podido eliminar la cancion deseada");
+			}
+			sentencia.close();
+			con.close();
+		}catch(SQLException error) {
+			JOptionPane.showMessageDialog(this, "Error de SQL: " + error.getMessage());
+			error.printStackTrace();
+		}
+	}
+}
+	
+	public void modificarCancion() {
+		
+		String nombre =txtNombreModificarMusica.getText().trim();
+		
+		int duracion= Integer.parseInt(txtDuracionModificarCancion.getText());
+		String archivo = txtArchivoModificarCancion.getText(); 
+		String tipo = "Cancion";
+		int nReproducciones= Integer.parseInt(txtNReproduccionesModificar.getText());
+		String idAudio = txtIDAudioModificarCancion.getText();
+				
+		
+		if (nombre.isEmpty()){
+			JOptionPane.showMessageDialog(this, "Rellena los campos"); 
+			
+	} else {
+			
+			
+			String consulta = "UPDATE Audio SET Nombre= ?, Duracion= ?, "
+					+ "Archivo= ?, Tipo= ?, NReproducciones= ?  "
+					+ "WHERE IDAudio = ?";
+			
+		try {
+			
+			Connection con = conexion.getConnection();
+			PreparedStatement sentencia = con.prepareStatement(consulta);
+			
+			
+			sentencia.setString(1, nombre);
+			sentencia.setInt(2, duracion);
+			sentencia.setString(3, archivo);
+			sentencia.setString(4, tipo);
+			sentencia.setInt(5, nReproducciones);
+			sentencia.setString(6, idAudio);
+
+			
+			int ejecucion = sentencia.executeUpdate();
+			
+			if(ejecucion > 0) {
+				
+			JOptionPane.showMessageDialog(this, "Cancion modificada correctamente");
+		
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+			}else {
+				JOptionPane.showMessageDialog(Aplicacion_usuario, "No se ha podido modificar la cancion deseada");
+			}
+			sentencia.close();
+			con.close();
+		}catch(SQLException error) {
+			JOptionPane.showMessageDialog(this, "Error de SQL: " + error.getMessage());
+			error.printStackTrace();
+		}
+	}
+}
+	
+	public void añadirCancionFavoritos() {
+		String idCliente = clienteLogueado.getIdCliente();
+		String idAudio = listaCanciones.getSelectedValue().toString();
+		String idCancion = "";
+		String idPodcast;
+		
+		String consultaID = "select IDAudio from Audio where Nombre = ?";
+		String consultaInsert = "insert into Favoritos (IDCliente, IDAudio) values(?, ?)";
+		
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentenciaID = con.prepareStatement(consultaID);
+			sentenciaID.setString(1, idAudio);
+			ResultSet resultado = sentenciaID.executeQuery();
+			
+			if(resultado.next()) {
+				idCancion = resultado.getString("IDAudio");
+			}
+			resultado.close();
+			sentenciaID.close();
+			
+			if(!idCancion.isEmpty()) {
+				PreparedStatement sentenciaInsert = con.prepareStatement(consultaInsert);
+				sentenciaInsert.setString(1, idCliente);
+				sentenciaInsert.setString(2, idCancion);
+				
+				int filas = sentenciaInsert.executeUpdate();
+				if(filas > 0) {
+					JOptionPane.showMessageDialog(this, "Cancion añadida a favoritos");
+				}
+				sentenciaInsert.close();
+			}
+			con.close();
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	public void añadirPodcastFavoritos() {
+		String idCliente = clienteLogueado.getIdCliente();
+		String idAudio = listaPodcasts.getSelectedValue().toString();
+		String idPodcast = "";
+		String idCancion;
+		
+		String consultaID = "select IDAudio from Audio where Nombre = ?";
+		String consultaInsert = "insert into Favoritos (IDCliente, IDAudio) values(?, ?)";
+		
+		try {
+			Connection con = conexion.getConnection();
+			PreparedStatement sentenciaID = con.prepareStatement(consultaID);
+			sentenciaID.setString(1, idAudio);
+			ResultSet resultado = sentenciaID.executeQuery();
+			
+			if(resultado.next()) {
+				idPodcast = resultado.getString("IDAudio");
+			}
+			
+			resultado.close();
+			sentenciaID.close();
+			
+			if(!idPodcast.isEmpty()) {
+				PreparedStatement sentenciaInsert = con.prepareStatement(consultaInsert);
+				sentenciaInsert.setString(1, idCliente);
+				sentenciaInsert.setString(2, idPodcast);
+				
+				int filas = sentenciaInsert.executeUpdate();
+				if(filas > 0) {
+					JOptionPane.showMessageDialog(this, "Cancion añadida a favoritos");
+				}
+				sentenciaInsert.close();
+			}
+			con.close();
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent evento) {
+		
+		if(evento.getClickCount() == 2) {
+			if(evento.getSource()== listaArtistas) {
+				String artistaSeleccionado = listaArtistas.getSelectedValue();
+				if(artistaSeleccionado != null) {
+					abrirVentanaArtista(artistaSeleccionado);
+				}
+			}else if (evento.getSource() == listaDiscos) {
+				String discoSeleccionado = listaDiscos.getSelectedValue();
+				if(discoSeleccionado != null) {
+					abrirVentanaAlbum(discoSeleccionado);		
+				}
+			}else if(evento.getSource() == listaPodcasters) {
+				String podcasterSeleccionado = listaPodcasters.getSelectedValue();
+				if(podcasterSeleccionado != null) {
+					abrirVentanaPodcasts(podcasterSeleccionado);
+				}
+			}else if(evento.getSource() == listaCanciones) {
+				String seleccionCancion = listaCanciones.getSelectedValue();
+			    
+			   
+			    colaDeReproduccion.clear(); 
+			    for (int i = 0; i < modeloCanciones.getSize(); i++) {
+			        colaDeReproduccion.add(modeloCanciones.getElementAt(i));
+			    }
+			    posicionActualEnCola = listaCanciones.getSelectedIndex(); 
+			    audioReproduciendo = "cancion";
+			    panelAnterior = "album";
+			    
+
+			    abrirReproductorCancion(seleccionCancion);
+			}
+				
+			}else if(evento.getSource() == listaPodcasts){
+			    
+			    colaDeReproduccion.clear(); 
+			    for (int i = 0; i < modeloPodcasts.getSize(); i++) {
+			        colaDeReproduccion.add(modeloPodcasts.getElementAt(i)); 
+			    }
+			    posicionActualEnCola = listaPodcasts.getSelectedIndex();
+			    audioReproduciendo = "podcast"; 
+			    panelAnterior = "podcasts";
+
+			   
+			    
+			    String seleccionPodcasts = listaPodcasts.getSelectedValue();
+			    
+			    if (seleccionPodcasts != null) {
+			        String nombrePodcast = seleccionPodcasts.split(" \\(")[0];
+			        abrirReproductorPodcast(nombrePodcast);
+			    }
+			}
+			
+		}
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -1659,16 +2218,17 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 		
 		if (evento.getSource() == btnAtrasReproduccion ) {
-			if(audioReproduciendo.equals("cancion")) {
-				cl_aplicacion_usuario.show(Aplicacion_usuario, "album");
-			}else if(audioReproduciendo.equals("podcast")) {
-				cl_aplicacion_usuario.show(Aplicacion_usuario, "podcasts");
+			if(panelAnterior != null && !panelAnterior.isEmpty()) {
+				cl_aplicacion_usuario.show(Aplicacion_usuario, panelAnterior);
+			}else {
+				cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
 			}
 		}
 		
 		
 		if (evento.getSource() == btnAtrasPodcasts) {
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "podcasters");
+			
 		}
 		
 		if(evento.getSource() == btnAtrasPerfil) {
@@ -1684,9 +2244,42 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "menu estadisticas");
 		}
 		
+		if(evento.getSource() == btnAtrasAdministracion) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "login");
+		}
+		
+		if(evento.getSource() == btnAtrasAdministrarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+		}
+		
+		if(evento.getSource() == btnAtrasAdministarAñadirMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administrar musica");
+		}
+		
+		if (evento.getSource() == btnAtrasCrearPlaylist) {
+		    cl_aplicacion_usuario.show(Aplicacion_usuario, "administrar musica");
+		}
+		
+		if(evento.getSource() == btnAtrasEliminarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administrar musica");
+		}
+		
+		if(evento.getSource() == btnAtrasModificarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administrar musica");
+		}
 		
 		if (evento.getSource() == btnLogin) {
-			validarLogin();
+			if(validarLogin()) {
+				String cbSeleccion= cbVerificar.getSelectedItem().toString();
+				
+				if(cbSeleccion.equals("Administrador")) {
+					cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+				}else if(cbSeleccion.equals("Empleado")) {
+					cl_aplicacion_usuario.show(Aplicacion_usuario, "administracion");
+				}else if(cbSeleccion.equals("Cliente")) {
+					cl_aplicacion_usuario.show(Aplicacion_usuario, "menu");
+				}
+			}
 		}
 		
 		if(evento.getSource()== btnGuardar) {
@@ -1745,6 +2338,145 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			abrirPanelPerfil();
 		}
 		
+		if(evento.getSource() == btnPerfilAdministrarMusica) {
+			panelAnterior = "administrar musica";
+			abrirPanelPerfil();
+		}
+		
+		if(evento.getSource() == btnPerfilAñadirMusica) {
+			panelAnterior = "añadir musica";
+			abrirPanelPerfil();
+		}
+		
+		if(evento.getSource() == btnPerfilEliminarMusica) {
+			panelAnterior = "eliminar musica";
+			abrirPanelPerfil();
+		}
+		
+		if(evento.getSource() == btnPerfilModificarMusica) {
+			panelAnterior = "modificar musica";
+			abrirPanelPerfil();
+		}
+		
+		
+		if(evento.getSource() == btnCrearPlaylist) {
+			txtNombrePlaylist.setText("");
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "crear playlists");
+		
+		}
+	
+		
+		if (evento.getSource() == btnGuardarPlaylist) { 
+		    String nombreNuevaPlaylist = txtNombrePlaylist.getText().trim();
+		    
+		    if (!nombreNuevaPlaylist.isEmpty() && clienteLogueado != null) {
+		       
+		        String sqlInsert = "INSERT INTO Playlist (Titulo, FechaCreacion, IDCliente) VALUES (?, CURDATE(), ?)";
+		        
+		        try {
+		            Connection con = conexion.getConnection();
+		            PreparedStatement sentencia = con.prepareStatement(sqlInsert);
+		            
+		            sentencia.setString(1, nombreNuevaPlaylist);
+		            sentencia.setString(2, clienteLogueado.getIdCliente());
+		            
+		            int filas = sentencia.executeUpdate();
+		            if (filas > 0) {
+		                llamarPlaylists(); 
+		                txtNombrePlaylist.setText("");
+		                cl_aplicacion_usuario.show(Aplicacion_usuario, "playlists"); 
+		            }
+		            sentencia.close();
+		        } catch (SQLException error) {
+		      
+		            error.printStackTrace(); 
+		            JOptionPane.showMessageDialog(this, "Error de base de datos: " + error.getMessage());
+		        }
+		    }
+		}
+		if (evento.getSource() == btnBorrarPlaylist) {
+		    String playlistSeleccionada = listaPlaylist.getSelectedValue();
+		    
+		    if (playlistSeleccionada != null && clienteLogueado != null) {
+		        // Confirmación rápida de SI o NO
+		        int confirmar = JOptionPane.showConfirmDialog(this, "¿Eliminar playlist?", "Confirmar", JOptionPane.YES_NO_OPTION);
+		        
+		        if (confirmar == JOptionPane.YES_OPTION) {
+		            String sqlDelete = "DELETE FROM Playlist WHERE Titulo = ? AND IDCliente = ?";
+		            
+		            try {
+		                Connection con = conexion.getConnection();
+		                PreparedStatement sentencia = con.prepareStatement(sqlDelete);
+		                sentencia.setString(1, playlistSeleccionada);
+		                sentencia.setString(2, clienteLogueado.getIdCliente());
+		                
+		                int filas = sentencia.executeUpdate();
+		                if (filas > 0) {
+		                    llamarPlaylists(); 
+		                }
+		                sentencia.close();
+		            } catch (SQLException error) {
+		                error.printStackTrace();
+		            }
+		        }
+		    }
+		}
+		
+		if (evento.getSource() == btnExportar) {
+			if(clienteLogueado.getTipoCliente() == TipoCliente.Premium) {
+		    String playlistSeleccionada = listaPlaylist.getSelectedValue();
+		    
+		    if (playlistSeleccionada != null && clienteLogueado != null) {
+		        File fichero = null;
+		        FileWriter writer = null;
+		        PrintWriter printwriter = null;
+		        
+		        String sql = "select A.Nombre FROM Audio A " 
+	                    + "join Playlist_Canciones PC ON A.IDAudio = PC.IDCancion " 
+	                    + "join Playlist P ON PC.IDPlaylist = P.IDPlaylist " 
+	                    + "where P.Titulo = ? AND P.IDCliente = ?";
+		        
+		        try {
+		            fichero = new File("Playlist_" + playlistSeleccionada + ".txt");
+		            writer = new FileWriter(fichero);
+		            printwriter = new PrintWriter(writer);
+		            
+		            Connection con = conexion.getConnection();
+		            PreparedStatement sentencia = con.prepareStatement(sql);
+		            sentencia.setString(1, playlistSeleccionada);
+		            sentencia.setString(2, clienteLogueado.getIdCliente());
+		            ResultSet resultado = sentencia.executeQuery();
+		            
+		            printwriter.println("PLAYLIST:" + playlistSeleccionada);
+		            while (resultado.next()) {
+		                printwriter.println(resultado.getString("Nombre"));
+		            }
+		            
+		            resultado.close();
+		            sentencia.close();
+		            
+		            
+		            JOptionPane.showMessageDialog(this, "Playlist exportada en: " + fichero.getName());
+		        } catch (Exception error) {
+		            error.printStackTrace();
+		        } finally {
+		           
+		            try {
+		                if (printwriter != null) {
+		                    printwriter.close();
+		                }
+		            } catch (Exception error2) {
+		                error2.printStackTrace();
+		            }
+		        }
+		    }
+		}else {
+            JOptionPane.showMessageDialog(this, "No tienes permisos para hacer esto");
+            btnExportar.setVisible(false);
+
+		}
+	}		
+		
 		if(evento.getSource() == btnTopCanciones){
 		    tipoEstadistica = "canciones";
 		    cl_aplicacion_usuario.show(Aplicacion_usuario, "estadisticas");
@@ -1770,37 +2502,51 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			JOptionPane.showMessageDialog(this, "Iniciando reproduccion");
 		}
 		
-		if(evento.getSource() == btnCancionAnterior) {
-			 if(audioReproduciendo.equals("cancion")) {
-				 int indice =0;
-				 indice = listaCanciones.getSelectedIndex();
-				 if(indice > 0) {
-					 indice = indice -1;
-					 listaCanciones.setSelectedIndex(indice);
-					 Cancion cancion = cargarCanciones.get(indice);
-					 abrirReproductorPodcast(cancion.getNombre());
-					 String podcast = modeloPodcasts.getElementAt(indice);
-				     abrirReproductorPodcast(podcast);
-				 }
-			 }else if(audioReproduciendo.equals("podcast")) {
-				 int indice =0;
-				 indice = listaPodcasts.getSelectedIndex();
-				 if(indice > 0) {
-					 indice = indice -1;
-					 listaPodcasts.setSelectedIndex(indice);
-					 Podcast p = cargarPodcasts.get(indice);
-					 abrirReproductorPodcast(p.getNombre());
-					 String podcast = modeloPodcasts.getElementAt(indice);
-					 abrirReproductorPodcast(podcast);
-			 }
+	
+		if (evento.getSource() == btnCancionAnterior) {
+		    if (colaDeReproduccion != null && !colaDeReproduccion.isEmpty()) {
+		        if (posicionActualEnCola > 0) {
+		            posicionActualEnCola--; 
+		        } else {
+		            posicionActualEnCola = colaDeReproduccion.size() - 1; 
+		        }
+		        
+		        String cancionAnterior = colaDeReproduccion.get(posicionActualEnCola);
+		        
+		        if(audioReproduciendo.equals("cancion")) { 
+		        	abrirReproductorCancion(cancionAnterior);
+		        }else if(audioReproduciendo.equals("podcast"));
+		    }
 		}
+
+	
+		if (evento.getSource() == btnSiguienteCancion) {
+		    if (colaDeReproduccion != null && !colaDeReproduccion.isEmpty()) {
+		    	
+		    		if (posicionActualEnCola < colaDeReproduccion.size() - 1) {
+		            posicionActualEnCola++; 
+		        } else {
+		            posicionActualEnCola = 0; 
+		        }
+		        
+		        String cancionSiguiente = colaDeReproduccion.get(posicionActualEnCola);
+		        if(audioReproduciendo.equals("cancion")) {
+		        	abrirReproductorCancion(cancionSiguiente);
+		        }else if (audioReproduciendo.equals("podcast")) {
+		        	abrirReproductorPodcast(cancionSiguiente);
+		    	}
+		    		
+		    	}
+		    }
 		
-		if(evento.getSource() == btnSiguienteCancion) {
-			
-		}
 		
 		if(evento.getSource() == btnFavorito) {
-			
+			 if(audioReproduciendo.equals("cancion")) {
+				 añadirCancionFavoritos();
+			 }else if (audioReproduciendo.equals("podcast")) {
+				 añadirPodcastFavoritos();
+				 
+			 }
 		}
 		
 		if (evento.getSource() == btnEditarPerfil) {
@@ -1857,6 +2603,37 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "estadisticas");
 		}
 		
+		if(evento.getSource() == btnGestionarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "administrar musica");
+		}
+		
+		if (evento.getSource() == btnAñadirMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "añadir musica");
+		}
+		
+		if(evento.getSource() == btnEliminarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "eliminar musica");
+		}
+		
+		if(evento.getSource() == btnModificarMusica) {
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "modificar musica");
+		}
+		
+		if(evento.getSource() == btnConfirmarAñadirMusica) {
+			añadirCancion();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "añadir musica");
+		}
+		
+		if(evento.getSource() == btnConfirmarEliminarMusica) {
+			eliminarCancion();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "eliminar musica");
+		}
+		
+		if(evento.getSource() == btnConfirmarModificarMusica) {
+			modificarCancion();
+			cl_aplicacion_usuario.show(Aplicacion_usuario, "modificar musica");
+		}
+		
+		
 		}	
 	}
-}
