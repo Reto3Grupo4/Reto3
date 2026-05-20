@@ -345,7 +345,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		});
 	}
 
-	
+	/**
+	 * metodo dedicado a configurar la ventana
+	 */
 	public void configurarVentana() {
 	
 		setTitle("Aplicacion Usuario");
@@ -358,7 +360,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		setContentPane(Aplicacion_usuario);
 		
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelLogin
+	 */
 	public void crearPanelLogin(){
 		
 		panelLogin = new JPanel();
@@ -400,7 +404,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		panelLogin.add(btnRegistrar);
 		
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelRegistro
+	 */
 	public void crearPanelRegistro() {
 		
 		panelRegistro = new JPanel();
@@ -500,7 +506,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		chckbxPremiumRegistro.setBounds(121, 275, 21, 23);
 		panelRegistro.add(chckbxPremiumRegistro);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelMenu
+	 */
 	public void crearPanelMenu() {
 		panelMenu = new JPanel();
 		panelMenu.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ventana Menu", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -538,7 +546,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnMisPlaylists.setBounds(230, 144, 126, 23);
 		panelMenu.add(btnMisPlaylists);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelArtistas
+	 */
 	public void crearPanelArtistas() {
 		
 		panelArtistas = new JPanel();
@@ -571,7 +581,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		listaArtistas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelArtista
+	 */
 	public void crearPanelArtista() {
 	
 		panelArtista = new JPanel();
@@ -620,6 +632,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		pnlInformacion.add(lblFotoArtista);
 		
 	}
+	/**
+	 * metodo dedicado a crear e instanciar el PanelAlbum
+	 */
 	public void crearPanelAlbums() {
 		panelAlbum = new JPanel();
 		Aplicacion_usuario.add(panelAlbum, "album");
@@ -667,6 +682,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnPerfilAlbums.setBounds(525, 11, 89, 23);
 		panelAlbum.add(btnPerfilAlbums);
 	}
+	/**
+	 * metodo dedicado a crear e instanciar el PanelReproduccion
+	 */
 	public void crearPanelReproduccion() {
 		
 		panelReproduccion = new JPanel();
@@ -725,7 +743,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		lblNombreCancionReproductor.setBounds(185, 363, 300, 25);
 		panelReproduccion.add(lblNombreCancionReproductor);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelPlaylist
+	 */
 	public void crearPanelPlaylist() {
 		panelPlaylists = new JPanel();
 		Aplicacion_usuario.add(panelPlaylists, "playlists");
@@ -767,7 +787,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnExportar.addActionListener(this);
 		panelPlaylists.add(btnExportar);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelCrearPlaylist
+	 */
 	public void crearPanelCrearPlaylist() {
 		panelCrearPlaylist = new JPanel();
 		Aplicacion_usuario.add(panelCrearPlaylist, "crear playlists");
@@ -797,7 +819,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnAtrasCrearPlaylist.addActionListener(this); 
 		panelCrearPlaylist.add(btnAtrasCrearPlaylist);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelAñadirCancion_Playlist
+	 */
 	public void crearPanelAnadirCancion_Playlist() {
 		panelAñadirCancionPlaylist = new JPanel();
 		Aplicacion_usuario.add(panelAñadirCancionPlaylist, "añadir canciones a playlists");
@@ -807,7 +831,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnAtrasAñadirCancion_Playlist.setBounds(10, 11, 89, 23);
 		panelAñadirCancionPlaylist.add(btnAtrasAñadirCancion_Playlist);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelPodcasters
+	 */
 	public void crearPanelPodcasters() {
 		
 		panelPodcasters = new JPanel();
@@ -839,7 +865,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		lblPodcasters.setBounds(147, 82, 200, 14);
 		panelPodcasters.add(lblPodcasters);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelPodcasts
+	 */
 	public void crearPanelPodcasts() {
 		panelPodcasts = new JPanel();
 		Aplicacion_usuario.add(panelPodcasts, "podcasts");
@@ -869,7 +897,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		scrollListaPodcasts.setBounds(121, 116, 425, 297);
 		panelPodcasts.add(scrollListaPodcasts);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelPerfil
+	 */
 	public void crearPanelPerfil() {
 		panelPerfil = new JPanel();
 		Aplicacion_usuario.add(panelPerfil, "perfil");
@@ -931,7 +961,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnAtrasPerfil.setBounds(10, 11, 89, 23);
 		panelPerfil.add(btnAtrasPerfil);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelAdministracion
+	 */
 	public void crearPanelAdministracion() {
 		panelAdministracion = new JPanel();
 		Aplicacion_usuario.add(panelAdministracion, "administracion");
@@ -961,7 +993,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnEstadisticas.setBounds(191, 241, 260, 23);
 		panelAdministracion.add(btnEstadisticas);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelMenuEstadisticas
+	 */
 	public void crearPanelMenuEstadisticas(){
 		panelMenuEstadisticas = new JPanel();
 		Aplicacion_usuario.add(panelMenuEstadisticas, "menu estadisticas");
@@ -997,7 +1031,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		btnTopPlaylist.setBounds(165, 279, 191, 23);
 		panelMenuEstadisticas.add(btnTopPlaylist);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelEstadisticas
+	 */
 	public void crearPanelEstadisticas() {
 		panelEstadisticas = new JPanel();
 		Aplicacion_usuario.add(panelEstadisticas, "estadisticas");
@@ -1028,7 +1064,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    
 	    			
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelAdministrarAñadirMusica
+	 */
 	public void crearPanelAdministrarAñadirMusica() {
 		panelAdministrarAñadirMusica = new JPanel();
 	    Aplicacion_usuario.add(panelAdministrarAñadirMusica, "añadir musica");
@@ -1076,7 +1114,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    btnConfirmarAñadirMusica.setBounds(233, 214, 147, 23);
 	    panelAdministrarAñadirMusica.add(btnConfirmarAñadirMusica);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelEliminarMusica
+	 */
 	public void crearPanelEliminarMusica() {
 		panelEliminarMusica = new JPanel();
 	    Aplicacion_usuario.add(panelEliminarMusica, "eliminar musica");
@@ -1106,7 +1146,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    btnConfirmarEliminarMusica.setBounds(241, 204, 89, 23);
 	    panelEliminarMusica.add(btnConfirmarEliminarMusica);
 	}
-	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelModificarMusica
+	 */
 	public void crearPanelModificarMusica() {
 		panelModificarMusica = new JPanel();
 	    Aplicacion_usuario.add(panelModificarMusica, "modificar musica");
@@ -1177,6 +1219,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    panelModificarMusica.add(lblBusquedaModificar);
 	}
 	
+	/**
+	 * metodo dedicado a crear e instanciar el PanelGestionarMusica
+	 */
 	public void crearPanelGestionarMusica() {
 		panelAdministrarMusica = new JPanel();
 	    Aplicacion_usuario.add(panelAdministrarMusica, "administrar musica");
@@ -1209,6 +1254,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	    
 	   
 	}
+	/**
+	 * Metodo dedicado a la inicializacion 
+	 */
 	public Aplicacion() {		
 		configurarVentana();
 		crearPanelLogin();
@@ -1239,7 +1287,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	
 	/**
 	 * Metodo encargado deverificar que el registro se haga correctamente
-	 * @return confirmar variable para confirmar la clave
+	 * @return validado variable para confirmar la clave
 	 */
 	public boolean validarRegistro() {
 			boolean validado = false;
@@ -1317,7 +1365,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	
 	/**
 	 * Metodo encargado de verificar si el usuario y la clave estan registradas
-	 * @return clave variable para sacar la clave registrada
+	 * @return validado variable para sacar la clave registrada
 	 */
 	public boolean validarLogin() {
 		boolean validado = false;
@@ -1389,7 +1437,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		return validado;
 	}
-	
+	/**
+	 * metodo dedicado a cargar los datos del artista seleccionado anteriormente en el panelArtistas (JList)
+	 * @param seleccion nombre del artista seleccionado 
+	 */
 	private void abrirVentanaArtista(String seleccion) {
 		
 		if(seleccion != null) {
@@ -1404,7 +1455,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "artista");
 		}
 	}
-	
+	/**
+	 * 
+	 * @param nombreArtistico
+	 */
 	private void cargarImagenArtista(String nombreArtistico) {
 		String consultaSQL = "select Imagen "
 				+ "from Artista "
@@ -1440,6 +1494,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @param seleccion
+	 */
 	private void abrirVentanaPodcasts(String seleccion) {
 		if (seleccion != null) {
 			
@@ -1449,7 +1507,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario,"podcasts");
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	private void abrirPanelPerfil() {
 		if(clienteLogueado != null) {
 			txtIDCliente.setText(clienteLogueado.getIdCliente());
@@ -1460,6 +1520,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "perfil");
 		}
 	}
+	/**
+	 * Metodo dedicado a cargar los datos del artista seleccionado dentro del panelArtistas (JList)
+	 */
 	public void llamarArtistas() {
 		modeloArtistas.clear();
 		
@@ -1489,7 +1552,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Metodo dedicado a cargar los albumes que tiene el artista selccionado anteriormente
+	 * @param nombreArtistico nombre artistico del artista seleccionado 
+	 */
 	public void llamarDiscos(String nombreArtistico) {
 		modeloDiscos.clear();
 		
@@ -1525,7 +1591,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		
 		
 	}
-	
+	/**
+	 * metodo dedicado a cargar la informacion del artista seleccionado anteriorente en el panelArtistas (JList)
+	 * @param nombreArtistico nombre artistico del artista seleccionado 
+	 */
 	public void cargarInfoArtista(String nombreArtistico) {
 		String consultaSQL = "select AR.GeneroPredom, AL.Año, AR.Descripcion "
 				+ "from Artista AR join Album AL on AR.IDArtista = AL.IDMusico "
@@ -1552,7 +1621,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	}
 	
 	
-	
+	/**
+	 * metodo dedicado a cargar los datos dentro del panelAlbum
+	 * @param seleccion Nombre del album seleccionado
+	 */
 	private void abrirVentanaAlbum(String seleccion) {
 		if(seleccion != null) {
 			String tituloLimpio = seleccion.split(" - ")[0];
@@ -1564,7 +1636,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			cl_aplicacion_usuario.show(Aplicacion_usuario, "album");
 		}
 	}
-	
+	/**
+	 * Metodo dedicado a cargar la imagen de dentro de la base de datos, 
+	 * se hace una busqueda mediante el atributo Imagen
+	 * @param nombreAlbum nombre del album del que se desea sacar la imagen
+	 */
 	private void cargarImagenAlbum(String nombreAlbum) {
 		String consultaSQL = "select Imagen "
 				+ "from Album "
@@ -1600,7 +1676,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Metodo dedicado a mostrar las canciones (dentro de un JList) que tiene el album 
+	 * seleccionado anteriormente en el panelArtista
+	 * @param tituloAlbum nombre del Album seleccionado anteriormente
+	 */
 	public void cargarCanciones(String tituloAlbum) {
 		modeloCanciones.clear();
 		
@@ -1625,7 +1705,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Muestra la infromacion del album seleccionado anteriormente en el panelArtista (JList)
+	 * @param tituloAlbum nombre del album seleccionado anteriormente
+	 */
 	public void cargarInfoAlbum(String tituloAlbum) {
 		String consultaSQL = "select AL.Titulo, year(AL.Año) as Anio, AL.Genero, "
 				+ "(select count(*) from Cancion where IDAlbum = AL.IDAlbum) as TotalCanciones "
@@ -1650,7 +1733,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Muestra en el panelPlaylist los playlist que tiene el cliente logueado. 
+	 * utiliza como busqueda el IDCliente
+	 */
 	public void llamarPlaylists() {
 		modeloPlaylist.clear();
 		
@@ -1676,7 +1762,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	        error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Muestra la informacion de los podcasters dentro de un JList mediante una consulta SQL 
+	 */
 	public void llamarPodcasters() {
 		modeloPodcasters.clear();
 		String consulta = "select AR.nombreArtistico, sum(A.NReproducciones) as 'Reproducciones' "
@@ -1703,6 +1791,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 		
 	}
+	/**
+	 * Muestra la infcrmacion de los podcasts en base a la seleccion anterior del podcaster
+	 * @param nombrePodcaster nombre del podcaster seleccionado anteriomente en el PanelPodcaster(JList)
+	 */
 	public void llamarPodcasts(String nombrePodcaster) {
 		modeloPodcasts.clear();
 		String consulta =  "select P.NombrePodcast, A.Duracion, P.Colaboradores "
@@ -1731,13 +1823,14 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.getMessage();
 		}
 	}
-	
+	/**
+	 * Muestra la informacion e imagen de la cancion seleccionada anteriormente en el PanelAlbum (JList)
+	 * @param nombreCancion recoge el nombre de la cancion que se ha seleccionado
+	 */
 	public void abrirReproductorCancion(String nombreCancion) {
 		audioReproduciendo = "cancion";
 		
-		if (nombreCancion == null) {
-			return;	
-		}
+		
 		
 		String consultaSQL = "select A.IDAudio, A.Nombre, AL.Titulo, AL.Imagen, A.Duracion "
 				+ "from Audio A join Cancion C on A.IDAudio = C.IDCancion "
@@ -1781,14 +1874,14 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 	}
 	
 
-	
+	/**
+	 * Muestra la información e imagen del podcast seleccionado
+	 * en la ventana de reproducción.
+	 * @param nombrePodcast nombre del podcast a reproducir
+	 */
 	public void abrirReproductorPodcast(String nombrePodcast) {
 		
 		audioReproduciendo = "podcast";
-		
-		if (nombrePodcast == null) {
-			return;	
-		}
 		
 		String consultaSQL = "select P.NombrePodcast, P.Colaboradores, A.Duracion, AR.Imagen "
 				+ "from Audio A join Podcast P on A.IDAudio = P.IDPodcast "
@@ -1809,7 +1902,7 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 				
 				rutaImagen = resultado.getString("Imagen");
 		
-			if(rutaImagen != null || rutaImagen.isEmpty()) {
+			if(rutaImagen != null && !rutaImagen.isEmpty()) {
 				
 				if(rutaImagen.startsWith("/")) {
 					rutaImagen = rutaImagen.substring(1);
@@ -1834,51 +1927,10 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			
 	}
 	
-	
-	
-	
-	
-	
-	public void actualizarTablaEstadisticas(String tipoTop) {
-		panelTablaEstadisticas.removeAll();
-		
-		DefaultTableModel modeloTabla = new DefaultTableModel();
-		
-		if(tipoTop.equals("canciones")) {
-			modeloTabla.addColumn("Posicion");
-			modeloTabla.addColumn("Titulo de la cancion");
-			modeloTabla.addColumn("Artista / Album");
-			modeloTabla.addColumn("Duracion");
-			
-		}else if(tipoTop.equals("podcasts")) {
-			modeloTabla.addColumn("Posicion");
-			modeloTabla.addColumn("Titulo del podcast");
-			modeloTabla.addColumn("Artista / Album");
-			modeloTabla.addColumn("Duracion");
-			
-		}else if(tipoTop.equals("reproducciones")) {
-			modeloTabla.addColumn("Posicion");
-			modeloTabla.addColumn("Contenido");
-			modeloTabla.addColumn("Tipo");
-			modeloTabla.addColumn("Nº Reproducciones");
-			
-		}else if(tipoTop.equals("podcasts")) {
-			modeloTabla.addColumn("Posicion");
-			modeloTabla.addColumn("Nombre de la playlist");
-			modeloTabla.addColumn("Creador");
-			modeloTabla.addColumn("Total Canciones");
-		}
-		
-		JTable tablaEstadisticas = new JTable(modeloTabla);
-		
-		JScrollPane scrollPanelTabla = new JScrollPane(tablaEstadisticas);
-		
-		panelTablaEstadisticas.add(scrollPanelTabla, BorderLayout.CENTER);
-		
-		panelTablaEstadisticas.revalidate();
-		panelTablaEstadisticas.repaint();
-	}
-	
+	/**
+	 * metodo dedicado a añadir una cancion de la base de datos, 
+	 * se requiere ser administrador/emplado para poder ejecutarlo
+	 */
 	public void añadirCancion() {
 		
 		String nombre =txtNombreAdministrarAñadirMusica.getText().trim();
@@ -1928,6 +1980,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 	}
 }
+	/**
+	 * metodo dedicado a eliminar una cancion de la base de datos, 
+	 * la busqueda se hace en base al nombre de la cancion
+	 * se requiere ser administrador/emplado para poder ejecutarlo
+	 */
 	public void eliminarCancion() {
 		
 		String nombre = txtNombreEliminarMusica.getText().trim();
@@ -1967,7 +2024,11 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 	}
 }
-	
+	/**
+	 * metodo dedicdo a la modificacion de las 
+	 * canciones dentro de la base de datos, busqueda en base a IDAudio,
+	 * se requiere ser adminstrador/empleado para poder hacerlo.
+	 */
 	public void modificarCancion() {
 		
 		String nombre =txtNombreModificarMusica.getText().trim();
@@ -2021,7 +2082,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 	}
 }
-	
+	/**
+	 * Metodo dedicado a añadir una cancion a la tabla Favoritos mediante consultas SQL
+	 */
 	public void añadirCancionFavoritos() {
 		String idCliente = clienteLogueado.getIdCliente();
 		String idAudio = listaCanciones.getSelectedValue().toString();
@@ -2059,7 +2122,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 			error.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Metodo dedicado a añadir las podcast mediante el boton favorito
+	 */
 	public void añadirPodcastFavoritos() {
 		String idCliente = clienteLogueado.getIdCliente();
 		String idAudio = listaPodcasts.getSelectedValue().toString();
@@ -2099,7 +2164,9 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 		}
 	}
 	
-	
+	/**
+	 * Metodo dedicado a la seleccion dentro de las listas, las cuales estan dentro de los paneles
+	 */
 	@Override
 	public void mouseClicked(MouseEvent evento) {
 		
@@ -2186,7 +2253,8 @@ public class Aplicacion extends JFrame implements ActionListener, MouseListener{
 
 
 /**
- * Metodo dedicado a realizar una accion al pulsar botones
+ * Metodo dedicado al actionPerformed de cada boton 
+ * dentro de la aplicación, se encarga de gestionar la navegación
  */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
