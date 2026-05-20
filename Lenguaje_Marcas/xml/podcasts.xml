@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="podcast.xsl"?>
+<podcasts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="podcasts.xsd">
+    <podcast>
+        <titulo>El Futuro de IA</titulo>
+        <podcaster>PodcastMaster</podcaster>
+        <colaboradores>12</colaboradores>
+        <genero>Musica</genero>
+        <duracion>60</duracion>
+    </podcast>
+    <podcast>
+        <titulo>La Caída de Roma</titulo>
+        <podcaster>HistoriaCon</podcaster>
+        <colaboradores>2</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
+    </podcast>
+    <podcast>
+        <titulo>Innovacion 2030</titulo>
+        <podcaster>PodcastMaster</podcaster>
+        <colaboradores>2</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
+    </podcast>
+    <podcast>
+        <titulo>Edad Media</titulo>
+        <podcaster>HistoriaCon</podcaster>
+        <colaboradores>1</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
+    </podcast>
+    <podcast>
+        <titulo>IA y Futuro</titulo>
+        <podcaster>TechTalks</podcaster>
+        <colaboradores>3</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
+    </podcast>
+    <podcast>
+        <titulo>Roma Profunda</titulo>
+        <podcaster>HistoryLab</podcaster>
+        <colaboradores>2</colaboradores>
+        <genero>Entrevistas</genero>
+        <duracion>45</duracion>
+    </podcast>
+</podcasts>

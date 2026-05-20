@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="artistas.xsl"?>
+<artistas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="artistas.xsd">
+    <artista id="1">
+        <nombre>Kaze</nombre>
+        <genero>Rap</genero>
+        <imagen>img/Kaze.jpg</imagen>
+        <album>
+            <titulo>Nombre Direccion</titulo>
+            <año>2023-08-01</año>
+            <reproducciones>1327701</reproducciones>
+        </album>
+        <album>
+            <titulo>Antipop</titulo>
+            <año>2021-01-01</año>
+            <reproducciones>1327701</reproducciones>
+        </album>
+
+    </artista>
+    <artista id="2">
+        <nombre>Bad Bunny</nombre>
+        <genero>Reggaeton</genero>
+        <imagen>img/bad_bunny.jpg</imagen>
+        <album>
+            <titulo>Un Verano sin Ti</titulo>
+            <año>2022-07-01</año>
+            <reproducciones>550459667</reproducciones>
+        </album>
+        <album>
+            <titulo>Oasis</titulo>
+            <año>2019-06-28</año>
+            <reproducciones>550459667</reproducciones>
+        </album>
+    </artista>
+    <artista id="3">
+        <nombre>Rosalia</nombre>
+        <genero>Flamenco</genero>
+        <imagen>img/rosalia.jpg</imagen>
+        <album>
+            <titulo>El Mal Querer</titulo>
+            <año>2018-01-01</año>
+            <reproducciones>1000000000</reproducciones>
+        </album>
+        <album>
+            <titulo>Motomami</titulo>
+            <año>2022-03-18</año>
+            <reproducciones>1000000000</reproducciones>
+        </album>
+    </artista>
+</artistas>
